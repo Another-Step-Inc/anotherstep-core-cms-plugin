@@ -1,0 +1,146 @@
+<?php
+/**
+ * Plugin Name: Another Step Core CMS
+ * Description: The core infrastructure for a headless Astro integration. This plugin registers essential Custom Post Types (Services, Promos), extends the WP-REST API with custom artist metadata, and implements a high-level content approval system for leadership roles. It also enforces a streamlined, role-based dashboard UI and handles automated Gutenberg block registration.
+ * Version: 1.0
+ * Author: IT Department
+ */
+
+if ( ! defined('ABSPATH') ) wxit;
+
+// 1. Feature: Register Custom Post Type - Services
+function as_register_services_cpt() {
+    $labels = [
+        'name' => 'Services',
+        'singular_name' => 'Service',
+        'menu_name' => 'Organization Services',
+    ];
+
+    $args = [
+        'labels' => $labels,
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => ['title', 'editor', 'thumbnail'],
+        'menu_icon' => 'dashicons-heart',
+    ];
+
+    register_post_type('services', $args);
+}
+add_action('init', 'as_register_services_cpt');
+
+// 2. Feature: Add Custom Fields for the Services Post Type
+function as_register_rest_fields() {
+    // Adding an "Artist Name field to the Services API response
+    register_rest_field( 'services', 'artist_details', [
+        'get_callback' => function( $post ) {
+            return [
+                'name' => get_post_meta( $post['id'], '_as_artist_name', true ),
+                'service_type' => get_post_meta( $post['id'], '_as_service_type', true ),
+            ];
+        },
+        'update_callback' => null,
+        'schema' => null,
+    ]);
+}
+add_action('rest_api_init', 'as_register_rest_fields');
+
+// 3. Feature: Add the Meta Box to the Service Post Type Edit Screen
+function as_render_service_metabox( $post ) {
+    $artist = get_post_meta( $post->ID, '_as_artist_name', true );
+    ?>
+    <p>
+        <label for="as_artist_name"><strong>Artist Name (for Drawings):</strong></label><br />
+        <input type="text" name="as_artist_name" value="<?php echo esc_attr($artist); ?>" style="width:100%;" />
+    </p>
+    <?php
+}
+function as_add_service_metabox() {
+    add_meta_box('service_info', 'Service Details', 'as_render_service_metabox', 'services', 'normal', 'high');
+}
+add_action('add_meta_boxes', 'as_add_service_metabox');
+
+
+
+// 4. Feature: Save the Data for the Artist Name
+function as_save_service_meta($post_id) {
+    if (array_key_exists('as_artist_name', $_POST)) {
+        update_post_meta( $post_id, '_as_artist_name', $_POST['as_artist_name'] );
+    }
+}
+add_action('save_post', 'as_save_service_meta');
+
+// 5. Feature: Simplify the Dashboard Sidebar based on Roles
+function as_admin_menu() {
+    if (!current_user_can('access_developer_tools')) {
+        remove_menu_page('plugins.php');
+        remove_menu_page('themes.php');
+        remove_menu_page('options-general.php');
+        remove_menu_page('tools.php');
+        remove_menu_page('edit.php?post_type=acf-field-group');
+    }    
+}
+add_action('admin_menu', 'as_admin_menu', 999);
+
+// 6. Feature: Website content approvals system; add meta boxes to posts, services, and promos
+function as_render_merge_box($post) {
+    if ($post->post_status === 'publish') {
+        echo '<p style="color: green; font-weight: bold;">✅ This content is Live (Merged).</p>';
+    } else {
+        echo '<p>Review the content and waiver status below.</p>';
+        echo '<input type="submit" name="as_approve_merge" class="button button-primary button-large" value="Approve & Merge to Live" style="width:100%;">';
+    }
+}
+function as_add_meta_boxes() {
+    $authorized_roles = ['operations_manager', 'administration_management', 'executive_director'];
+    $current_user = wp_get_current_user();
+
+    // Only show this box if the user has one of the authorized roles
+    if (array_intersect($authorized_roles, $current_user->roles)) {
+        add_meta_box(
+            'as_merge_request', 
+            'Content Approval (Merge)', 
+            'as_render_merge_box', 
+            ['post', 'services', 'promos'], 
+            'side', 
+            'high'
+        );
+    }    
+}
+add_action('add_meta_boxes', 'as_add_meta_boxes');
+
+// 7. Feature: Saving a post with approvals from one of three roles
+function as_save_post($post_id) {
+    // Basic security checks
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!isset($_POST['as_approve_merge'])) return;
+
+    // Capability Check: Ensure only leadership can "Merge"
+    $authorized_roles = ['operations_manager', 'administration_management', 'executive_director'];
+    $current_user = wp_get_current_user();
+
+    if (array_intersect($authorized_roles, $current_user->roles)) {
+        // Unhook to prevent infinite loop
+        remove_action('save_post', 'as_save_approval_data'); 
+        
+        wp_update_post([
+            'ID'          => $post_id,
+            'post_status' => 'publish'
+        ]);
+    }
+}
+add_action('save_post', 'as_save_post', 20);
+
+// 8. Feature: Registering all blocks to be used in posts and pages.
+function as_register_blocks() {
+    $build_dir = __DIR__ . '/blocks/build';
+
+    // Check if the directory exists to prevent errors
+    // Check if the manifest exists before trying to register
+    if ( file_exists( $build_dir . '/blocks-manifest.php' ) ) {
+        wp_register_block_types_from_metadata_collection(
+            $build_dir,
+            $build_dir . '/blocks-manifest.php'
+        );
+    }    
+}
+add_action('init', 'as_register_blocks');
