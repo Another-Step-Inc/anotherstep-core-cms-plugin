@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "anotherstep/homepage-ethics-section",
+	"version": "0.1.0",
+	"title": "Homepage Ethics Section",
+	"category": "widgets",
+	"attributes": {
+		
+	},
+	"icon": "smiley",
+	"description": "Block to be used specifically for the home page code of ethics.",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "homepage-ethics-section",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js"
+}
