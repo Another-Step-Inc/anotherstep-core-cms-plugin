@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "title": "Homepage About Section",
   "category": "widgets",
+  "attributes": {},
   "icon": "smiley",
   "description": "Block to be used specifically for the home page Who We Are section.",
   "example": {},

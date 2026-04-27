@@ -8,6 +8,9 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'Homepage About Section',
 		'category' => 'widgets',
+		'attributes' => array(
+			
+		),
 		'icon' => 'smiley',
 		'description' => 'Block to be used specifically for the home page Who We Are section.',
 		'example' => array(
@@ -30,6 +33,9 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'Homepage Ethics Section',
 		'category' => 'widgets',
+		'attributes' => array(
+			
+		),
 		'icon' => 'smiley',
 		'description' => 'Block to be used specifically for the home page code of ethics.',
 		'example' => array(
@@ -52,6 +58,9 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'Homepage Legal Section',
 		'category' => 'widgets',
+		'attributes' => array(
+			
+		),
 		'icon' => 'smiley',
 		'description' => 'Block to be used specifically for the home page legal documentation.',
 		'example' => array(
@@ -74,6 +83,9 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'Homepage Values Section',
 		'category' => 'widgets',
+		'attributes' => array(
+			
+		),
 		'icon' => 'smiley',
 		'description' => 'Block to be used specifically for the home page core values.',
 		'example' => array(
@@ -96,6 +108,39 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'Page Hero Section',
 		'category' => 'widgets',
+		'attributes' => array(
+			'heroTitle' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'heroDescription' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'heroImageId' => array(
+				'type' => 'number'
+			),
+			'heroImageUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'btn1Text' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'btn1Url' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'btn2Text' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'btn2Url' => array(
+				'type' => 'string',
+				'default' => ''
+			)
+		),
 		'icon' => 'smiley',
 		'description' => 'Block to be used for any page that has a top hero section to display hero content.',
 		'example' => array(

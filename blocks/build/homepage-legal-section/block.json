@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "title": "Homepage Legal Section",
   "category": "widgets",
+  "attributes": {},
   "icon": "smiley",
   "description": "Block to be used specifically for the home page legal documentation.",
   "example": {},

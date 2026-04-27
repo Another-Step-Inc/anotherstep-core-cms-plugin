@@ -5,6 +5,39 @@
   "version": "0.1.0",
   "title": "Page Hero Section",
   "category": "widgets",
+  "attributes": {
+    "heroTitle": {
+      "type": "string",
+      "default": ""
+    },
+    "heroDescription": {
+      "type": "string",
+      "default": ""
+    },
+    "heroImageId": {
+      "type": "number"
+    },
+    "heroImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "btn1Text": {
+      "type": "string",
+      "default": ""
+    },
+    "btn1Url": {
+      "type": "string",
+      "default": ""
+    },
+    "btn2Text": {
+      "type": "string",
+      "default": ""
+    },
+    "btn2Url": {
+      "type": "string",
+      "default": ""
+    }
+  },
   "icon": "smiley",
   "description": "Block to be used for any page that has a top hero section to display hero content.",
   "example": {},

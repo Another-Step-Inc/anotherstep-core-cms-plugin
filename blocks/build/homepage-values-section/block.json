@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "title": "Homepage Values Section",
   "category": "widgets",
+  "attributes": {},
   "icon": "smiley",
   "description": "Block to be used specifically for the home page core values.",
   "example": {},
