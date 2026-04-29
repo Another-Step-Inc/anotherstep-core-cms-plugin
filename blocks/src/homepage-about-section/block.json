@@ -6,7 +6,15 @@
 	"title": "Homepage About Section",
 	"category": "widgets",
 	"attributes": {
-		
+		"aboutHeadline": {"type": "string", "default": ""},
+		"aboutDescription": {"type": "string", "default": ""},
+		"aboutSubHeadline": {"type": "string", "default": ""},
+		"aboutImpactTitle1": {"type": "string", "default": ""},
+		"aboutImpactParagraph1": {"type": "string", "default": ""},
+		"aboutImpactIcon1": {"type": "string", "default": ""},
+		"aboutImpactTitle2": {"type": "string", "default": ""},
+		"aboutImpactParagraph2": {"type": "string", "default": ""},
+		"aboutImpactIcon2": {"type": "string", "default": ""}
 	},
 	"icon": "smiley",
 	"description": "Block to be used specifically for the home page Who We Are section.",

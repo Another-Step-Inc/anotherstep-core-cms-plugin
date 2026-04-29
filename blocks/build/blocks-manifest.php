@@ -9,7 +9,42 @@ return array(
 		'title' => 'Homepage About Section',
 		'category' => 'widgets',
 		'attributes' => array(
-			
+			'aboutHeadline' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutDescription' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutSubHeadline' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutImpactTitle1' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutImpactParagraph1' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutImpactIcon1' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutImpactTitle2' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutImpactParagraph2' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutImpactIcon2' => array(
+				'type' => 'string',
+				'default' => ''
+			)
 		),
 		'icon' => 'smiley',
 		'description' => 'Block to be used specifically for the home page Who We Are section.',
