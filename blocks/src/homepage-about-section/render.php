@@ -14,10 +14,16 @@ $about_description = isset( $attributes['aboutDescription'] ) ? $attributes['abo
 $about_subheadline = $attributes['aboutSubHeadline'];
 $about_impact_title1 = $attributes['aboutImpactTitle1'];
 $about_impact_paragraph1 = isset( $attributes['aboutImpactParagraph1'] ) ? $attributes['aboutImpactParagraph1'] : '';
-$about_impact_icon1 = $attributes['aboutImpactIcon1'];
+$about_impact_icon1 = $attributes['aboutImpactIcon1']?: 'StarIcon';
 $about_impact_title2 = $attributes['aboutImpactTitle2'];
 $about_impact_paragraph2 = isset( $attributes['aboutImpactParagraph2'] ) ? $attributes['aboutImpactParagraph2'] : '';
-$about_impact_icon2 = $attributes['aboutImpactIcon2'];
+$about_impact_icon2 = $attributes['aboutImpactIcon2']?: 'StarIcon';
+$sprite_url = get_template_directory_uri() . '/assets/icons/heroicons-sprite.svg';
+static $sprite_has_rendered = false;
+if ( ! $sprite_has_rendered && file_exists( $sprite_url ) ) {
+    echo file_get_contents( $sprite_url );
+    $sprite_has_rendered = true;
+}
 ?>
       <div class="space-y-6">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-900 text-sm font-bold uppercase tracking-wider">
@@ -51,12 +57,14 @@ $about_impact_icon2 = $attributes['aboutImpactIcon2'];
         <?php endif; ?>
           <div class="space-y-8">
             <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                </svg>
+              <div <?php echo get_block_wrapper_attributes(); ?>>
+                <div class="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-6 w-6 text-blue-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <use href="<?php echo esc_attr( $sprite_url . '#' . $about_impact_icon1 ); ?>"></use>
+                  </svg>
+                </div>                
               </div>
-              <div>
+            <div>
 				<?php if ($about_impact_title1) : ?>
                 <h4 class="font-bold text-slate-900"><?php echo esc_html($about_impact_title1) ?></h4>
 				<?php endif; ?>
@@ -71,12 +79,14 @@ $about_impact_icon2 = $attributes['aboutImpactIcon2'];
             </div>
 
             <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-blue-900 rounded-2xl flex items-center justify-center shrink-0 text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
+              <div <?php echo get_block_wrapper_attributes(); ?>>
+                <div class="w-12 h-12 bg-blue-900 rounded-2xl flex items-center justify-center shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <use href="<?php echo esc_attr( $sprite_url . '#' . $about_impact_icon2 ); ?>"></use>
+                  </svg>
+                </div>                
               </div>
-              <div>
+            <div>
 				<?php if ($about_impact_title2) : ?>
                 <h4 class="font-bold text-slate-900"><?php echo esc_html($about_impact_title2) ?></h4>
 				<?php endif; ?>

@@ -15,6 +15,7 @@
 		"start": "wp-scripts start --webpack-copy-php --blocks-manifest"
 	},
 	"dependencies": {
+		"@heroicons/react": "^2.2.0",
 		"@wordpress/block-editor": "latest",
 		"@wordpress/blocks": "latest",
 		"@wordpress/i18n": "latest"

@@ -1,4 +1,38 @@
 /**
+ * Other important imports
+ */
+import { useState } from '@wordpress/element';
+import { Button, Modal, TextControl } from '@wordpress/components';
+import { HomeIcon, 
+		MapPinIcon, 
+		UserGroupIcon, 
+		AcademicCapIcon, 
+		ChartBarIcon, 
+		ArrowTrendingUpIcon, 
+		StarIcon, 
+		CheckBadgeIcon, 
+		HeartIcon, 
+		HandThumbUpIcon, 
+		UserPlusIcon, 
+		SunIcon, 
+		BriefcaseIcon, 
+		GlobeAltIcon, 
+		BuildingOfficeIcon, 
+		CalendarDaysIcon, 
+		PhoneIcon, 
+		CursorArrowRaysIcon, 
+		InformationCircleIcon, 
+		RocketLaunchIcon } from '@heroicons/react/24/outline';
+
+const ICON_MAP = {
+    HomeIcon, MapPinIcon, UserGroupIcon, AcademicCapIcon,
+    ChartBarIcon, ArrowTrendingUpIcon, StarIcon, CheckBadgeIcon,
+    HeartIcon, HandThumbUpIcon, UserPlusIcon, SunIcon,
+    BriefcaseIcon, GlobeAltIcon, BuildingOfficeIcon, CalendarDaysIcon,
+    PhoneIcon, CursorArrowRaysIcon, InformationCircleIcon, RocketLaunchIcon
+};
+
+/**
  * Retrieves the translation of text.
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
@@ -30,6 +64,9 @@ import './editor.scss';
  * @return {Element} Element to render.
  */
 export default function Edit(props) {
+	const IconOne = ICON_MAP[ props.attributes.aboutImpactIcon1 ] || StarIcon;
+	const IconTwo = ICON_MAP[ props.attributes.aboutImpactIcon2 ] || StarIcon;
+
 	function handleAttributeChange(valueOrEvent, prop) {
 		const newValue = (valueOrEvent?.target) ? valueOrEvent.target.value : valueOrEvent;
 		props.setAttributes({ [prop]: newValue })
@@ -85,11 +122,11 @@ export default function Edit(props) {
 						value={ props.attributes.aboutImpactTitle1 }
 						onChange={ (e) => (handleAttributeChange(e, 'aboutImpactTitle1')) }
                     />
-					<input 
-                        type="text" 
-                        placeholder="Impact Icon" 
-						className="as-custom-input"
-                    />
+					<IconPicker 
+						label="Impact 1 Icon"
+						currentIcon={ props.attributes.aboutImpactIcon1 }
+						onSelect={ ( name ) => props.setAttributes( { aboutImpactIcon1: name } ) }
+                	/>
                 </div>
 				<div className="as-preview-group">
 					<label className="as-label">Impact Description</label>
@@ -113,11 +150,11 @@ export default function Edit(props) {
 						value={ props.attributes.aboutImpactTitle2 }
 						onChange={ (e) => (handleAttributeChange(e, 'aboutImpactTitle2')) }
                     />
-					<input 
-                        type="text" 
-                        placeholder="Impact Icon" 
-						className="as-custom-input"
-                    />
+					<IconPicker 
+						label="Impact 2 Icon"
+						currentIcon={ props.attributes.aboutImpactIcon2 }
+						onSelect={ ( name ) => props.setAttributes( { aboutImpactIcon2: name } ) }
+                	/>
                 </div>
 				<div className="as-preview-group">
 					<label className="as-label">Impact Description</label>
@@ -138,3 +175,54 @@ export default function Edit(props) {
 		</div>
 	);
 }
+
+const IconPicker = ({currentIcon, onSelect, label}) => {
+	const [ isModalOpen, setModalOpen ] = useState(false);
+	const [ searchTerm, setSearchTerm ] = useState('');
+
+	// Filter icons based on searchTerm
+	const iconNames = Object.keys(ICON_MAP).filter(name => name.toLowerCase().includes(searchTerm.toLowerCase()));
+
+	const SelectedIcon = ICON_MAP[currentIcon] || StarIcon;
+
+	return(
+		<div className="as-icon-picker-wrapper">
+		<Button 
+        	variant="secondary"
+			onClick={ () => setModalOpen(true)}
+			className="as-custom-input"
+        >
+			<SelectedIcon style={{width:'20px', marginRight: '8px'}} />
+			{currentIcon || 'Choose Icon'}
+		</Button>
+		{ isModalOpen && (
+			<Modal title="Select a Heroicon" onRequestClose={ () => setModalOpen(false)}>
+				<TextControl 
+					placeholder="Search icons..."
+					value={ searchTerm }
+					onChange={ setSearchTerm }
+					autoFocus
+				/>
+				<div className="as-icon-grid" style={ { display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '10px' } }>
+					{iconNames.map((name) => {
+						const IconComponent = ICON_MAP[name];
+						return (
+							<Button
+								key={name}
+								onClick={() => {
+									onSelect(name);
+									setModalOpen(false);
+								}}
+								className="as-icon-item"
+								label={name}
+							>
+								<IconComponent style={{width: '24px'}} />
+							</Button>
+						);
+					})}
+				</div>
+			</Modal>
+		)}
+		</div>
+	);
+};
