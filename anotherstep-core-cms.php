@@ -21,12 +21,31 @@ function as_register_services_cpt() {
         'public' => true,
         'show_in_rest' => true,
         'supports' => ['title', 'editor', 'thumbnail'],
-        'menu_icon' => 'dashicons-heart',
+        'menu_icon' => 'dashicons-money-alt',
     ];
 
     register_post_type('services', $args);
 }
 add_action('init', 'as_register_services_cpt');
+
+function as_register_values_cpt() {
+    $labels = [
+        'name' => 'Values',
+        'singular_name' => 'Value',
+        'menu_name' => 'Organization Values',
+    ];
+
+    $args =[
+        'labels' => $labels,
+        'public' => true,
+        'show_in_rest' => true,
+        'supports' => ['title', 'editor', 'thumbnail'],
+        'menu_icon' => 'dashicons-heart',
+    ];
+
+    register_post_type('values', $args);
+}
+add_action('init', 'as_register_values_cpt');
 
 // 2. Feature: Add Custom Fields for the Services Post Type
 function as_register_rest_fields() {

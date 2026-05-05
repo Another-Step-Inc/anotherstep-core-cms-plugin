@@ -119,7 +119,18 @@ return array(
 		'title' => 'Homepage Values Section',
 		'category' => 'widgets',
 		'attributes' => array(
-			
+			'coreValuesHeadline' => array(
+				'type' => 'string',
+				'default' => 'Our Values'
+			),
+			'coreValuesQuote' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'coreValuesQty' => array(
+				'type' => 'number',
+				'default' => ''
+			)
 		),
 		'icon' => 'smiley',
 		'description' => 'Block to be used specifically for the home page core values.',

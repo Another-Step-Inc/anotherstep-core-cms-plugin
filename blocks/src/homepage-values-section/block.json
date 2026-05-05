@@ -6,7 +6,9 @@
 	"title": "Homepage Values Section",
 	"category": "widgets",
 	"attributes": {
-		
+		"coreValuesHeadline": {"type": "string", "default": "Our Values"},
+		"coreValuesQuote": {"type": "string", "default": ""},
+		"coreValuesQty": {"type": "number", "default": ""}
 	},
 	"icon": "smiley",
 	"description": "Block to be used specifically for the home page core values.",

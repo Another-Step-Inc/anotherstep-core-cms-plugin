@@ -18,10 +18,10 @@ $about_impact_icon1 = $attributes['aboutImpactIcon1']?: 'StarIcon';
 $about_impact_title2 = $attributes['aboutImpactTitle2'];
 $about_impact_paragraph2 = isset( $attributes['aboutImpactParagraph2'] ) ? $attributes['aboutImpactParagraph2'] : '';
 $about_impact_icon2 = $attributes['aboutImpactIcon2']?: 'StarIcon';
-$sprite_url = get_template_directory_uri() . '/assets/icons/heroicons-sprite.svg';
+$sprite_path = get_template_directory() . '/assets/icons/heroicons-sprite.svg';
 static $sprite_has_rendered = false;
-if ( ! $sprite_has_rendered && file_exists( $sprite_url ) ) {
-    echo file_get_contents( $sprite_url );
+if ( ! $sprite_has_rendered && file_exists( $sprite_path ) ) {
+    echo file_get_contents( $sprite_path );
     $sprite_has_rendered = true;
 }
 ?>
@@ -60,7 +60,7 @@ if ( ! $sprite_has_rendered && file_exists( $sprite_url ) ) {
               <div <?php echo get_block_wrapper_attributes(); ?>>
                 <div class="w-12 h-12 bg-yellow-400 rounded-2xl flex items-center justify-center shrink-0">
                   <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-6 w-6 text-blue-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <use href="<?php echo esc_attr( $sprite_url . '#' . $about_impact_icon1 ); ?>"></use>
+                    <use href="#<?php echo esc_attr( $about_impact_icon1 ); ?>"></use>
                   </svg>
                 </div>                
               </div>
@@ -82,7 +82,7 @@ if ( ! $sprite_has_rendered && file_exists( $sprite_url ) ) {
               <div <?php echo get_block_wrapper_attributes(); ?>>
                 <div class="w-12 h-12 bg-blue-900 rounded-2xl flex items-center justify-center shrink-0">
                   <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <use href="<?php echo esc_attr( $sprite_url . '#' . $about_impact_icon2 ); ?>"></use>
+                    <use href="#<?php echo esc_attr( $about_impact_icon2 ); ?>"></use>
                   </svg>
                 </div>                
               </div>
