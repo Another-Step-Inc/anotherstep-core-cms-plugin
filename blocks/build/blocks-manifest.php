@@ -69,7 +69,18 @@ return array(
 		'title' => 'Homepage Ethics Section',
 		'category' => 'widgets',
 		'attributes' => array(
-			
+			'ethicsHeadline' => array(
+				'type' => 'string',
+				'default' => 'Code Of Ethics'
+			),
+			'ethicsLinkText' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'ethicsLinkUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			)
 		),
 		'icon' => 'smiley',
 		'description' => 'Block to be used specifically for the home page code of ethics.',

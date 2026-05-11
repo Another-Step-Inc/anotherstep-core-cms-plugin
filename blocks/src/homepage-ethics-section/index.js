@@ -19,6 +19,7 @@ import './style.scss';
  */
 import Edit from './edit';
 import metadata from './block.json';
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Every block starts by registering a new block type definition.
@@ -30,4 +31,12 @@ registerBlockType( metadata.name, {
 	 * @see ./edit.js
 	 */
 	edit: Edit,
+	save: () => {
+        const blockProps = useBlockProps.save();
+        return (
+            <div { ...blockProps }>
+                <InnerBlocks.Content />
+            </div>
+        );
+    }
 } );

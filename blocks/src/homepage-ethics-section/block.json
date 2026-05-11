@@ -6,7 +6,9 @@
 	"title": "Homepage Ethics Section",
 	"category": "widgets",
 	"attributes": {
-		
+		"ethicsHeadline": {"type": "string", "default": "Code Of Ethics"},
+		"ethicsLinkText": {"type": "string", "default": ""},
+		"ethicsLinkUrl": {"type": "string", "default": ""}
 	},
 	"icon": "smiley",
 	"description": "Block to be used specifically for the home page code of ethics.",
