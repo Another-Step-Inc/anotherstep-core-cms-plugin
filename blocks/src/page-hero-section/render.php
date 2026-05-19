@@ -12,7 +12,7 @@ $display_btn2_text = $attributes['btn2Text'];
 $display_btn2_url = $attributes['btn2Url'];
 ?>
 
-<div class="p-8 md:p-16 md:w-1/2 text-white">
+<div class="p-8 md:p-16 md:w-1/2 text-white not-prose">
     <span class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider uppercase bg-yellow-400 text-blue-900 rounded-full">
         Established 1992
     </span>
@@ -44,12 +44,14 @@ $display_btn2_url = $attributes['btn2Url'];
     </div>
 </div>
 
-<div class="md:w-1/2 w-full h-64 md:h-[500px] relative">
-	<img 
-        src="<?php echo esc_url($display_image_url); ?>" 
-        alt="<?php echo esc_attr($display_title); ?>" 
-        class="absolute inset-0 w-full h-full rounded-3xl object-cover"
-    />
-    <div class="absolute inset-0 bg-blue-900/10"></div>
+<div class="w-full md:w-1/2 p-6 md:p-12 not-prose">
+    <div class="relative h-64 md:h-[600px] rounded-2xl overflow-hidden shadow-lg">
+        <img
+            src="<?php echo esc_url($display_image_url); ?>"
+            alt="<?php echo esc_attr($display_title); ?>"
+            class="absolute inset-0 w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-blue-900/10"></div>
+    </div>
 </div>
 

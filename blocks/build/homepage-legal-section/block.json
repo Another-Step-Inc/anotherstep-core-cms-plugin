@@ -5,7 +5,56 @@
   "version": "0.1.0",
   "title": "Homepage Legal Section",
   "category": "widgets",
-  "attributes": {},
+  "attributes": {
+    "administrativeRecordsTitle": {
+      "type": "string",
+      "default": "Administrative Records"
+    },
+    "administrativeRecordsDescription": {
+      "type": "string",
+      "default": "Governing documents, conflict of interest policy, and financial statements are available upon request to:"
+    },
+    "directorName": {
+      "type": "string",
+      "default": "Dawn Rich Meitrott"
+    },
+    "directorTitle": {
+      "type": "string",
+      "default": "Executive Director"
+    },
+    "organizationName": {
+      "type": "string",
+      "default": "Another Step, Inc."
+    },
+    "street": {
+      "type": "string",
+      "default": "30 Ramland Road, Suite 202"
+    },
+    "city": {
+      "type": "string",
+      "default": "Orangeburg"
+    },
+    "state": {
+      "type": "string",
+      "default": "NY"
+    },
+    "zipCode": {
+      "type": "string",
+      "default": "10962"
+    },
+    "charityInfoTitle": {
+      "type": "string",
+      "default": "Charity Information"
+    },
+    "charityInfoDescription": {
+      "type": "string",
+      "default": "You can obtain more information about charities by calling the Attorney General:"
+    },
+    "attorneyGeneralPhone": {
+      "type": "string",
+      "default": "212-416-8686"
+    }
+  },
   "icon": "smiley",
   "description": "Block to be used specifically for the home page legal documentation.",
   "example": {},

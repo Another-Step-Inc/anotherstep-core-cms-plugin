@@ -105,7 +105,54 @@ return array(
 		'title' => 'Homepage Legal Section',
 		'category' => 'widgets',
 		'attributes' => array(
-			
+			'administrativeRecordsTitle' => array(
+				'type' => 'string',
+				'default' => 'Administrative Records'
+			),
+			'administrativeRecordsDescription' => array(
+				'type' => 'string',
+				'default' => 'Governing documents, conflict of interest policy, and financial statements are available upon request to:'
+			),
+			'directorName' => array(
+				'type' => 'string',
+				'default' => 'Dawn Rich Meitrott'
+			),
+			'directorTitle' => array(
+				'type' => 'string',
+				'default' => 'Executive Director'
+			),
+			'organizationName' => array(
+				'type' => 'string',
+				'default' => 'Another Step, Inc.'
+			),
+			'street' => array(
+				'type' => 'string',
+				'default' => '30 Ramland Road, Suite 202'
+			),
+			'city' => array(
+				'type' => 'string',
+				'default' => 'Orangeburg'
+			),
+			'state' => array(
+				'type' => 'string',
+				'default' => 'NY'
+			),
+			'zipCode' => array(
+				'type' => 'string',
+				'default' => '10962'
+			),
+			'charityInfoTitle' => array(
+				'type' => 'string',
+				'default' => 'Charity Information'
+			),
+			'charityInfoDescription' => array(
+				'type' => 'string',
+				'default' => 'You can obtain more information about charities by calling the Attorney General:'
+			),
+			'attorneyGeneralPhone' => array(
+				'type' => 'string',
+				'default' => '212-416-8686'
+			)
 		),
 		'icon' => 'smiley',
 		'description' => 'Block to be used specifically for the home page legal documentation.',
