@@ -1,0 +1,10 @@
+services:
+  builder:
+    image: node:20-alpine
+    container_name: anotherstep-core-cms-plugin
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
+    working_dir: /app/blocks
+    command: sh -c "if [ ! -d 'node_modules' ]; then npm install; fi && tail -f /dev/null"
