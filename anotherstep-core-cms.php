@@ -163,3 +163,19 @@ function as_register_blocks() {
     }    
 }
 add_action('init', 'as_register_blocks');
+
+// 9. Feature: Store roles for shop managers and order processing
+function as_restrict_woocommerce_menus() {
+    // Check if the current user has specific roles
+    if (current_user_can('order_fulfillment_processor')) {
+        // 1. Remove the woocommerce menu pages
+        remove_menu_page('woocommerce-marketing');
+
+        // 2. Remove the woocommerce submenu pages
+        remove_submenu_page('woocommerce', 'wc-admin');
+        remove_submenu_page('woocommerce', 'wc-status');
+        remove_submenu_page('woocommerce', 'wc-addons');
+    }
+}
+
+add_action('admin_init', 'as_restrict_woocommerce_menus');
