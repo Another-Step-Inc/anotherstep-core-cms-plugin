@@ -3,6 +3,7 @@
  * @var array    $attributes The block attributes.
  */
 
+// Primary Text Content
 $display_title = $attributes['heroTitle'];
 $display_desc  = $attributes['heroDescription'];
 $display_image_url = $attributes['heroImageUrl'];
@@ -10,6 +11,19 @@ $display_btn1_text = $attributes['btn1Text'];
 $display_btn1_url = $attributes['btn1Url'];
 $display_btn2_text = $attributes['btn2Text'];
 $display_btn2_url = $attributes['btn2Url'];
+
+// Layout & Custom Content Extensions
+$layout_type = $attributes['layoutType'] ?? 'split';
+$image_decoration = $attributes['imageDecoration'] ?? 'none';
+$has_badge = $attributes['hasBadge'] ?? false;
+$badge_text = $attributes['badgeText'] ?? '';
+$quote_text = $attributes['quoteText'] ?? '';
+$stats_number = $attributes['statsNumber'] ?? '';
+$stats_text = $attributes['statsText'] ?? '';
+$extra_div_text = $attributes['extraDivText'] ?? '';
+
+// Base Container Class assignment depending on Full Background vs Split Mode
+$section_classes = 'relative';
 ?>
 
 <div class="p-8 md:p-16 md:w-1/2 text-white not-prose">

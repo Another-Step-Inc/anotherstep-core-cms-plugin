@@ -243,6 +243,42 @@ return array(
 			'btn2Url' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'layoutType' => array(
+				'type' => 'string',
+				'default' => 'split'
+			),
+			'hasBadge' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'badgeText' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'ctaStyle' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'imageDecoration' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'quoteText' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'statsNumber' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'statsText' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'extraDivText' => array(
+				'type' => 'string',
+				'default' => ''
 			)
 		),
 		'icon' => 'smiley',

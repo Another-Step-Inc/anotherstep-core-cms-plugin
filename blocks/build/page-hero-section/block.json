@@ -36,6 +36,42 @@
     "btn2Url": {
       "type": "string",
       "default": ""
+    },
+    "layoutType": {
+      "type": "string",
+      "default": "split"
+    },
+    "hasBadge": {
+      "type": "boolean",
+      "default": false
+    },
+    "badgeText": {
+      "type": "string",
+      "default": ""
+    },
+    "ctaStyle": {
+      "type": "string",
+      "default": "none"
+    },
+    "imageDecoration": {
+      "type": "string",
+      "default": "none"
+    },
+    "quoteText": {
+      "type": "string",
+      "default": ""
+    },
+    "statsNumber": {
+      "type": "string",
+      "default": ""
+    },
+    "statsText": {
+      "type": "string",
+      "default": ""
+    },
+    "extraDivText": {
+      "type": "string",
+      "default": ""
     }
   },
   "icon": "smiley",
