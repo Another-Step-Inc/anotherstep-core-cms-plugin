@@ -17,6 +17,7 @@
 		"layoutType": {"type": "string", "default": "split"},
     	"hasBadge": {"type": "boolean", "default": false},
 		"badgeText": {"type": "string", "default": ""},
+		"badgeStyle": { "type": "string", "default": "pill-yellow" },
     	"ctaStyle": {"type": "string", "default": "none"},
     	"imageDecoration": {"type": "string", "default": "none"},
 		"quoteText": { "type": "string", "default": "" },

@@ -49,6 +49,10 @@
       "type": "string",
       "default": ""
     },
+    "badgeStyle": {
+      "type": "string",
+      "default": "pill-yellow"
+    },
     "ctaStyle": {
       "type": "string",
       "default": "none"

@@ -256,6 +256,10 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'badgeStyle' => array(
+				'type' => 'string',
+				'default' => 'pill-yellow'
+			),
 			'ctaStyle' => array(
 				'type' => 'string',
 				'default' => 'none'

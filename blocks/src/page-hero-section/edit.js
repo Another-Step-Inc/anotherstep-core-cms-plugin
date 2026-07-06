@@ -137,6 +137,21 @@ export default function Edit(props) {
 					</div>
 				)}
 
+				{/* DYNAMIC LOOKUP: Displays choice panel if badge toggle selection check is active */}
+                { props.attributes.hasBadge && (
+                    <div className="as-preview-row">
+                        <label className="as-label">Badge Visual Theme Style</label>
+                        <select
+                            value={ props.attributes.badgeStyle || 'pill-yellow' }
+                            onChange={ (e) => props.setAttributes({ badgeStyle: e.target.value }) }
+                        >
+                            <option value="pill-yellow">Pill Shape (Solid Yellow Background / Dark Yellow Text)</option>
+                            <option value="text-blue">Clean Text (Brand Blue Font Only)</option>
+                            <option value="pill-blue">Pill Shape (Solid Blue Background / Black Text)</option>
+                        </select>
+                    </div>
+                )}
+
 				{ props.attributes.imageDecoration === 'bubble-text' && (
 					<div className="as-preview-row-split">
 						<div>
