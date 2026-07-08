@@ -23,7 +23,15 @@
 		"quoteText": { "type": "string", "default": "" },
 		"statsNumber": { "type": "string", "default": "" },
 		"statsText": { "type": "string", "default": "" },
-		"extraDivText": { "type": "string", "default": "" }
+		"statsBgColor": { "type": "string", "default": "" },
+    	"statsTextColor": { "type": "string", "default": "" },
+		"isImageLarge": { "type": "boolean", "default": false },
+    	"isStatsRotated": { "type": "boolean", "default": true },
+		"hasExtraTextDiv": { "type": "boolean", "default": false },
+		"extraDivText": { "type": "string", "default": "" },
+        "extraDivIcon": { "type": "string", "default": "" },
+        "extraDivIconColor": { "type": "string", "default": "" },
+        "extraDivBgColor": { "type": "string", "default": "" }
 	},
 	"icon": "smiley",
 	"description": "Block to be used for any page that has a top hero section to display hero content.",

@@ -73,7 +73,39 @@
       "type": "string",
       "default": ""
     },
+    "statsBgColor": {
+      "type": "string",
+      "default": ""
+    },
+    "statsTextColor": {
+      "type": "string",
+      "default": ""
+    },
+    "isImageLarge": {
+      "type": "boolean",
+      "default": false
+    },
+    "isStatsRotated": {
+      "type": "boolean",
+      "default": true
+    },
+    "hasExtraTextDiv": {
+      "type": "boolean",
+      "default": false
+    },
     "extraDivText": {
+      "type": "string",
+      "default": ""
+    },
+    "extraDivIcon": {
+      "type": "string",
+      "default": ""
+    },
+    "extraDivIconColor": {
+      "type": "string",
+      "default": ""
+    },
+    "extraDivBgColor": {
       "type": "string",
       "default": ""
     }

@@ -280,7 +280,39 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
+			'statsBgColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'statsTextColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'isImageLarge' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'isStatsRotated' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'hasExtraTextDiv' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
 			'extraDivText' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'extraDivIcon' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'extraDivIconColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'extraDivBgColor' => array(
 				'type' => 'string',
 				'default' => ''
 			)
