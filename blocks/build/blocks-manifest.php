@@ -331,5 +331,88 @@ return array(
 		'style' => 'file:./style-index.css',
 		'render' => 'file:./render.php',
 		'viewScript' => 'file:./view.js'
+	),
+	'split-feature-section' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/split-feature-section',
+		'version' => '0.1.0',
+		'title' => 'Bento Split Feature Section',
+		'category' => 'design',
+		'icon' => 'layout',
+		'description' => 'Asymmetric side-by-side bento layout featuring text content alongside a structural grid of images and metric badges.',
+		'attributes' => array(
+			'splitTitle' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => 'h2',
+				'default' => ''
+			),
+			'splitDescription' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.split-desc-container',
+				'default' => ''
+			),
+			'imageAlignment' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'backgroundColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'eyebrowText' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'underlineAccent' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'mediaId' => array(
+				'type' => 'number'
+			),
+			'mediaUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'mediaAlt' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'secondaryMediaId' => array(
+				'type' => 'number'
+			),
+			'secondaryMediaUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'metricNumber' => array(
+				'type' => 'string',
+				'default' => '100%'
+			),
+			'metricLabel' => array(
+				'type' => 'string',
+				'default' => 'In-Home Support'
+			),
+			'iconName' => array(
+				'type' => 'string',
+				'default' => 'home_health'
+			),
+			'iconTitle' => array(
+				'type' => 'string',
+				'default' => 'Personalized Care'
+			)
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'textdomain' => 'split-feature-section',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php',
+		'viewScript' => 'file:./view.js'
 	)
 );

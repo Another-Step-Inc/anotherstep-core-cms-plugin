@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Homepage About Section
+ * Plugin Name:       AnotherStep Core CMS
  * Description:       Example block scaffolded with Create Block tool.
  * Version:           0.1.0
  * Requires at least: 6.8
@@ -8,7 +8,7 @@
  * Author:            The WordPress Contributors
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       homepage-about-section
+ * Text Domain:       anotherstep-core-cms
  *
  * @package CreateBlock
  */
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @see https://make.wordpress.org/core/2025/03/13/more-efficient-block-type-registration-in-6-8/
  * @see https://make.wordpress.org/core/2024/10/17/new-block-type-registration-apis-to-improve-performance-in-wordpress-6-7/
  */
-function create_block_homepage_about_section_block_init() {
+function create_block_anotherstep_core_cms_init() {
 	wp_register_block_types_from_metadata_collection( __DIR__ . '/build', __DIR__ . '/build/blocks-manifest.php' );
 }
-add_action( 'init', 'create_block_homepage_about_section_block_init' );
+add_action( 'init', 'create_block_anotherstep_core_cms_init' );

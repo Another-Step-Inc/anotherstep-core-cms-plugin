@@ -1,0 +1,83 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "anotherstep/split-feature-section",
+  "version": "0.1.0",
+  "title": "Bento Split Feature Section",
+  "category": "design",
+  "icon": "layout",
+  "description": "Asymmetric side-by-side bento layout featuring text content alongside a structural grid of images and metric badges.",
+  "attributes": {
+    "splitTitle": {
+      "type": "string",
+      "source": "html",
+      "selector": "h2",
+      "default": ""
+    },
+    "splitDescription": {
+      "type": "string",
+      "source": "html",
+      "selector": ".split-desc-container",
+      "default": ""
+    },
+    "imageAlignment": {
+      "type": "string",
+      "default": ""
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "eyebrowText": {
+      "type": "string",
+      "default": ""
+    },
+    "underlineAccent": {
+      "type": "boolean",
+      "default": true
+    },
+    "mediaId": {
+      "type": "number"
+    },
+    "mediaUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "mediaAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "secondaryMediaId": {
+      "type": "number"
+    },
+    "secondaryMediaUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "metricNumber": {
+      "type": "string",
+      "default": "100%"
+    },
+    "metricLabel": {
+      "type": "string",
+      "default": "In-Home Support"
+    },
+    "iconName": {
+      "type": "string",
+      "default": "home_health"
+    },
+    "iconTitle": {
+      "type": "string",
+      "default": "Personalized Care"
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "split-feature-section",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}

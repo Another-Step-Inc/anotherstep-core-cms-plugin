@@ -1,175 +1,142 @@
-.as-custom-settings-panel {
-    // Container
-    border: 1px solid #5e5d5d;
-    border-radius: 6px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+.as-live-hero-canvas {
+    background: #ffffff;
+    border: 1px solid #e2e4e7;
+    border-radius: 16px;
+    padding: 48px;
+    position: relative;
     overflow: hidden;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    margin: 20px 0;
+    box-sizing: border-box;
 
-    // Header
-    .as-panel-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: #e3f2fd;
-		background-color: #1e1e1e;
-        padding: 12px 16px;
-        border-bottom: 1px solid #e2e4e7;
-
-        .as-panel-title {
-            margin: 0;
-            font-size: 14px;
-            font-weight: 600;
+    // View Mode Variants
+    &.view-mode-split {
+        .as-hero-canvas-grid-wrapper {
+            display: grid;
+            grid-template-cols: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
         }
-
-		.as-settings-icon {
-            font-size: 16px;
-			color: #e3f2fd;
-        }
-
-        .as-panel-badge {
-            background-color: #e3f2fd;
-            color: #2196f3;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 2px 8px;
-            border-radius: 12px;
-            letter-spacing: 0.02em;
+        &.img-size-large .as-hero-canvas-grid-wrapper {
+            grid-template-cols: 0.9fr 1.1fr;
         }
     }
 
-    // Body
-    .as-panel-body {
-        padding: 16px;
-		background-color: #f0f2f5;
-        border-radius: 4px;
-
-        .as-panel-info {
-            margin-bottom: 16px;
-            p {
-                margin: 0;
-                font-size: 13px;
-                color: #50575e;
-                line-height: 1.5;
+    &.view-mode-background {
+        background: #0f172a;
+        padding: 64px;
+        
+        .as-canvas-background-image {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            img { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; }
+            &.decoration-gradient-overlay .as-bg-overlay-mask {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(90deg, #0f172a 40%, transparent);
             }
         }
-
-
-        .as-preview-row {
-                display: flex;
-                justify-content: space-between;
-                padding: 4px 0;
-                font-size: 12px;
-
-                .as-label {
-                    color: #757575;
-                    font-weight: 500;
-                }
-
-                .as-value {
-                    color: #1e1e1e;
-                    font-family: monospace;
-                    background: #fff;
-                    padding: 1px 4px;
-                    border-radius: 3px;
-                    border: 1px solid #e0e0e0;
-                }
-
-				.as-custom-input {
-					width: 100%;
-					padding: 8px;
-					border: 1px solid #ccc;
-					border-radius: 4px;
-					font-size: 14px;
-					margin-top: 5px;
-
-					&:focus {
-						border-color: #2196f3;
-						outline: none;
-						box-shadow: 0 0 0 1px #2196f3;
-					}
-				}
-
-				.as-image-preview-wrapper {
-					margin-top: 10px;
-					border: 1px dashed #ccd0d4;
-					padding: 10px;
-					text-align: center;
-					border-radius: 4px;
-
-					.as-image-preview {
-						max-width: 100%;
-						height: auto;
-						display: block;
-						margin: 0 auto 10px;
-						cursor: pointer;
-						border-radius: 4px;
-					}
-
-					.as-custom-button {
-						background: #f6f7f7;
-						border: 1px solid #2271b1;
-						color: #2271b1;
-						padding: 6px 12px;
-						cursor: pointer;
-						font-weight: 600;
-						border-radius: 3px;
-
-						&:hover {
-							background: #f0f6fb;
-						}
-					}
-
-					.as-remove-link {
-						background: none;
-						border: none;
-						color: #d63638;
-						font-size: 11px;
-						text-decoration: underline;
-						cursor: pointer;
-					}
-				}
+        .as-hero-canvas-grid-wrapper {
+            position: relative;
+            z-index: 2;
+            grid-template-cols: 1fr;
+            max-width: 650px;
         }
-
-		.as-separator {
-			border: 0;
-			border-top: 1px solid #ccd0d4;
-			margin: 20px 0;
-		}
-
-		.as-settings-section-title {
-			font-size: 11px;
-			font-weight: 700;
-			text-transform: uppercase;
-			color: #646970;
-			margin-bottom: 10px;
-		}
-
-		.as-preview-row-split {
-			display: flex;
-			gap: 10px;
-			margin-bottom: 15px;
-
-			input {
-				flex: 1;
-				min-width: 0;
-			}
-		}
+        .as-canvas-title-input { color: #ffffff; }
+        .as-canvas-desc-input { color: #cbd5e1; }
     }
 
-    // Footer
-    .as-panel-footer {
-        margin-top: 16px;
-        padding-top: 12px;
-        border-top: 1px solid #f0f0f0;
-        
-        small {
-            color: #949494;
-            font-size: 11px;
-            font-style: italic;
+    // Canvas Inputs Restyling
+    .as-canvas-title-input {
+        font-size: 38px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+        color: #0f172a;
+        width: 100%;
+        border: 1px dashed transparent;
+        background: transparent;
+        resize: none;
+        margin-bottom: 16px;
+        &:focus { border-color: #2271b1; background: rgba(255,255,255,0.8); outline: none; }
+    }
+
+    .as-canvas-desc-input {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #475569;
+        width: 100%;
+        border: 1px dashed transparent;
+        background: transparent;
+        resize: none;
+        margin-bottom: 24px;
+        &:focus { border-color: #2271b1; background: rgba(255,255,255,0.8); outline: none; }
+    }
+
+    // Badge Sizing Elements
+    .as-canvas-badge-input {
+        border: none;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 4px 12px;
+        border-radius: 9999px;
+        margin-bottom: 16px;
+        width: auto;
+        display: inline-block;
+        &.theme-pill-yellow { background: #fef08a; color: #854d0e; }
+        &.theme-text-blue { background: transparent; color: #2563eb; padding: 4px 0; }
+        &.theme-pill-blue { background: #2563eb; color: #ffffff; }
+    }
+
+    // Button Row elements
+    .as-canvas-cta-row {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 24px;
+        .as-canvas-btn-wrapper {
+            border-radius: 12px;
+            padding: 10px 24px;
+            input {
+                border: none; background: transparent; font-weight: 700; font-size: 14px; text-align: center; width: 130px; outline: none;
+            }
+            &.primary { background: #facc15; input { color: #1e3a8a; } }
+            &.secondary { background: #f1f5f9; border: 1px solid #e2e8f0; input { color: #1e293b; } }
         }
+    }
+
+    // Media Frame Engine
+    .as-canvas-image-frame {
+        border-radius: 16px;
+        overflow: hidden;
+        aspect-ratio: 4 / 3;
+        background: #f8fafc;
+        border: 2px dashed #cbd5e1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        img { width: 100%; height: 100%; object-fit: cover; }
+    }
+
+    // Decorative Underlays
+    .as-hero-graphic-engine {
+        position: relative;
+        .as-canvas-decoration-layers { position: relative; }
+        &.decoration-yellow-box .underlay-yellow-card {
+            position: absolute; inset: -8px; background: #facc15; border-radius: 16px; z-index: -1; transform: translate(6px, 6px);
+        }
+        &.decoration-hover-frame .underlay-rotated-frame {
+            position: absolute; inset: -6px; background: rgba(250, 204, 21, 0.2); border-radius: 16px; z-index: -1; transform: rotate(-2deg);
+        }
+    }
+
+    // Floating Overlay Boxes
+    .as-canvas-floating-stat-card {
+        position: absolute; bottom: 12px; left: -16px; padding: 16px; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); width: 150px; display: flex; flex-direction: column;
+        input { border: none; background: transparent; padding: 0; outline: none; }
+        .stat-value { font-size: 22px; font-weight: 900; }
+        .stat-label { font-size: 11px; color: #64748b; }
+        &.apply-rotation { transform: rotate(3deg); }
     }
 }
