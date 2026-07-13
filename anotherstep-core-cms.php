@@ -13,7 +13,7 @@ function as_register_services_cpt() {
     $labels = [
         'name' => 'Services',
         'singular_name' => 'Service',
-        'menu_name' => 'Organization Services',
+        'menu_name' => 'Organization Services'
     ];
 
     $args = [
@@ -22,6 +22,9 @@ function as_register_services_cpt() {
         'show_in_rest' => true,
         'supports' => ['title', 'editor', 'thumbnail'],
         'menu_icon' => 'dashicons-money-alt',
+        'show_in_graphql'     => true,
+        'graphql_single_name' => 'service',
+        'graphql_plural_name' => 'services',
     ];
 
     register_post_type('services', $args);
@@ -41,6 +44,9 @@ function as_register_values_cpt() {
         'show_in_rest' => true,
         'supports' => ['title', 'editor', 'thumbnail'],
         'menu_icon' => 'dashicons-heart',
+        'show_in_graphql'     => true,
+        'graphql_single_name' => 'value',
+        'graphql_plural_name' => 'values',
     ];
 
     register_post_type('values', $args);
