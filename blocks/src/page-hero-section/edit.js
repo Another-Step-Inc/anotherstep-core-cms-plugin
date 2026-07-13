@@ -3,8 +3,7 @@ import {
     useBlockProps, 
     MediaUpload, 
     MediaUploadCheck, 
-    InspectorControls,
-    RichText
+    InspectorControls 
 } from '@wordpress/block-editor';
 import { 
     PanelBody, 
@@ -16,7 +15,7 @@ import {
 
 import './editor.scss';
 
-export default function Edit(props) {
+export default function Edit( props ) {
     const {
         layoutType,
         imageDecoration,
@@ -45,20 +44,20 @@ export default function Edit(props) {
         isStatsRotated
     } = props.attributes;
 
-    const onSelectImage = (media) => {
-        props.setAttributes({
+    const onSelectImage = ( media ) => {
+        props.setAttributes( {
             heroImageId: media.id,
             heroImageUrl: media.url,
-        });
+        } );
     };
 
     return (
         <>
-            {/* INSPECTOR SIDEBAR CONTROLS */}
+            {/* SIDEBAR CONFIGURATION INSPECTOR */}
             <InspectorControls>
-                <PanelBody title={__('Design & Layout Strategy', 'page-hero-section')} initialOpen={true}>
+                <PanelBody title={__( 'Design & Layout Strategy', 'page-hero-section' )} initialOpen={true}>
                     <SelectControl
-                        label={__('Structural Mode', 'page-hero-section')}
+                        label={__( 'Structural Mode', 'page-hero-section' )}
                         value={layoutType}
                         options={[
                             { label: 'Split Layout (Text Left / Image Right)', value: 'split' },
@@ -68,7 +67,7 @@ export default function Edit(props) {
                     />
 
                     <SelectControl
-                        label={__('Image Mask & Background Decorations', 'page-hero-section')}
+                        label={__( 'Image Mask & Background Decorations', 'page-hero-section' )}
                         value={imageDecoration}
                         options={[
                             { label: 'Plain Image (Sharp Corners)', value: 'none' },
@@ -83,20 +82,20 @@ export default function Edit(props) {
                     />
 
                     <ToggleControl
-                        label={__('Enable Top Accent Badge', 'page-hero-section')}
+                        label={__( 'Enable Top Accent Badge', 'page-hero-section' )}
                         checked={hasBadge}
                         onChange={(val) => props.setAttributes({ hasBadge: val })}
                     />
 
                     <ToggleControl
-                        label={__('Enable Verification Badge (Extra Text Div)', 'page-hero-section')}
+                        label={__( 'Enable Verification Badge (Extra Text Div)', 'page-hero-section' )}
                         checked={hasExtraTextDiv}
                         onChange={(val) => props.setAttributes({ hasExtraTextDiv: val })}
                     />
 
                     {layoutType === 'split' && (
                         <ToggleControl
-                            label={__('Enlarge Image Sizing Layout', 'page-hero-section')}
+                            label={__( 'Enlarge Image Sizing Layout', 'page-hero-section' )}
                             checked={isImageLarge}
                             onChange={(val) => props.setAttributes({ isImageLarge: val })}
                         />
@@ -104,9 +103,9 @@ export default function Edit(props) {
                 </PanelBody>
 
                 {hasBadge && (
-                    <PanelBody title={__('Badge Style Options', 'page-hero-section')} initialOpen={false}>
+                    <PanelBody title={__( 'Badge Style Options', 'page-hero-section' )} initialOpen={false}>
                         <SelectControl
-                            label={__('Badge Visual Theme Style', 'page-hero-section')}
+                            label={__( 'Badge Visual Theme Style', 'page-hero-section' )}
                             value={badgeStyle || 'pill-yellow'}
                             options={[
                                 { label: 'Pill Shape (Solid Yellow / Dark Text)', value: 'pill-yellow' },
@@ -119,32 +118,32 @@ export default function Edit(props) {
                 )}
 
                 {hasExtraTextDiv && (
-                    <PanelBody title={__('Verification Badge Utilities', 'page-hero-section')} initialOpen={false}>
+                    <PanelBody title={__( 'Verification Badge Utilities', 'page-hero-section' )} initialOpen={false}>
                         <TextControl
-                            label={__('Material Icon Key', 'page-hero-section')}
+                            label={__( 'Material Icon Key', 'page-hero-section' )}
                             value={extraDivIcon}
                             placeholder="verified"
                             onChange={(val) => props.setAttributes({ extraDivIcon: val })}
                         />
                         <TextControl
-                            label={__('Icon Color Utility', 'page-hero-section')}
+                            label={__( 'Icon Color Utility', 'page-hero-section' )}
                             value={extraDivIconColor}
-                            placeholder="brand-red"
+                            placeholder="text-brand-red"
                             onChange={(val) => props.setAttributes({ extraDivIconColor: val })}
                         />
                         <TextControl
-                            label={__('Container Background Utility', 'page-hero-section')}
+                            label={__( 'Container Background Utility', 'page-hero-section' )}
                             value={extraDivBgColor}
-                            placeholder="surface-container-low"
+                            placeholder="bg-surface-container-low"
                             onChange={(val) => props.setAttributes({ extraDivBgColor: val })}
                         />
                     </PanelBody>
                 )}
 
                 {imageDecoration === 'bubble-text' && (
-                    <PanelBody title={__('Stats Graphic Options', 'page-hero-section')} initialOpen={false}>
+                    <PanelBody title={__( 'Stats Graphic Options', 'page-hero-section' )} initialOpen={false}>
                         <SelectControl
-                            label={__('Bubble Background', 'page-hero-section')}
+                            label={__( 'Bubble Background', 'page-hero-section' )}
                             value={statsBgColor}
                             options={[
                                 { label: 'Clean White', value: 'white' },
@@ -155,7 +154,7 @@ export default function Edit(props) {
                             onChange={(val) => props.setAttributes({ statsBgColor: val })}
                         />
                         <SelectControl
-                            label={__('Bubble Typography Color', 'page-hero-section')}
+                            label={__( 'Bubble Typography Color', 'page-hero-section' )}
                             value={statsTextColor}
                             options={[
                                 { label: 'Charcoal Dark Text', value: 'on-surface' },
@@ -165,179 +164,162 @@ export default function Edit(props) {
                             onChange={(val) => props.setAttributes({ statsTextColor: val })}
                         />
                         <ToggleControl
-                            label={__('Apply Rotation Effects', 'page-hero-section')}
+                            label={__( 'Apply Rotation Effects', 'page-hero-section' )}
                             checked={isStatsRotated !== false}
                             onChange={(val) => props.setAttributes({ isStatsRotated: val })}
                         />
                     </PanelBody>
                 )}
 
-                <PanelBody title={__('Button Links (URLs)', 'page-hero-section')} initialOpen={false}>
+                <PanelBody title={__( 'Button Link Targets (URLs)', 'page-hero-section' )} initialOpen={false}>
                     <TextControl
-                        label={__('Primary Button URL', 'page-hero-section')}
+                        label={__( 'Primary Button URL', 'page-hero-section' )}
                         value={btn1Url}
-                        placeholder="/donate"
+                        placeholder="/services"
                         onChange={(val) => props.setAttributes({ btn1Url: val })}
                     />
                     <TextControl
-                        label={__('Secondary Button URL', 'page-hero-section')}
+                        label={__( 'Secondary Button URL', 'page-hero-section' )}
                         value={btn2Url}
-                        placeholder="/about"
+                        placeholder="#"
                         onChange={(val) => props.setAttributes({ btn2Url: val })}
                     />
                 </PanelBody>
             </InspectorControls>
 
-            {/* FULLY RENDERED HERO PREVIEW CANVAS */}
-            <div {...useBlockProps({ 
-                className: `as-hero-live-preview mode-${layoutType} size-${isImageLarge ? 'large' : 'normal'}` 
-            })}>
-                
-                {/* BACKGROUND MODE UNDERLAY */}
-                {layoutType === 'background' && heroImageUrl && (
-                    <div className="as-hero-bg-underlay">
-                        <img src={heroImageUrl} alt="" />
-                        <div className={`as-hero-bg-mask decoration-${imageDecoration}`}></div>
-                    </div>
-                )}
-
-                <div className="as-hero-container-grid">
+            {/* HERO GRID WORKSPACE CANVASES */}
+            <div { ...useBlockProps( { className: `as-hero-editor-container layout-${layoutType}` } ) }>
+                <div className="as-hero-editor-grid">
                     
-                    {/* LEFT / MAIN TEXT CONTENT */}
-                    <div className="as-hero-text-content">
-                        {hasBadge && (
-                            <RichText
-                                tagName="span"
-                                className={`as-hero-badge-preview theme-${badgeStyle}`}
-                                value={badgeText}
-                                onChange={(val) => props.setAttributes({ badgeText: val })}
-                                placeholder={__('Accent Badge Label', 'page-hero-section')}
-                                allowedFormats={[]}
-                            />
-                        )}
-
-                        <RichText
-                            tagName="h1"
-                            className="as-hero-title-preview"
-                            value={heroTitle}
-                            onChange={(val) => props.setAttributes({ heroTitle: val })}
-                            placeholder={__('Enter Hero Main Heading', 'page-hero-section')}
-                            allowedFormats={['core/bold', 'core/italic']}
-                        />
-
-                        <RichText
-                            tagName="p"
-                            className="as-hero-desc-preview"
-                            value={heroDescription}
-                            onChange={(val) => props.setAttributes({ heroDescription: val })}
-                            placeholder={__('Enter body paragraph content narrative here...', 'page-hero-section')}
-                        />
-
-                        <div className="as-hero-buttons-preview">
-                            <RichText
-                                tagName="div"
-                                className="as-hero-btn btn-primary"
-                                value={btn1Text}
-                                onChange={(val) => props.setAttributes({ btn1Text: val })}
-                                placeholder={__('Primary Button', 'page-hero-section')}
-                                allowedFormats={[]}
-                            />
-                            <RichText
-                                tagName="div"
-                                className="as-hero-btn btn-secondary"
-                                value={btn2Text}
-                                onChange={(val) => props.setAttributes({ btn2Text: val })}
-                                placeholder={__('Secondary Link', 'page-hero-section')}
-                                allowedFormats={[]}
-                            />
-                        </div>
-
-                        {hasExtraTextDiv && (
-                            <div className={`as-hero-verification-preview bg-${extraDivBgColor}`}>
-                                <span className={`material-symbols-outlined icon-${extraDivIconColor}`}>
-                                    {extraDivIcon || 'verified_user'}
-                                </span>
-                                <RichText
-                                    tagName="span"
-                                    value={extraDivText}
-                                    onChange={(val) => props.setAttributes({ extraDivText: val })}
-                                    placeholder={__('Verification badge text...', 'page-hero-section')}
-                                    allowedFormats={[]}
+                    {/* TEXT CONTENT COLUMN */}
+                    <div className="as-hero-content-col">
+                        
+                        {/* Top Accent Badge Row */}
+                        { hasBadge && (
+                            <div className="as-editor-badge-wrapper">
+                                <input
+                                    type="text"
+                                    className={`as-inline-badge ${badgeStyle}`}
+                                    value={ badgeText }
+                                    placeholder="ACCENT BADGE TEXT..."
+                                    onChange={ ( e ) => props.setAttributes( { badgeText: e.target.value } ) }
                                 />
                             </div>
-                        )}
+                        ) }
+
+                        {/* Main Title Field */}
+                        <textarea
+                            className="as-inline-title"
+                            value={ heroTitle }
+                            placeholder="Enter Hero Title Narrative..."
+                            rows={ 2 }
+                            onChange={ ( e ) => props.setAttributes( { heroTitle: e.target.value } ) }
+                        />
+
+                        {/* Description Paragraph Field */}
+                        <textarea
+                            className="as-inline-description"
+                            value={ heroDescription }
+                            placeholder="Enter descriptive body copy paragraphs here..."
+                            rows={ 3 }
+                            onChange={ ( e ) => props.setAttributes( { heroDescription: e.target.value } ) }
+                        />
+
+                        {/* Call to Action Button Group Mockup */}
+                        <div className="as-editor-btn-group">
+                            <div className="as-btn-mock primary">
+                                <input 
+                                    type="text" 
+                                    placeholder="Primary Action" 
+                                    value={ btn1Text } 
+                                    onChange={ ( e ) => props.setAttributes( { btn1Text: e.target.value } ) } 
+                                />
+                            </div>
+                            <div className="as-btn-mock secondary">
+                                <input 
+                                    type="text" 
+                                    placeholder="Secondary Link" 
+                                    value={ btn2Text } 
+                                    onChange={ ( e ) => props.setAttributes( { btn2Text: e.target.value } ) } 
+                                />
+                            </div>
+                        </div>
+
+                        {/* Verification / Extra Info Badge Module */}
+                        { hasExtraTextDiv && (
+                            <div className="as-editor-verification-box">
+                                <span className="material-symbols-outlined">{ extraDivIcon || 'verified' }</span>
+                                <input 
+                                    type="text" 
+                                    placeholder="Verification subtext..." 
+                                    value={ extraDivText } 
+                                    onChange={ ( e ) => props.setAttributes( { extraDivText: e.target.value } ) } 
+                                />
+                            </div>
+                        ) }
                     </div>
 
-                    {/* RIGHT SIDE MEDIA ENGINE (SPLIT EXCLUSIVE) */}
-                    {layoutType === 'split' && (
-                        <div className={`as-hero-media-content decoration-${imageDecoration}`}>
-                            <div className="as-media-wrapper-layers">
-                                {imageDecoration === 'yellow-box' && <div className="layer-yellow-box"></div>}
-                                {imageDecoration === 'hover-frame' && <div className="layer-hover-frame"></div>}
-                                {imageDecoration === 'organic-blur' && <div className="layer-organic-blur"></div>}
-
-                                <MediaUploadCheck>
-                                    <MediaUpload
-                                        onSelect={onSelectImage}
-                                        allowedTypes={['image']}
-                                        value={heroImageId}
-                                        render={({ open }) => (
-                                            <div className="as-media-canvas-frame" onClick={open}>
-                                                {heroImageUrl ? (
-                                                    <img src={heroImageUrl} alt="" />
-                                                ) : (
-                                                    <div className="as-media-placeholder">
-                                                        <span className="dashicons dashicons-images-alt2"></span>
-                                                        <span>Click to Assign Hero Image</span>
-                                                    </div>
-                                                )}
+                    {/* GRAPHIC MEDIA & DECORATIONS COLUMN */}
+                    <div className={ `as-hero-media-col size-${ isImageLarge ? 'large' : 'normal' } decoration-${ imageDecoration }` }>
+                        <MediaUploadCheck>
+                            <MediaUpload
+                                onSelect={ onSelectImage }
+                                allowedTypes={ [ 'image' ] }
+                                value={ heroImageId }
+                                render={ ( { open } ) => (
+                                    <div className="as-editor-image-frame" onClick={ open }>
+                                        { heroImageUrl ? (
+                                            <>
+                                                <img src={ heroImageUrl } alt="Hero Preview" />
+                                                <div className="as-image-overlay-actions">
+                                                    <Button isSecondary onClick={ open }>Swap Image</Button>
+                                                    <Button isDestructive onClick={ ( e ) => {
+                                                        e.stopPropagation();
+                                                        props.setAttributes( { heroImageId: 0, heroImageUrl: '' } );
+                                                    } }>Remove</Button>
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <div className="as-image-upload-prompt">
+                                                <span className="dashicons dashicons-format-image"></span>
+                                                <span>Assign Hero Asset</span>
                                             </div>
-                                        )}
-                                    />
-                                </MediaUploadCheck>
-
-                                {/* FLOATING STAT BOX OVERLAY */}
-                                {imageDecoration === 'bubble-text' && (
-                                    <div className={`as-floating-stat-box ${isStatsRotated ? 'rotated' : ''} bg-${statsBgColor}`}>
-                                        <RichText
-                                            tagName="div"
-                                            className={`stat-big-num text-${statsTextColor}`}
-                                            value={statsNumber}
-                                            onChange={(val) => props.setAttributes({ statsNumber: val })}
-                                            placeholder="100%"
-                                            allowedFormats={[]}
-                                        />
-                                        <RichText
-                                            tagName="div"
-                                            className="stat-sub-label"
-                                            value={statsText}
-                                            onChange={(val) => props.setAttributes({ statsText: val })}
-                                            placeholder="Stat description"
-                                            allowedFormats={[]}
-                                        />
+                                        ) }
                                     </div>
-                                )}
+                                ) }
+                            />
+                        </MediaUploadCheck>
 
-                                {/* FLOATING TESTIMONIAL QUOTE OVERLAY */}
-                                {imageDecoration === 'quote-bubble' && (
-                                    <div className="as-floating-quote-box">
-                                        <RichText
-                                            tagName="p"
-                                            value={quoteText}
-                                            onChange={(val) => props.setAttributes({ quoteText: val })}
-                                            placeholder={__('"Quote narrative detail..."', 'page-hero-section')}
-                                        />
-                                    </div>
-                                )}
+                        {/* Floating Statistics Overlay Box Preview */}
+                        { imageDecoration === 'bubble-text' && (
+                            <div className={`as-editor-floating-stat ${isStatsRotated ? 'rotated' : ''}`}>
+                                <input 
+                                    type="text" 
+                                    placeholder="100%" 
+                                    value={ statsNumber } 
+                                    onChange={ ( e ) => props.setAttributes( { statsNumber: e.target.value } ) } 
+                                />
+                                <input 
+                                    type="text" 
+                                    placeholder="Stat subtext label" 
+                                    value={ statsText } 
+                                    onChange={ ( e ) => props.setAttributes( { statsText: e.target.value } ) } 
+                                />
                             </div>
+                        ) }
 
-                            {heroImageUrl && (
-                                <Button isDestructive isLink className="as-remove-image-lnk" onClick={() => props.setAttributes({ heroImageId: 0, heroImageUrl: '' })}>
-                                    {__('Remove Image Asset', 'page-hero-section')}
-                                </Button>
-                            )}
-                        </div>
-                    )}
+                        {/* Floating Testimonial Quote Overlay Box Preview */}
+                        { imageDecoration === 'quote-bubble' && (
+                            <div className="as-editor-floating-quote">
+                                <textarea 
+                                    placeholder="Enter overlay quote statement..." 
+                                    value={ quoteText } 
+                                    rows={ 2 }
+                                    onChange={ ( e ) => props.setAttributes( { quoteText: e.target.value } ) } 
+                                />
+                            </div>
+                        ) }
+                    </div>
 
                 </div>
             </div>

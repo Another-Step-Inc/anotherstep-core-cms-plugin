@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "anotherstep/custom-grid-section",
+  "version": "0.1.0",
+  "title": "Customizable Grid Section",
+  "category": "design",
+  "attributes": {
+    "headline": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "bgStyle": {
+      "type": "string",
+      "default": "bg-surface-container-low"
+    },
+    "textAlignment": {
+      "type": "string",
+      "default": "text-center"
+    }
+  },
+  "allowedBlocks": [
+    "anotherstep/custom-grid-card"
+  ],
+  "icon": "layout",
+  "description": "A highly customizable 3-column wrapper block with independent inner cards.",
+  "supports": {
+    "html": false,
+    "align": [
+      "full",
+      "wide"
+    ]
+  },
+  "textdomain": "custom-grid-section",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

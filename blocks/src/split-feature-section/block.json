@@ -8,8 +8,8 @@
   "icon": "layout",
   "description": "Asymmetric side-by-side bento layout featuring text content alongside a structural grid of images and metric badges.",
   "attributes": {
-    "splitTitle": { "type": "string", "source": "html", "selector": "h2", "default": "" },
-    "splitDescription": { "type": "string", "source": "html", "selector": ".split-desc-container", "default": ""},
+    "splitTitle": { "type": "string", "source": "text", "selector": ".as-split-feature-title", "default": "" },
+    "splitDescription": { "type": "string", "source": "html", "selector": ".as-split-feature-desc", "default": ""},
     "imageAlignment": { "type": "string", "default": "" },
     "backgroundColor": { "type": "string", "default": "" },
     "eyebrowText": { "type": "string", "default": "" },
@@ -25,12 +25,12 @@
     "iconTitle": { "type": "string", "default": "Personalized Care" }
   },
   "supports": { 
-    "html": false 
+    "html": true 
   },
   "textdomain": "split-feature-section",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css",
+  "style": "file:./style.css",
   "render": "file:./render.php",
   "viewScript": "file:./view.js"
 }

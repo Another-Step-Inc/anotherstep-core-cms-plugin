@@ -1,6 +1,49 @@
 <?php
 // This file is generated. Do not modify it manually.
 return array(
+	'custom-grid-section' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/custom-grid-section',
+		'version' => '0.1.0',
+		'title' => 'Customizable Grid Section',
+		'category' => 'design',
+		'attributes' => array(
+			'headline' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'description' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'bgStyle' => array(
+				'type' => 'string',
+				'default' => 'bg-surface-container-low'
+			),
+			'textAlignment' => array(
+				'type' => 'string',
+				'default' => 'text-center'
+			)
+		),
+		'allowedBlocks' => array(
+			'anotherstep/custom-grid-card'
+		),
+		'icon' => 'layout',
+		'description' => 'A highly customizable 3-column wrapper block with independent inner cards.',
+		'supports' => array(
+			'html' => false,
+			'align' => array(
+				'full',
+				'wide'
+			)
+		),
+		'textdomain' => 'custom-grid-section',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php'
+	),
 	'homepage-about-section' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -169,42 +212,6 @@ return array(
 		'render' => 'file:./render.php',
 		'viewScript' => 'file:./view.js'
 	),
-	'homepage-values-section' => array(
-		'$schema' => 'https://schemas.wp.org/trunk/block.json',
-		'apiVersion' => 3,
-		'name' => 'anotherstep/homepage-values-section',
-		'version' => '0.1.0',
-		'title' => 'Homepage Values Section',
-		'category' => 'widgets',
-		'attributes' => array(
-			'coreValuesHeadline' => array(
-				'type' => 'string',
-				'default' => 'Our Values'
-			),
-			'coreValuesQuote' => array(
-				'type' => 'string',
-				'default' => ''
-			),
-			'coreValuesQty' => array(
-				'type' => 'number',
-				'default' => ''
-			)
-		),
-		'icon' => 'smiley',
-		'description' => 'Block to be used specifically for the home page core values.',
-		'example' => array(
-			
-		),
-		'supports' => array(
-			'html' => false
-		),
-		'textdomain' => 'homepage-values-section',
-		'editorScript' => 'file:./index.js',
-		'editorStyle' => 'file:./index.css',
-		'style' => 'file:./style-index.css',
-		'render' => 'file:./render.php',
-		'viewScript' => 'file:./view.js'
-	),
 	'page-hero-section' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -344,14 +351,14 @@ return array(
 		'attributes' => array(
 			'splitTitle' => array(
 				'type' => 'string',
-				'source' => 'html',
-				'selector' => 'h2',
+				'source' => 'text',
+				'selector' => '.as-split-feature-title',
 				'default' => ''
 			),
 			'splitDescription' => array(
 				'type' => 'string',
 				'source' => 'html',
-				'selector' => '.split-desc-container',
+				'selector' => '.as-split-feature-desc',
 				'default' => ''
 			),
 			'imageAlignment' => array(
@@ -406,12 +413,12 @@ return array(
 			)
 		),
 		'supports' => array(
-			'html' => false
+			'html' => true
 		),
 		'textdomain' => 'split-feature-section',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
-		'style' => 'file:./style-index.css',
+		'style' => 'file:./style.css',
 		'render' => 'file:./render.php',
 		'viewScript' => 'file:./view.js'
 	)

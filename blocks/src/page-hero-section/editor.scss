@@ -1,142 +1,161 @@
-.as-live-hero-canvas {
-    background: #ffffff;
-    border: 1px solid #e2e4e7;
-    border-radius: 16px;
-    padding: 48px;
-    position: relative;
-    overflow: hidden;
+.as-hero-editor-container {
+    background: #fafafa;
+    border: 1px solid #dcdcdc;
+    border-radius: 12px;
+    padding: 40px;
+    margin: 20px 0;
     box-sizing: border-box;
 
-    // View Mode Variants
-    &.view-mode-split {
-        .as-hero-canvas-grid-wrapper {
-            display: grid;
-            grid-template-cols: 1.2fr 0.8fr;
-            gap: 40px;
-            align-items: center;
-        }
-        &.img-size-large .as-hero-canvas-grid-wrapper {
-            grid-template-cols: 0.9fr 1.1fr;
-        }
-    }
-
-    &.view-mode-background {
-        background: #0f172a;
-        padding: 64px;
-        
-        .as-canvas-background-image {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            img { width: 100%; height: 100%; object-fit: cover; opacity: 0.35; }
-            &.decoration-gradient-overlay .as-bg-overlay-mask {
-                position: absolute;
-                inset: 0;
-                background: linear-gradient(90deg, #0f172a 40%, transparent);
-            }
-        }
-        .as-hero-canvas-grid-wrapper {
-            position: relative;
-            z-index: 2;
-            grid-template-cols: 1fr;
-            max-width: 650px;
-        }
-        .as-canvas-title-input { color: #ffffff; }
-        .as-canvas-desc-input { color: #cbd5e1; }
-    }
-
-    // Canvas Inputs Restyling
-    .as-canvas-title-input {
-        font-size: 38px;
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        line-height: 1.15;
-        color: #0f172a;
-        width: 100%;
-        border: 1px dashed transparent;
-        background: transparent;
-        resize: none;
-        margin-bottom: 16px;
-        &:focus { border-color: #2271b1; background: rgba(255,255,255,0.8); outline: none; }
-    }
-
-    .as-canvas-desc-input {
-        font-size: 16px;
-        line-height: 1.6;
-        color: #475569;
-        width: 100%;
-        border: 1px dashed transparent;
-        background: transparent;
-        resize: none;
-        margin-bottom: 24px;
-        &:focus { border-color: #2271b1; background: rgba(255,255,255,0.8); outline: none; }
-    }
-
-    // Badge Sizing Elements
-    .as-canvas-badge-input {
-        border: none;
-        font-size: 11px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        padding: 4px 12px;
-        border-radius: 9999px;
-        margin-bottom: 16px;
-        width: auto;
-        display: inline-block;
-        &.theme-pill-yellow { background: #fef08a; color: #854d0e; }
-        &.theme-text-blue { background: transparent; color: #2563eb; padding: 4px 0; }
-        &.theme-pill-blue { background: #2563eb; color: #ffffff; }
-    }
-
-    // Button Row elements
-    .as-canvas-cta-row {
-        display: flex;
-        gap: 16px;
-        margin-bottom: 24px;
-        .as-canvas-btn-wrapper {
-            border-radius: 12px;
-            padding: 10px 24px;
-            input {
-                border: none; background: transparent; font-weight: 700; font-size: 14px; text-align: center; width: 130px; outline: none;
-            }
-            &.primary { background: #facc15; input { color: #1e3a8a; } }
-            &.secondary { background: #f1f5f9; border: 1px solid #e2e8f0; input { color: #1e293b; } }
-        }
-    }
-
-    // Media Frame Engine
-    .as-canvas-image-frame {
-        border-radius: 16px;
-        overflow: hidden;
-        aspect-ratio: 4 / 3;
-        background: #f8fafc;
-        border: 2px dashed #cbd5e1;
-        display: flex;
-        justify-content: center;
+    // Grid Layout Alignment Strategy
+    .as-hero-editor-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 40px;
         align-items: center;
-        cursor: pointer;
-        img { width: 100%; height: 100%; object-fit: cover; }
     }
 
-    // Decorative Underlays
-    .as-hero-graphic-engine {
+    // Handle Split Type Swapping
+    &.layout-background {
+        background: #f0f4f8;
+        .as-hero-editor-grid {
+            grid-template-columns: 1fr;
+        }
+        .as-hero-media-col {
+            display: none;
+        }
+    }
+
+    // Input Fields Styled Inline smoothly
+    .as-inline-title {
+        font-size: 32px;
+        font-weight: 800;
+        color: #1a1a1a;
+        line-height: 1.2;
+        border: 1px dashed transparent;
+        background: transparent;
+        width: 100%;
+        margin-bottom: 16px;
+        resize: none;
+
+        &:hover, &:focus {
+            border-color: #2271b1;
+            background: #ffffff;
+            outline: none;
+        }
+    }
+
+    .as-inline-description {
+        font-size: 16px;
+        color: #555555;
+        line-height: 1.6;
+        border: 1px dashed transparent;
+        background: transparent;
+        width: 100%;
+        margin-bottom: 24px;
+        resize: none;
+
+        &:hover, &:focus {
+            border-color: #2271b1;
+            background: #ffffff;
+            outline: none;
+        }
+    }
+
+    // Buttons Container Mockup
+    .as-editor-btn-group {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 24px;
+
+        .as-btn-mock {
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-flex;
+            
+            input {
+                background: transparent;
+                border: none;
+                text-align: center;
+                font-weight: 700;
+                font-size: 14px;
+                width: 120px;
+                outline: none;
+            }
+
+            &.primary {
+                background: #0056b3;
+                input { color: #ffffff; }
+            }
+            &.secondary {
+                background: #e2e8f0;
+                input { color: #334155; }
+            }
+        }
+    }
+
+    // Hero Image Box & Overlays Layout
+    .as-hero-media-col {
         position: relative;
-        .as-canvas-decoration-layers { position: relative; }
-        &.decoration-yellow-box .underlay-yellow-card {
-            position: absolute; inset: -8px; background: #facc15; border-radius: 16px; z-index: -1; transform: translate(6px, 6px);
-        }
-        &.decoration-hover-frame .underlay-rotated-frame {
-            position: absolute; inset: -6px; background: rgba(250, 204, 21, 0.2); border-radius: 16px; z-index: -1; transform: rotate(-2deg);
-        }
-    }
+        
+        .as-editor-image-frame {
+            background: #eef2f6;
+            border: 2px dashed #cbd5e1;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
 
-    // Floating Overlay Boxes
-    .as-canvas-floating-stat-card {
-        position: absolute; bottom: 12px; left: -16px; padding: 16px; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); width: 150px; display: flex; flex-direction: column;
-        input { border: none; background: transparent; padding: 0; outline: none; }
-        .stat-value { font-size: 22px; font-weight: 900; }
-        .stat-label { font-size: 11px; color: #64748b; }
-        &.apply-rotation { transform: rotate(3deg); }
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .as-image-overlay-actions {
+                position: absolute;
+                bottom: 12px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                gap: 8px;
+                background: rgba(255,255,255,0.9);
+                padding: 6px 12px;
+                border-radius: 8px;
+                opacity: 0;
+                transition: opacity 0.2s;
+            }
+
+            &:hover .as-image-overlay-actions {
+                opacity: 1;
+            }
+        }
+
+        // Floating Overlays
+        .as-editor-floating-stat {
+            position: absolute;
+            bottom: -10px;
+            left: -20px;
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            width: 160px;
+            
+            input {
+                border: none;
+                padding: 2px;
+                outline: none;
+                &:first-child { font-weight: 900; font-size: 20px; color: #bb0014; }
+                &:last-child { font-size: 11px; color: #666; }
+            }
+
+            &.rotated { transform: rotate(-3deg); }
+        }
     }
 }

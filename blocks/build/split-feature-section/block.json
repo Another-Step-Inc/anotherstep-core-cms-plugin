@@ -10,14 +10,14 @@
   "attributes": {
     "splitTitle": {
       "type": "string",
-      "source": "html",
-      "selector": "h2",
+      "source": "text",
+      "selector": ".as-split-feature-title",
       "default": ""
     },
     "splitDescription": {
       "type": "string",
       "source": "html",
-      "selector": ".split-desc-container",
+      "selector": ".as-split-feature-desc",
       "default": ""
     },
     "imageAlignment": {
@@ -72,12 +72,12 @@
     }
   },
   "supports": {
-    "html": false
+    "html": true
   },
   "textdomain": "split-feature-section",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css",
+  "style": "file:./style.css",
   "render": "file:./render.php",
   "viewScript": "file:./view.js"
 }

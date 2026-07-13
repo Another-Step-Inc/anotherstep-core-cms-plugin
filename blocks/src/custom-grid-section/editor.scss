@@ -1,0 +1,29 @@
+// Clear outline indicators for the parent admin area
+.wp-block-anotherstep-custom-grid-section {
+    margin-top: 24px;
+    margin-bottom: 24px;
+
+    // Reset dashed inline dashboard frames to align natively
+    input[type="text"]:focus,
+    textarea:focus {
+        background-color: #fff !important;
+        outline: 2px solid #2196f3 !important;
+        border-radius: 4px;
+    }
+
+    // Force Gutenberg's inner block wrapper to layout your cards in a clean row
+    .block-editor-inner-blocks .block-editor-block-list__layout {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 20px;
+        width: 100%;
+
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        @media (min-width: 1024px) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+}
