@@ -1,6 +1,50 @@
 <?php
 // This file is generated. Do not modify it manually.
 return array(
+	'custom-grid-card' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/custom-grid-card',
+		'version' => '0.1.0',
+		'title' => 'Grid Card Item',
+		'category' => 'design',
+		'parent' => array(
+			'anotherstep/custom-grid-section'
+		),
+		'attributes' => array(
+			'title' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'content' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'icon' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'theme' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'linkText' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'linkUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			)
+		),
+		'icon' => 'portfolio',
+		'description' => 'An individual card cell designed to inhabit a Customizable Grid column.',
+		'textdomain' => 'custom-grid-card',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./editor.scss',
+		'style' => 'file:./style.scss',
+		'render' => 'file:./render.php'
+	),
 	'custom-grid-section' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -24,6 +68,22 @@ return array(
 			'textAlignment' => array(
 				'type' => 'string',
 				'default' => 'text-center'
+			),
+			'styleVariant' => array(
+				'type' => 'string',
+				'default' => 'standard'
+			),
+			'useQuery' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'postType' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'postsPerPage' => array(
+				'type' => 'number',
+				'default' => 3
 			)
 		),
 		'allowedBlocks' => array(
@@ -40,8 +100,8 @@ return array(
 		),
 		'textdomain' => 'custom-grid-section',
 		'editorScript' => 'file:./index.js',
-		'editorStyle' => 'file:./index.css',
-		'style' => 'file:./style-index.css',
+		'editorStyle' => 'file:./editor.scss',
+		'style' => 'file:./style.scss',
 		'render' => 'file:./render.php'
 	),
 	'homepage-about-section' => array(

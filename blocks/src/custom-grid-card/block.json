@@ -5,7 +5,7 @@
 	"version": "0.1.0",
 	"title": "Grid Card Item",
 	"category": "design",
-	"parent": [ "anotherstep/custom-grid-section" ],
+	"parent": ["anotherstep/custom-grid-section"],
 	"attributes": {
 		"title": {
 			"type": "string",
@@ -22,10 +22,21 @@
 		"theme": {
 			"type": "string",
 			"default": ""
+		},
+		"linkText": {
+			"type": "string",
+			"default": ""
+		},
+		"linkUrl": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"icon": "portfolio",
 	"description": "An individual card cell designed to inhabit a Customizable Grid column.",
 	"textdomain": "custom-grid-card",
-	"editorScript": "file:./index.js"
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.scss",
+	"style": "file:./style.scss",
+	"render": "file:./render.php"
 }

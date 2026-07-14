@@ -21,6 +21,22 @@
     "textAlignment": {
       "type": "string",
       "default": "text-center"
+    },
+    "styleVariant": {
+      "type": "string",
+      "default": "standard"
+    },
+    "useQuery": {
+      "type": "boolean",
+      "default": false
+    },
+    "postType": {
+      "type": "string",
+      "default": ""
+    },
+    "postsPerPage": {
+      "type": "number",
+      "default": 3
     }
   },
   "allowedBlocks": [
@@ -37,7 +53,7 @@
   },
   "textdomain": "custom-grid-section",
   "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css",
+  "editorStyle": "file:./editor.scss",
+  "style": "file:./style.scss",
   "render": "file:./render.php"
 }

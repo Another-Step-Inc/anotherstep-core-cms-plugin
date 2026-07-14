@@ -9,9 +9,13 @@
 		"headline": {"type": "string", "default": ""},
 		"description": {"type": "string", "default": ""},
 		"bgStyle": {"type": "string", "default": "bg-surface-container-low"},
-		"textAlignment": {"type": "string", "default": "text-center"}
+		"textAlignment": {"type": "string", "default": "text-center"},
+		"styleVariant": {"type": "string", "default": "standard"},
+		"useQuery": {"type": "boolean", "default": false},
+        "postType": {"type": "string", "default": ""},
+        "postsPerPage": {"type": "number", "default": 3}
 	},
-	"allowedBlocks": [ "anotherstep/custom-grid-card" ],
+	"allowedBlocks": ["anotherstep/custom-grid-card"],
 	"icon": "layout",
 	"description": "A highly customizable 3-column wrapper block with independent inner cards.",
 	"supports": {
@@ -20,7 +24,7 @@
 	},
 	"textdomain": "custom-grid-section",
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css",
+	"editorStyle": "file:./editor.scss",
+	"style": "file:./style.scss",
 	"render": "file:./render.php"
 }

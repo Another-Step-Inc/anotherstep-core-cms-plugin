@@ -1,15 +1,15 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, SelectControl } from '@wordpress/components';
+import { PanelBody, SelectControl, TextControl } from '@wordpress/components';
 
 export default function Edit({ attributes, setAttributes }) {
-	const { title, content, icon, theme } = attributes;
+	const { title, content, icon, theme, linkText, linkUrl } = attributes;
 
 	// Palette hex definitions to present beautiful contextual backgrounds inside the Gutenberg canvas
 	const paletteMap = {
 		blue: { bg: '#e3f2fd', text: '#002f6c', border: '#2196f3' },
-		red: { bg: '#fde8e8', text: '#bb0014', border: '#f05252' },
-		yellow: { bg: '#fef9c3', text: '#854d0e', border: '#eab308' }
+		"dark-red": { bg: '#fde8e8', text: '#bb0014', border: '#f05252' },
+		"dark-yellow": { bg: '#fef9c3', text: '#854d0e', border: '#eab308' }
 	};
 
 	const currentPalette = paletteMap[theme] || paletteMap.blue;
@@ -23,12 +23,26 @@ export default function Edit({ attributes, setAttributes }) {
 						value={theme}
 						options={[
 							{ label: __('Brand Blue Scheme', 'customizable-grid-card'), value: 'blue' },
-							{ label: __('Brand Red Scheme', 'customizable-grid-card'), value: 'red' },
-							{ label: __('Brand Yellow Scheme', 'customizable-grid-card'), value: 'yellow' }
+							{ label: __('Brand Dark Red Scheme', 'customizable-grid-card'), value: 'dark-red' },
+							{ label: __('Brand Dark Yellow Scheme', 'customizable-grid-card'), value: 'dark-yellow' }
 						]}
 						onChange={(val) => setAttributes({ theme: val })}
 					/>
 				</PanelBody>
+				<PanelBody title="Card Configuration" initialOpen={true}>
+                    <TextControl
+                        label="Link URL"
+                        value={linkUrl || ''}
+                        onChange={(value) => setAttributes({ linkUrl: value })}
+                        placeholder="https://..."
+                    />
+                    <TextControl
+                        label="Link Text"
+                        value={linkText || ''}
+                        onChange={(value) => setAttributes({ linkText: value })}
+                        placeholder="Our Wishlist"
+                    />
+                </PanelBody>
 			</InspectorControls>
 
 			{/* CARD COMPONENT SETTINGS PANEL ENGINE */}
@@ -52,7 +66,7 @@ export default function Edit({ attributes, setAttributes }) {
 						<span className="material-symbols-outlined" style={{ fontSize: '18px', color: currentPalette.text }}>
 							{icon || 'star'}
 						</span>
-						<span style={{ fontSize: '11px', color: '#646970', fontWeight: 'bold' }}>{__('Icon Name:', 'customizable-grid-card')}</span>
+						<span style={{ fontSize: '11px', color: '#646970', fontWeight: 'bold' }}>{__('Icon Name:', 'custom-grid-card')}</span>
 						<input
 							type="text"
 							value={icon}
@@ -74,7 +88,7 @@ export default function Edit({ attributes, setAttributes }) {
 						<input
 							type="text"
 							value={title}
-							placeholder={__('Enter Card Heading Title...', 'customizable-grid-card')}
+							placeholder={__('Enter Card Heading Title...', 'custom-grid-card')}
 							onChange={(e) => setAttributes({ title: e.target.value })}
 							style={{
 								fontSize: '16px',
@@ -92,7 +106,7 @@ export default function Edit({ attributes, setAttributes }) {
 					<div>
 						<textarea
 							value={content}
-							placeholder={__('Enter card body text copy...', 'customizable-grid-card')}
+							placeholder={__('Enter card body text copy...', 'custom-grid-card')}
 							onChange={(e) => setAttributes({ content: e.target.value })}
 							rows={3}
 							style={{
@@ -108,6 +122,10 @@ export default function Edit({ attributes, setAttributes }) {
 						/>
 					</div>
 
+					<div className={`custom-grid-card-preview ${theme || ''}`}>
+						<h4>{title || 'Card Title'}</h4>
+						{linkUrl && <span className="link-preview">{linkText || 'Learn More'} →</span>}
+					</div>
 				</div>
 			</div>
 		</div>

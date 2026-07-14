@@ -1,9 +1,9 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InnerBlocks, InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, SelectControl } from '@wordpress/components';
+import { PanelBody, SelectControl, ToggleControl, TextControl } from '@wordpress/components';
 
 export default function Edit({ attributes, setAttributes }) {
-	const { headline, description, bgStyle } = attributes;
+	const { headline, description, bgStyle, useQuery, postType, postsPerPage, styleVariant } = attributes;
 
 	return (
 		<div {...useBlockProps()}>
@@ -20,6 +20,42 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(val) => setAttributes({ bgStyle: val })}
 					/>
 				</PanelBody>
+				<PanelBody title={ __( 'Grid Settings', 'custom-grid-section' ) } initialOpen={ true }>
+                    <ToggleControl
+                        label={ __( 'Query Dynamic Posts', 'custom-grid-section' ) }
+                        help={ useQuery ? __( 'Querying posts automatically.', 'custom-grid-section' ) : __( 'Manually build your grid using card blocks.', 'custom-grid-section' ) }
+                        checked={ useQuery }
+                        onChange={ ( value ) => setAttributes( { useQuery: value } ) }
+                    />
+
+                    { useQuery && (
+                        <>
+                            <TextControl
+                                label={ __( 'Post Type Slug', 'custom-grid-section' ) }
+                                value={ postType }
+                                onChange={ ( value ) => setAttributes( { postType: value } ) }
+                            />
+                            <TextControl
+                                label={ __( 'Number of Cards', 'custom-grid-section' ) }
+                                type="number"
+                                value={ postsPerPage }
+                                onChange={ ( value ) => setAttributes( { postsPerPage: parseInt( value ) || 3 } ) }
+                            />
+                        </>
+                    ) }
+                </PanelBody>
+				<PanelBody title={ __( 'Grid Layout Options', 'custom-grid-section' ) } initialOpen={ true }>
+                    <SelectControl
+                        label={ __( 'Header Style Variant', 'custom-grid-section' ) }
+                        value={ styleVariant }
+                        options={ [
+                            { label: 'Standard Header', value: 'standard' },
+							{ label: 'Accent Line Block', value: 'accent-line' },
+                            { label: 'Minimal Spaced', value: 'minimal-spaced' }
+                        ] }
+                        onChange={ ( value ) => setAttributes( { styleVariant: value } ) }
+                    />
+                </PanelBody>
 			</InspectorControls>
 
 			{/* LIVE CANVAS PREVIEW FRAME */}
@@ -86,24 +122,43 @@ export default function Edit({ attributes, setAttributes }) {
 				</div>
 
 				{/* Child Blocks Inner Canvas Container */}
-				<div style={{
-					display: 'grid',
-					gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-					gap: '24px',
-					background: '#f0f2f5',
-					padding: '20px',
-					borderRadius: '8px',
-					border: '1px dashed #ccd0d4'
-				}}>
-					<InnerBlocks 
-						allowedBlocks={['anotherstep/customizable-grid-card']}
-						template={[
-							['anotherstep/customizable-grid-card', { theme: 'blue', title: 'Services One' }],
-							['anotherstep/customizable-grid-card', { theme: 'red', title: 'Services Two' }],
-							['anotherstep/customizable-grid-card', { theme: 'yellow', title: 'Services Three' }]
-						]}
-						templateLock={false}
-					/>
+				<div className="editor-grid-container">
+					{ useQuery && (
+						<div className="dynamic-query-placeholder" style={{
+							background: '#e3f2fd',
+							padding: '20px',
+							borderRadius: '8px',
+							border: '1px solid #2196f3',
+							marginBottom: '16px',
+							textAlign: 'center'
+						}}>
+							<p className="placeholder-info" style={{ margin: 0, color: '#0d47a1', fontWeight: '500' }}>
+								{ `🔄 Dynamic Query Active: Fetching ${ postsPerPage } entries from "${ postType }"` }
+							</p>
+							<small style={{ color: '#1565c0' }}>Manual card blocks below are hidden on the live frontend.</small>
+						</div>
+					) }
+
+					{/* Always leave InnerBlocks mounted, but hide its container visually when querying */}
+					<div style={{
+						display: useQuery ? 'none' : 'grid', // 💡 Hides it cleanly without destroying the React tree!
+						gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+						gap: '24px',
+						background: '#f0f2f5',
+						padding: '20px',
+						borderRadius: '8px',
+						border: '1px dashed #ccd0d4'
+					}}>
+						<InnerBlocks 
+							allowedBlocks={['anotherstep/custom-grid-card']} // Adjusted to match your block.json name
+							template={[
+								['anotherstep/custom-grid-card', { theme: 'blue', title: 'Services One' }],
+								['anotherstep/custom-grid-card', { theme: 'red', title: 'Services Two' }],
+								['anotherstep/custom-grid-card', { theme: 'yellow', title: 'Services Three' }]
+							]}
+							templateLock={false}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
