@@ -66,16 +66,78 @@ function as_register_rest_fields() {
         'update_callback' => null,
         'schema' => null,
     ]);
+
+    // Adding an "Icon field to the Values and Services API response
+    register_rest_field( [ 'values', 'services' ], 'cardIcon', [
+        'get_callback' => function( $post ) {
+            return get_post_meta( $post['id'], '_as_icon', true );
+        },
+        'update_callback' => null,
+        'schema' => null,
+    ]);
+
+    // Adding an "Theme field to the Values and Services API response
+    register_rest_field( [ 'values', 'services' ], 'cardTheme', [
+        'get_callback' => function( $post ) {
+            return get_post_meta( $post['id'], '_as_theme', true );
+        },
+        'update_callback' => null,
+        'schema' => null,
+    ]);
 }
 add_action('rest_api_init', 'as_register_rest_fields');
+
+/**
+ * Register Custom Fields to WPGraphQL Schema
+ */
+add_action( 'graphql_register_types', function() {
+    
+    // 1. Register 'cardIcon' on both CPT Types
+    // Note: The Type name in WPGraphQL for 'values' is usually 'Value' (based on graphql_single_name)
+    // and for 'services' it is 'Service'
+    $types_to_register_on = [ 'Value', 'Service' ];
+
+    foreach ( $types_to_register_on as $type_name ) {
+        
+        // Register cardIcon
+        register_graphql_field( $type_name, 'cardIcon', [
+            'type' => 'String',
+            'description' => __( 'The visual icon defined for this card layout', 'anotherstep' ),
+            'resolve' => function( \WPGraphQL\Model\Post $post ) {
+                // Fetch the same underlying database meta key as your REST field
+                return get_post_meta( $post->databaseId, '_as_icon', true );
+            }
+        ] );
+
+        // Register cardTheme
+        register_graphql_field( $type_name, 'cardTheme', [
+            'type' => 'String',
+            'description' => __( 'The background style theme mapping class', 'anotherstep' ),
+            'resolve' => function( \WPGraphQL\Model\Post $post ) {
+                // Fetch the same underlying database meta key as your REST field
+                return get_post_meta( $post->databaseId, '_as_theme', true );
+            }
+        ] );
+    }
+} );
 
 // 3. Feature: Add the Meta Box to the Service Post Type Edit Screen
 function as_render_service_metabox( $post ) {
     $artist = get_post_meta( $post->ID, '_as_artist_name', true );
+    $icon = get_post_meta( $post->ID, '_as_icon', true );
+    $theme = get_post_meta( $post->ID, '_as_theme', true );
     ?>
     <p>
         <label for="as_artist_name"><strong>Artist Name (for Drawings):</strong></label><br />
         <input type="text" name="as_artist_name" value="<?php echo esc_attr($artist); ?>" style="width:100%;" />
+    </p>
+    <p>
+        <label for="as_icon"><strong>Card Icon:</strong></label><br />
+        <input type="text" name="as_icon" value="<?php echo esc_attr($icon); ?>" style="width:100%;" />
+    </p>
+    <p>
+        <label for="as_theme"><strong>Card Theme:</strong></label><br />
+        <input type="text" name="as_theme" value="<?php echo esc_attr($theme); ?>" style="width:100%;" />
     </p>
     <?php
 }
@@ -84,6 +146,24 @@ function as_add_service_metabox() {
 }
 add_action('add_meta_boxes', 'as_add_service_metabox');
 
+function as_render_values_metabox( $post ) {
+    $icon = get_post_meta( $post->ID, '_as_icon', true );
+    $theme = get_post_meta( $post->ID, '_as_theme', true );
+    ?>
+    <p>
+        <label for="as_icon"><strong>Card Icon:</strong></label><br />
+        <input type="text" name="as_icon" value="<?php echo esc_attr($icon); ?>" style="width:100%;" />
+    </p>
+    <p>
+        <label for="as_theme"><strong>Card Theme:</strong></label><br />
+        <input type="text" name="as_theme" value="<?php echo esc_attr($theme); ?>" style="width:100%;" />
+    </p>
+    <?php
+}
+function as_add_values_metabox() {
+    add_meta_box('values_info', 'Values Details', 'as_render_values_metabox', 'values', 'normal', 'high');
+}
+add_action('add_meta_boxes', 'as_add_values_metabox');
 
 
 // 4. Feature: Save the Data for the Artist Name
@@ -93,6 +173,16 @@ function as_save_service_meta($post_id) {
     }
 }
 add_action('save_post', 'as_save_service_meta');
+
+function as_save_values_meta($post_id) {
+    if (array_key_exists('as_icon', $_POST)) {
+        update_post_meta( $post_id, '_as_icon', $_POST['as_icon'] );
+    }
+    if (array_key_exists('as_theme', $_POST)) {
+        update_post_meta( $post_id, '_as_theme', $_POST['as_theme'] );
+    }
+}
+add_action('save_post', 'as_save_values_meta');
 
 // 5. Feature: Simplify the Dashboard Sidebar based on Roles
 function as_admin_menu() {
