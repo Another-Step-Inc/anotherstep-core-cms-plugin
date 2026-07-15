@@ -1,0 +1,65 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "anotherstep/cta-contact-card-section",
+  "version": "1.0.0",
+  "title": "CTA Contact Card Section",
+  "category": "layout",
+  "description": "Call to action card matching a user with a contact person",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.scss",
+  "style": "file:./style.scss",
+  "render": "file:./render.php",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "headline": {
+      "type": "string",
+      "default": "Ready to take the next step?"
+    },
+    "description": {
+      "type": "string",
+      "default": "Connect with our dedicated leadership team to learn more about how our programs can support your journey towards independence."
+    },
+    "btn1Text": {
+      "type": "string",
+      "default": "Schedule a Call"
+    },
+    "btn1Url": {
+      "type": "string",
+      "default": ""
+    },
+    "btn2Text": {
+      "type": "string",
+      "default": "Email Us"
+    },
+    "btn2Url": {
+      "type": "string",
+      "default": ""
+    },
+    "directorName": {
+      "type": "string",
+      "default": ""
+    },
+    "directorTitle": {
+      "type": "string",
+      "default": ""
+    },
+    "directorRegions": {
+      "type": "string",
+      "default": ""
+    },
+    "directorPhone": {
+      "type": "string",
+      "default": ""
+    },
+    "directorImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "directorImageId": {
+      "type": "number"
+    }
+  }
+}

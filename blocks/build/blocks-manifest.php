@@ -1,6 +1,71 @@
 <?php
 // This file is generated. Do not modify it manually.
 return array(
+	'cta-contact-card-section' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/cta-contact-card-section',
+		'version' => '1.0.0',
+		'title' => 'CTA Contact Card Section',
+		'category' => 'layout',
+		'description' => 'Call to action card matching a user with a contact person',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./editor.scss',
+		'style' => 'file:./style.scss',
+		'render' => 'file:./render.php',
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'headline' => array(
+				'type' => 'string',
+				'default' => 'Ready to take the next step?'
+			),
+			'description' => array(
+				'type' => 'string',
+				'default' => 'Connect with our dedicated leadership team to learn more about how our programs can support your journey towards independence.'
+			),
+			'btn1Text' => array(
+				'type' => 'string',
+				'default' => 'Schedule a Call'
+			),
+			'btn1Url' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'btn2Text' => array(
+				'type' => 'string',
+				'default' => 'Email Us'
+			),
+			'btn2Url' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'directorName' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'directorTitle' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'directorRegions' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'directorPhone' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'directorImageUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'directorImageId' => array(
+				'type' => 'number'
+			)
+		)
+	),
 	'custom-grid-card' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -411,8 +476,6 @@ return array(
 		'attributes' => array(
 			'splitTitle' => array(
 				'type' => 'string',
-				'source' => 'text',
-				'selector' => '.as-split-feature-title',
 				'default' => ''
 			),
 			'splitDescription' => array(

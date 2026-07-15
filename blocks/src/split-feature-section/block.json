@@ -8,7 +8,7 @@
   "icon": "layout",
   "description": "Asymmetric side-by-side bento layout featuring text content alongside a structural grid of images and metric badges.",
   "attributes": {
-    "splitTitle": { "type": "string", "source": "text", "selector": ".as-split-feature-title", "default": "" },
+    "splitTitle": { "type": "string", "default": "" },
     "splitDescription": { "type": "string", "source": "html", "selector": ".as-split-feature-desc", "default": ""},
     "imageAlignment": { "type": "string", "default": "" },
     "backgroundColor": { "type": "string", "default": "" },

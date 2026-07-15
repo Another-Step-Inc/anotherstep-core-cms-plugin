@@ -10,8 +10,6 @@
   "attributes": {
     "splitTitle": {
       "type": "string",
-      "source": "text",
-      "selector": ".as-split-feature-title",
       "default": ""
     },
     "splitDescription": {

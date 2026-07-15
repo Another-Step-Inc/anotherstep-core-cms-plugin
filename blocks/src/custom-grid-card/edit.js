@@ -123,7 +123,6 @@ export default function Edit({ attributes, setAttributes }) {
 					</div>
 
 					<div className={`custom-grid-card-preview ${theme || ''}`}>
-						<h4>{title || 'Card Title'}</h4>
 						{linkUrl && <span className="link-preview">{linkText || 'Learn More'} →</span>}
 					</div>
 				</div>

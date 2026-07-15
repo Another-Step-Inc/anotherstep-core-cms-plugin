@@ -51,7 +51,10 @@ export default function Edit({ attributes, setAttributes }) {
                         options={ [
                             { label: 'Standard Header', value: 'standard' },
 							{ label: 'Accent Line Block', value: 'accent-line' },
-                            { label: 'Minimal Spaced', value: 'minimal-spaced' }
+                            { label: 'Minimal Spaced', value: 'minimal-spaced' },
+							{ label: 'Bottom Accent', value: 'bottom-accent' },
+							{ label: 'Horizontal Icon', value: 'horizontal-icon' },
+							{ label: 'Editorial Hover', value: 'editorial-hover' }
                         ] }
                         onChange={ ( value ) => setAttributes( { styleVariant: value } ) }
                     />
@@ -152,9 +155,9 @@ export default function Edit({ attributes, setAttributes }) {
 						<InnerBlocks 
 							allowedBlocks={['anotherstep/custom-grid-card']} // Adjusted to match your block.json name
 							template={[
-								['anotherstep/custom-grid-card', { theme: 'blue', title: 'Services One' }],
-								['anotherstep/custom-grid-card', { theme: 'red', title: 'Services Two' }],
-								['anotherstep/custom-grid-card', { theme: 'yellow', title: 'Services Three' }]
+								['anotherstep/custom-grid-card', { theme: 'blue', title: 'Card One' }],
+								['anotherstep/custom-grid-card', { theme: 'dark-red', title: 'Card Two' }],
+								['anotherstep/custom-grid-card', { theme: 'dark-yellow', title: 'Card Three' }]
 							]}
 							templateLock={false}
 						/>
