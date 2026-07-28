@@ -1,0 +1,201 @@
+import { useState } from '@wordpress/element';
+import { useBlockProps, InspectorControls, RichText } from '@wordpress/block-editor';
+import { PanelBody, TextControl, Button, Modal } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+
+import { 
+	HomeIcon, MapPinIcon, UserGroupIcon, AcademicCapIcon, 
+	ChartBarIcon, ArrowTrendingUpIcon, StarIcon, CheckBadgeIcon, 
+	HeartIcon, HandThumbUpIcon, UserPlusIcon, SunIcon, 
+	BriefcaseIcon, GlobeAltIcon, BuildingOfficeIcon, CalendarDaysIcon, 
+	PhoneIcon, CursorArrowRaysIcon, InformationCircleIcon, RocketLaunchIcon 
+} from '@heroicons/react/24/outline';
+
+import './editor.scss';
+
+const ICON_MAP = {
+    HomeIcon, MapPinIcon, UserGroupIcon, AcademicCapIcon,
+    ChartBarIcon, ArrowTrendingUpIcon, StarIcon, CheckBadgeIcon,
+    HeartIcon, HandThumbUpIcon, UserPlusIcon, SunIcon,
+    BriefcaseIcon, GlobeAltIcon, BuildingOfficeIcon, CalendarDaysIcon,
+    PhoneIcon, CursorArrowRaysIcon, InformationCircleIcon, RocketLaunchIcon
+};
+
+export default function Edit( props ) {
+	const { attributes, setAttributes } = props;
+
+	const {
+		aboutHeadline,
+		aboutSubHeadline,
+		aboutDescription,
+		aboutImpactTitle1,
+		aboutImpactParagraph1,
+		aboutImpactIcon1,
+		aboutImpactTitle2,
+		aboutImpactParagraph2,
+		aboutImpactIcon2,
+	} = attributes;
+
+	const IconOne = ICON_MAP[ aboutImpactIcon1 ] || StarIcon;
+	const IconTwo = ICON_MAP[ aboutImpactIcon2 ] || StarIcon;
+
+	return (
+		<>
+			{/* SIDEBAR CONFIGURATION INSPECTOR */}
+			<InspectorControls>
+				<PanelBody title={ __( 'Impact 1 Configuration', 'homepage-about-section' ) } initialOpen={ true }>
+					<IconPicker 
+						label={ __( 'Impact 1 Icon', 'homepage-about-section' ) }
+						currentIcon={ aboutImpactIcon1 }
+						onSelect={ ( name ) => setAttributes( { aboutImpactIcon1: name } ) }
+					/>
+				</PanelBody>
+
+				<PanelBody title={ __( 'Impact 2 Configuration', 'homepage-about-section' ) } initialOpen={ false }>
+					<IconPicker 
+						label={ __( 'Impact 2 Icon', 'homepage-about-section' ) }
+						currentIcon={ aboutImpactIcon2 }
+						onSelect={ ( name ) => setAttributes( { aboutImpactIcon2: name } ) }
+					/>
+				</PanelBody>
+			</InspectorControls>
+
+			{/* HERO-STYLE EDITOR CANVAS WORKSPACE */}
+			<div { ...useBlockProps( { className: 'as-hero-editor-container' } ) }>
+				
+				{/* MAIN HEADLINE & SUBHEADLINE */}
+				<div className="as-about-header-group">
+					<textarea
+						className="as-inline-title"
+						value={ aboutHeadline }
+						placeholder={ __( 'Enter Main Headline...', 'homepage-about-section' ) }
+						rows={ 1 }
+						onChange={ ( e ) => setAttributes( { aboutHeadline: e.target.value } ) }
+					/>
+
+					<textarea
+						className="as-inline-subtitle"
+						value={ aboutSubHeadline }
+						placeholder={ __( 'Enter Sub-headline...', 'homepage-about-section' ) }
+						rows={ 1 }
+						onChange={ ( e ) => setAttributes( { aboutSubHeadline: e.target.value } ) }
+					/>
+
+					<div className="as-inline-description">
+						<RichText 
+							tagName="div"
+							multiline="p"
+							placeholder={ __( 'Enter main section description...', 'homepage-about-section' ) }
+							value={ aboutDescription }
+							onChange={ ( val ) => setAttributes( { aboutDescription: val } ) }
+						/>
+					</div>
+				</div>
+
+				{/* 2-COLUMN IMPACT GRID */}
+				<div className="as-hero-editor-grid">
+					
+					{/* IMPACT CARD 1 */}
+					<div className="as-hero-content-col">
+						<div className="as-card-header">
+							<IconOne style={{ width: '24px', height: '24px', color: '#0056b3' }} />
+							<input
+								type="text"
+								className="as-inline-card-title"
+								value={ aboutImpactTitle1 }
+								placeholder={ __( 'Impact 1 Title...', 'homepage-about-section' ) }
+								onChange={ ( e ) => setAttributes( { aboutImpactTitle1: e.target.value } ) }
+							/>
+						</div>
+
+						<RichText 
+							tagName="p"
+							className="as-inline-description"
+							placeholder={ __( 'Impact 1 description...', 'homepage-about-section' ) }
+							value={ aboutImpactParagraph1 }
+							onChange={ ( val ) => setAttributes( { aboutImpactParagraph1: val } ) }
+						/>
+					</div>
+
+					{/* IMPACT CARD 2 */}
+					<div className="as-hero-content-col">
+						<div className="as-card-header">
+							<IconTwo style={{ width: '24px', height: '24px', color: '#0056b3' }} />
+							<input
+								type="text"
+								className="as-inline-card-title"
+								value={ aboutImpactTitle2 }
+								placeholder={ __( 'Impact 2 Title...', 'homepage-about-section' ) }
+								onChange={ ( e ) => setAttributes( { aboutImpactTitle2: e.target.value } ) }
+							/>
+						</div>
+
+						<RichText 
+							tagName="p"
+							className="as-inline-description"
+							placeholder={ __( 'Impact 2 description...', 'homepage-about-section' ) }
+							value={ aboutImpactParagraph2 }
+							onChange={ ( val ) => setAttributes( { aboutImpactParagraph2: val } ) }
+						/>
+					</div>
+
+				</div>
+			</div>
+		</>
+	);
+}
+
+/* HELPER COMPONENT: ICON PICKER MODAL */
+const IconPicker = ( { currentIcon, onSelect, label } ) => {
+	const [ isModalOpen, setModalOpen ] = useState( false );
+	const [ searchTerm, setSearchTerm ] = useState( '' );
+
+	const iconNames = Object.keys( ICON_MAP ).filter( ( name ) =>
+		name.toLowerCase().includes( searchTerm.toLowerCase() )
+	);
+
+	const SelectedIcon = ICON_MAP[ currentIcon ] || StarIcon;
+
+	return (
+		<div className="as-icon-picker-wrapper">
+			<label className="as-sidebar-label">{ label }</label>
+			<Button 
+				variant="secondary"
+				onClick={ () => setModalOpen( true ) }
+				style={ { width: '100%', justifyContent: 'flex-start', marginTop: '6px' } }
+			>
+				<SelectedIcon style={ { width: '18px', marginRight: '8px' } } />
+				{ currentIcon || __( 'Select Icon', 'homepage-about-section' ) }
+			</Button>
+
+			{ isModalOpen && (
+				<Modal title={ __( 'Select Heroicon', 'homepage-about-section' ) } onRequestClose={ () => setModalOpen( false ) }>
+					<TextControl 
+						placeholder={ __( 'Search icons...', 'homepage-about-section' ) }
+						value={ searchTerm }
+						onChange={ setSearchTerm }
+						autoFocus
+					/>
+					<div style={ { display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '10px', marginTop: '12px' } }>
+						{ iconNames.map( ( name ) => {
+							const IconComponent = ICON_MAP[ name ];
+							return (
+								<Button
+									key={ name }
+									onClick={ () => {
+										onSelect( name );
+										setModalOpen( false );
+									} }
+									isSecondary
+									label={ name }
+								>
+									<IconComponent style={ { width: '20px' } } />
+								</Button>
+							);
+						} ) }
+					</div>
+				</Modal>
+			) }
+		</div>
+	);
+};

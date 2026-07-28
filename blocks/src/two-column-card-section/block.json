@@ -1,10 +1,10 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "anotherstep/homepage-about-section",
+	"name": "anotherstep/two-column-card-section",
 	"version": "0.1.0",
-	"title": "Homepage About Section",
-	"category": "widgets",
+	"title": "Two-Column Card Section",
+	"category": "design",
 	"attributes": {
 		"aboutHeadline": {"type": "string", "default": ""},
 		"aboutDescription": {"type": "string", "default": ""},
@@ -16,13 +16,13 @@
 		"aboutImpactParagraph2": {"type": "string", "default": ""},
 		"aboutImpactIcon2": {"type": "string", "default": ""}
 	},
-	"icon": "smiley",
-	"description": "Block to be used specifically for the home page Who We Are section.",
+	"icon": "index-card",
+	"description": "Flexible multi-column card block for custom structured content. Block to be used specifically for the home page Who We Are section.",
 	"example": {},
 	"supports": {
 		"html": false
 	},
-	"textdomain": "homepage-about-section",
+	"textdomain": "two-column-card-section",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",

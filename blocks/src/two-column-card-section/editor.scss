@@ -1,0 +1,156 @@
+// Generic Dynamic Info Section - Editor Canvas & Control Panel
+.as-hero-editor-container {
+    background: #fafafa;
+    border: 1px solid #dcdcdc;
+    border-radius: 12px;
+    padding: 32px;
+    margin: 20px 0;
+    box-sizing: border-box;
+
+    // Header Title & Subtitle Group
+    .as-about-header-group {
+        margin-bottom: 24px;
+
+        .as-inline-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e1e1e;
+            width: 100%;
+            border: 1px dashed #cccccc;
+            background: #ffffff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            resize: none;
+
+            &:hover, &:focus {
+                border-color: #2196f3;
+                outline: none;
+                box-shadow: 0 0 0 1px #2196f3;
+            }
+        }
+
+        .as-inline-subtitle {
+            font-size: 16px;
+            font-weight: 500;
+            color: #646970;
+            width: 100%;
+            border: 1px dashed #cccccc;
+            background: #ffffff;
+            padding: 6px 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            resize: none;
+
+            &:hover, &:focus {
+                border-color: #2196f3;
+                outline: none;
+            }
+        }
+
+        .as-inline-description {
+            background: #ffffff;
+            border: 1px dashed #cccccc;
+            padding: 10px 12px;
+            border-radius: 6px;
+            color: #50575e;
+
+            &:hover, &:focus-within {
+                border-color: #2196f3;
+            }
+        }
+    }
+
+    // Dynamic 2-Column Card Grid
+    .as-hero-editor-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: start;
+
+        @media (max-width: 782px) {
+            grid-template-columns: 1fr;
+        }
+
+        .as-hero-content-col {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+
+            .as-card-header {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 12px;
+
+                .as-inline-card-title {
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: #1e1e1e;
+                    border: 1px dashed #cccccc;
+                    border-radius: 4px;
+                    padding: 6px 10px;
+                    width: 100%;
+
+                    &:hover, &:focus {
+                        border-color: #2196f3;
+                        outline: none;
+                    }
+                }
+            }
+
+            .as-inline-description {
+                font-size: 14px;
+                color: #50575e;
+                line-height: 1.5;
+                border: 1px dashed #cccccc;
+                border-radius: 4px;
+                padding: 8px;
+
+                &:hover, &:focus-within {
+                    border-color: #2196f3;
+                }
+            }
+        }
+    }
+}
+
+// Icon Picker Sidebar Wrapper & Modal Styles
+.as-icon-picker-wrapper {
+    margin-bottom: 16px;
+
+    .as-sidebar-label {
+        font-weight: 600;
+        font-size: 12px;
+        color: #1e1e1e;
+        display: block;
+        margin-bottom: 4px;
+    }
+}
+
+// Icon Modal Grid Layout
+.as-icon-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 16px;
+    max-height: 300px;
+    overflow-y: auto;
+
+    .as-icon-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        border: 1px solid #e2e4e7;
+        border-radius: 6px;
+        cursor: pointer;
+
+        &:hover {
+            border-color: #2196f3;
+            background-color: #f0f6fb;
+        }
+    }
+}

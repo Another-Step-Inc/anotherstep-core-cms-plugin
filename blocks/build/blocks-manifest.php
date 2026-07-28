@@ -169,60 +169,116 @@ return array(
 		'style' => 'file:./style.scss',
 		'render' => 'file:./render.php'
 	),
-	'homepage-about-section' => array(
+	'dynamic-info-section' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'anotherstep/homepage-about-section',
+		'name' => 'anotherstep/dynamic-info-section',
 		'version' => '0.1.0',
-		'title' => 'Homepage About Section',
-		'category' => 'widgets',
+		'title' => 'Dynamic Info Section',
+		'category' => 'design',
 		'attributes' => array(
-			'aboutHeadline' => array(
+			'layoutType' => array(
+				'type' => 'string',
+				'default' => 'two-column'
+			),
+			'showSecondarySection' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'primaryTitle' => array(
 				'type' => 'string',
 				'default' => ''
 			),
-			'aboutDescription' => array(
+			'primaryDescription' => array(
 				'type' => 'string',
 				'default' => ''
 			),
-			'aboutSubHeadline' => array(
+			'primaryFieldLabel1' => array(
 				'type' => 'string',
 				'default' => ''
 			),
-			'aboutImpactTitle1' => array(
+			'primaryFieldValue1' => array(
 				'type' => 'string',
 				'default' => ''
 			),
-			'aboutImpactParagraph1' => array(
+			'primaryFieldLabel2' => array(
 				'type' => 'string',
 				'default' => ''
 			),
-			'aboutImpactIcon1' => array(
+			'primaryFieldValue2' => array(
 				'type' => 'string',
 				'default' => ''
 			),
-			'aboutImpactTitle2' => array(
+			'primaryFieldLabel3' => array(
 				'type' => 'string',
 				'default' => ''
 			),
-			'aboutImpactParagraph2' => array(
+			'primaryFieldValue3' => array(
 				'type' => 'string',
 				'default' => ''
 			),
-			'aboutImpactIcon2' => array(
+			'primaryFieldLabel4' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'primaryFieldValue4' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'primaryFieldLabel5' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'primaryFieldValue5' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'primaryFieldLabel6' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'primaryFieldValue6' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'primaryFieldLabel7' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'primaryFieldValue7' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'secondaryTitle' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'secondaryDescription' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'secondaryFieldLabel1' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'secondaryFieldValue1' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'footerNotice' => array(
 				'type' => 'string',
 				'default' => ''
 			)
 		),
-		'icon' => 'smiley',
-		'description' => 'Block to be used specifically for the home page Who We Are section.',
+		'icon' => 'grid-view',
+		'description' => 'Block used for displaying dynamic information sections on the page. For the legal section, it can be used to display information such as company details, contact information, and other relevant data. The block allows for customization of the layout and content, making it suitable for various use cases.',
 		'example' => array(
 			
 		),
 		'supports' => array(
 			'html' => false
 		),
-		'textdomain' => 'homepage-about-section',
+		'textdomain' => 'dynamic-info-section',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
@@ -259,78 +315,6 @@ return array(
 			'html' => false
 		),
 		'textdomain' => 'homepage-ethics-section',
-		'editorScript' => 'file:./index.js',
-		'editorStyle' => 'file:./index.css',
-		'style' => 'file:./style-index.css',
-		'render' => 'file:./render.php',
-		'viewScript' => 'file:./view.js'
-	),
-	'homepage-legal-section' => array(
-		'$schema' => 'https://schemas.wp.org/trunk/block.json',
-		'apiVersion' => 3,
-		'name' => 'anotherstep/homepage-legal-section',
-		'version' => '0.1.0',
-		'title' => 'Homepage Legal Section',
-		'category' => 'widgets',
-		'attributes' => array(
-			'administrativeRecordsTitle' => array(
-				'type' => 'string',
-				'default' => 'Administrative Records'
-			),
-			'administrativeRecordsDescription' => array(
-				'type' => 'string',
-				'default' => 'Governing documents, conflict of interest policy, and financial statements are available upon request to:'
-			),
-			'directorName' => array(
-				'type' => 'string',
-				'default' => 'Dawn Rich Meitrott'
-			),
-			'directorTitle' => array(
-				'type' => 'string',
-				'default' => 'Executive Director'
-			),
-			'organizationName' => array(
-				'type' => 'string',
-				'default' => 'Another Step, Inc.'
-			),
-			'street' => array(
-				'type' => 'string',
-				'default' => '30 Ramland Road, Suite 202'
-			),
-			'city' => array(
-				'type' => 'string',
-				'default' => 'Orangeburg'
-			),
-			'state' => array(
-				'type' => 'string',
-				'default' => 'NY'
-			),
-			'zipCode' => array(
-				'type' => 'string',
-				'default' => '10962'
-			),
-			'charityInfoTitle' => array(
-				'type' => 'string',
-				'default' => 'Charity Information'
-			),
-			'charityInfoDescription' => array(
-				'type' => 'string',
-				'default' => 'You can obtain more information about charities by calling the Attorney General:'
-			),
-			'attorneyGeneralPhone' => array(
-				'type' => 'string',
-				'default' => '212-416-8686'
-			)
-		),
-		'icon' => 'smiley',
-		'description' => 'Block to be used specifically for the home page legal documentation.',
-		'example' => array(
-			
-		),
-		'supports' => array(
-			'html' => false
-		),
-		'textdomain' => 'homepage-legal-section',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
@@ -542,6 +526,66 @@ return array(
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style.css',
+		'render' => 'file:./render.php',
+		'viewScript' => 'file:./view.js'
+	),
+	'two-column-card-section' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/two-column-card-section',
+		'version' => '0.1.0',
+		'title' => 'Two-Column Card Section',
+		'category' => 'design',
+		'attributes' => array(
+			'aboutHeadline' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutDescription' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutSubHeadline' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutImpactTitle1' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutImpactParagraph1' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutImpactIcon1' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutImpactTitle2' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutImpactParagraph2' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'aboutImpactIcon2' => array(
+				'type' => 'string',
+				'default' => ''
+			)
+		),
+		'icon' => 'index-card',
+		'description' => 'Flexible multi-column card block for custom structured content. Block to be used specifically for the home page Who We Are section.',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'textdomain' => 'two-column-card-section',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
 		'render' => 'file:./render.php',
 		'viewScript' => 'file:./view.js'
 	)
