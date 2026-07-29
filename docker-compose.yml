@@ -6,5 +6,6 @@ services:
     tty: true
     volumes:
       - .:/app
+      - /app/node_modules
     working_dir: /app/blocks
     command: sh -c "if [ ! -d 'node_modules' ]; then npm install; fi && tail -f /dev/null"

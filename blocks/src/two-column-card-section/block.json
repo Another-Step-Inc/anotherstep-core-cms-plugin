@@ -7,8 +7,8 @@
 	"category": "design",
 	"attributes": {
 		"aboutHeadline": {"type": "string", "default": ""},
-		"aboutDescription": {"type": "string", "default": ""},
 		"aboutSubHeadline": {"type": "string", "default": ""},
+		"aboutImpactHeadline": {"type": "string", "default": ""},
 		"aboutImpactTitle1": {"type": "string", "default": ""},
 		"aboutImpactParagraph1": {"type": "string", "default": ""},
 		"aboutImpactIcon1": {"type": "string", "default": ""},

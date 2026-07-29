@@ -541,11 +541,11 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
-			'aboutDescription' => array(
+			'aboutSubHeadline' => array(
 				'type' => 'string',
 				'default' => ''
 			),
-			'aboutSubHeadline' => array(
+			'aboutImpactHeadline' => array(
 				'type' => 'string',
 				'default' => ''
 			),

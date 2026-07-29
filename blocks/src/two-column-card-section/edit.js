@@ -1,5 +1,5 @@
 import { useState } from '@wordpress/element';
-import { useBlockProps, InspectorControls, RichText } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls, RichText, InnerBlocks } from '@wordpress/block-editor';
 import { PanelBody, TextControl, Button, Modal } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
@@ -27,7 +27,7 @@ export default function Edit( props ) {
 	const {
 		aboutHeadline,
 		aboutSubHeadline,
-		aboutDescription,
+		aboutImpactHeadline,
 		aboutImpactTitle1,
 		aboutImpactParagraph1,
 		aboutImpactIcon1,
@@ -36,6 +36,11 @@ export default function Edit( props ) {
 		aboutImpactIcon2,
 	} = attributes;
 
+	const ALLOWED_BLOCKS = [ 'core/paragraph', 'core/heading', 'core/list' ];
+	const TEMPLATE = [
+		[ 'core/paragraph', { placeholder: __( 'Enter a paragraph...', 'two-column-card-section' ) } ],
+	];
+
 	const IconOne = ICON_MAP[ aboutImpactIcon1 ] || StarIcon;
 	const IconTwo = ICON_MAP[ aboutImpactIcon2 ] || StarIcon;
 
@@ -43,17 +48,17 @@ export default function Edit( props ) {
 		<>
 			{/* SIDEBAR CONFIGURATION INSPECTOR */}
 			<InspectorControls>
-				<PanelBody title={ __( 'Impact 1 Configuration', 'homepage-about-section' ) } initialOpen={ true }>
+				<PanelBody title={ __( 'Impact 1 Configuration', 'two-column-card-section' ) } initialOpen={ true }>
 					<IconPicker 
-						label={ __( 'Impact 1 Icon', 'homepage-about-section' ) }
+						label={ __( 'Impact 1 Icon', 'two-column-card-section' ) }
 						currentIcon={ aboutImpactIcon1 }
 						onSelect={ ( name ) => setAttributes( { aboutImpactIcon1: name } ) }
 					/>
 				</PanelBody>
 
-				<PanelBody title={ __( 'Impact 2 Configuration', 'homepage-about-section' ) } initialOpen={ false }>
+				<PanelBody title={ __( 'Impact 2 Configuration', 'two-column-card-section' ) } initialOpen={ false }>
 					<IconPicker 
-						label={ __( 'Impact 2 Icon', 'homepage-about-section' ) }
+						label={ __( 'Impact 2 Icon', 'two-column-card-section' ) }
 						currentIcon={ aboutImpactIcon2 }
 						onSelect={ ( name ) => setAttributes( { aboutImpactIcon2: name } ) }
 					/>
@@ -68,7 +73,7 @@ export default function Edit( props ) {
 					<textarea
 						className="as-inline-title"
 						value={ aboutHeadline }
-						placeholder={ __( 'Enter Main Headline...', 'homepage-about-section' ) }
+						placeholder={ __( 'Enter Main Headline...', 'two-column-card-section' ) }
 						rows={ 1 }
 						onChange={ ( e ) => setAttributes( { aboutHeadline: e.target.value } ) }
 					/>
@@ -76,25 +81,32 @@ export default function Edit( props ) {
 					<textarea
 						className="as-inline-subtitle"
 						value={ aboutSubHeadline }
-						placeholder={ __( 'Enter Sub-headline...', 'homepage-about-section' ) }
+						placeholder={ __( 'Enter Sub-headline...', 'two-column-card-section' ) }
 						rows={ 1 }
 						onChange={ ( e ) => setAttributes( { aboutSubHeadline: e.target.value } ) }
 					/>
 
 					<div className="as-inline-description">
-						<RichText 
-							tagName="div"
-							multiline="p"
-							placeholder={ __( 'Enter main section description...', 'homepage-about-section' ) }
-							value={ aboutDescription }
-							onChange={ ( val ) => setAttributes( { aboutDescription: val } ) }
+						<InnerBlocks
+							allowedBlocks={ ALLOWED_BLOCKS }
+							template={ TEMPLATE }
+							templateLock={ false }
 						/>
 					</div>
 				</div>
 
 				{/* 2-COLUMN IMPACT GRID */}
 				<div className="as-hero-editor-grid">
-					
+					<div className="as-hero-content-col">
+						<textarea
+							className="as-inline-title"
+							value={ aboutImpactHeadline }
+							placeholder={ __( 'Enter Impact Headline...', 'two-column-card-section' ) }
+							rows={ 1 }
+							onChange={ ( e ) => setAttributes( { aboutImpactHeadline: e.target.value } ) }
+						/>
+					</div>
+
 					{/* IMPACT CARD 1 */}
 					<div className="as-hero-content-col">
 						<div className="as-card-header">
@@ -103,7 +115,7 @@ export default function Edit( props ) {
 								type="text"
 								className="as-inline-card-title"
 								value={ aboutImpactTitle1 }
-								placeholder={ __( 'Impact 1 Title...', 'homepage-about-section' ) }
+								placeholder={ __( 'Impact 1 Title...', 'two-column-card-section' ) }
 								onChange={ ( e ) => setAttributes( { aboutImpactTitle1: e.target.value } ) }
 							/>
 						</div>
@@ -111,7 +123,7 @@ export default function Edit( props ) {
 						<RichText 
 							tagName="p"
 							className="as-inline-description"
-							placeholder={ __( 'Impact 1 description...', 'homepage-about-section' ) }
+							placeholder={ __( 'Impact 1 description...', 'two-column-card-section' ) }
 							value={ aboutImpactParagraph1 }
 							onChange={ ( val ) => setAttributes( { aboutImpactParagraph1: val } ) }
 						/>
@@ -125,7 +137,7 @@ export default function Edit( props ) {
 								type="text"
 								className="as-inline-card-title"
 								value={ aboutImpactTitle2 }
-								placeholder={ __( 'Impact 2 Title...', 'homepage-about-section' ) }
+								placeholder={ __( 'Impact 2 Title...', 'two-column-card-section' ) }
 								onChange={ ( e ) => setAttributes( { aboutImpactTitle2: e.target.value } ) }
 							/>
 						</div>
@@ -133,7 +145,7 @@ export default function Edit( props ) {
 						<RichText 
 							tagName="p"
 							className="as-inline-description"
-							placeholder={ __( 'Impact 2 description...', 'homepage-about-section' ) }
+							placeholder={ __( 'Impact 2 description...', 'two-column-card-section' ) }
 							value={ aboutImpactParagraph2 }
 							onChange={ ( val ) => setAttributes( { aboutImpactParagraph2: val } ) }
 						/>
@@ -165,13 +177,13 @@ const IconPicker = ( { currentIcon, onSelect, label } ) => {
 				style={ { width: '100%', justifyContent: 'flex-start', marginTop: '6px' } }
 			>
 				<SelectedIcon style={ { width: '18px', marginRight: '8px' } } />
-				{ currentIcon || __( 'Select Icon', 'homepage-about-section' ) }
+				{ currentIcon || __( 'Select Icon', 'two-column-card-section' ) }
 			</Button>
 
 			{ isModalOpen && (
-				<Modal title={ __( 'Select Heroicon', 'homepage-about-section' ) } onRequestClose={ () => setModalOpen( false ) }>
+				<Modal title={ __( 'Select Heroicon', 'two-column-card-section' ) } onRequestClose={ () => setModalOpen( false ) }>
 					<TextControl 
-						placeholder={ __( 'Search icons...', 'homepage-about-section' ) }
+						placeholder={ __( 'Search icons...', 'two-column-card-section' ) }
 						value={ searchTerm }
 						onChange={ setSearchTerm }
 						autoFocus

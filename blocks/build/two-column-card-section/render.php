@@ -39,15 +39,10 @@ if ( ! $sprite_has_rendered && file_exists( $sprite_path ) ) {
         </h2>
 		<?php endif; ?>
         
-		<?php if ($about_description) : ?>
-			<div <?php echo get_block_wrapper_attributes(); ?>>
-				<div class="prose prose-lg text-slate-600 space-y-4">
-				<?php 
-					echo wp_kses_post( $about_description ); 
-				?>
-				</div>
-			</div>
-		<?php endif; ?>
+        <!-- Output Inner Blocks Content Here -->
+        <div class="as-inline-description">
+            <?php echo $content; ?>
+        </div>
       </div>
 
       <div class="relative">
