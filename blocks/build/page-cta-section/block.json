@@ -1,0 +1,109 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "anotherstep/page-cta-section",
+  "version": "0.1.0",
+  "title": "Page CTA Section",
+  "category": "widgets",
+  "attributes": {
+    "ctaTitle": {
+      "type": "string",
+      "default": ""
+    },
+    "ctaDescription": {
+      "type": "string",
+      "default": ""
+    },
+    "ctaStyle": {
+      "type": "string",
+      "default": "centered"
+    },
+    "btn1Text": {
+      "type": "string",
+      "default": ""
+    },
+    "btn1Url": {
+      "type": "string",
+      "default": ""
+    },
+    "btn1Style": {
+      "type": "string",
+      "default": "yellow"
+    },
+    "btn2Text": {
+      "type": "string",
+      "default": ""
+    },
+    "btn2Url": {
+      "type": "string",
+      "default": ""
+    },
+    "hasSteps": {
+      "type": "boolean",
+      "default": false
+    },
+    "step1Text": {
+      "type": "string",
+      "default": ""
+    },
+    "step2Text": {
+      "type": "string",
+      "default": ""
+    },
+    "step3Text": {
+      "type": "string",
+      "default": ""
+    },
+    "hasCard": {
+      "type": "boolean",
+      "default": false
+    },
+    "cardTitle": {
+      "type": "string",
+      "default": ""
+    },
+    "cardDescription": {
+      "type": "string",
+      "default": ""
+    },
+    "cardBtnText": {
+      "type": "string",
+      "default": ""
+    },
+    "cardBtnUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "hasStats": {
+      "type": "boolean",
+      "default": false
+    },
+    "stat1Number": {
+      "type": "string",
+      "default": ""
+    },
+    "stat1Label": {
+      "type": "string",
+      "default": ""
+    },
+    "stat2Number": {
+      "type": "string",
+      "default": ""
+    },
+    "stat2Label": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "icon": "megaphone",
+  "description": "Flexible Call-To-Action section supporting standard centered, step-based, and card layout styles.",
+  "example": {},
+  "supports": {
+    "html": false
+  },
+  "textdomain": "page-cta-section",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "anotherstep/gallery-placeholder",
+  "version": "0.1.0",
+  "title": "Gallery Section Anchor",
+  "category": "widgets",
+  "icon": "format-gallery",
+  "description": "Places the GraphQL dynamic gallery grid between blocks on the frontend.",
+  "attributes": {
+    "layoutType": {
+      "type": "string",
+      "default": "grid"
+    },
+    "showFilterBar": {
+      "type": "boolean",
+      "default": true
+    },
+    "itemsPerPage": {
+      "type": "string",
+      "default": "12"
+    },
+    "galleryTitle": {
+      "type": "string",
+      "default": ""
+    },
+    "galleryDescription": {
+      "type": "string",
+      "default": ""
+    },
+    "categorySlug": {
+      "type": "string",
+      "default": ""
+    },
+    "tagFilter": {
+      "type": "string",
+      "default": ""
+    },
+    "maxItems": {
+      "type": "string",
+      "default": "24"
+    },
+    "footerNotice": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "gallery-placeholder",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.scss"
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "anotherstep/video-placeholder",
+  "version": "0.1.0",
+  "title": "Video Section Anchor",
+  "category": "widgets",
+  "icon": "format-video",
+  "description": "Places the GraphQL dynamic video section between blocks on the frontend.",
+  "attributes": {
+    "layoutType": { "type": "string", "default": "grid" },
+    "showFilterBar": { "type": "boolean", "default": true },
+    "itemsPerPage": { "type": "string", "default": "12" },
+    "videoTitle": { "type": "string", "default": "" },
+    "videoDescription": { "type": "string", "default": "" },
+    "categorySlug": { "type": "string", "default": "" },
+    "tagFilter": { "type": "string", "default": "" },
+    "maxItems": { "type": "string", "default": "24" },
+    "footerNotice": { "type": "string", "default": "" }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "video-placeholder",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.scss"
+}

@@ -285,6 +285,60 @@ return array(
 		'render' => 'file:./render.php',
 		'viewScript' => 'file:./view.js'
 	),
+	'gallery-placeholder' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/gallery-placeholder',
+		'version' => '0.1.0',
+		'title' => 'Gallery Section Anchor',
+		'category' => 'widgets',
+		'icon' => 'format-gallery',
+		'description' => 'Places the GraphQL dynamic gallery grid between blocks on the frontend.',
+		'attributes' => array(
+			'layoutType' => array(
+				'type' => 'string',
+				'default' => 'grid'
+			),
+			'showFilterBar' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'itemsPerPage' => array(
+				'type' => 'string',
+				'default' => '12'
+			),
+			'galleryTitle' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'galleryDescription' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'categorySlug' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'tagFilter' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'maxItems' => array(
+				'type' => 'string',
+				'default' => '24'
+			),
+			'footerNotice' => array(
+				'type' => 'string',
+				'default' => ''
+			)
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'textdomain' => 'gallery-placeholder',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./editor.scss'
+	),
 	'homepage-ethics-section' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -320,6 +374,117 @@ return array(
 		'style' => 'file:./style-index.css',
 		'render' => 'file:./render.php',
 		'viewScript' => 'file:./view.js'
+	),
+	'page-cta-section' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/page-cta-section',
+		'version' => '0.1.0',
+		'title' => 'Page CTA Section',
+		'category' => 'widgets',
+		'attributes' => array(
+			'ctaTitle' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'ctaDescription' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'ctaStyle' => array(
+				'type' => 'string',
+				'default' => 'centered'
+			),
+			'btn1Text' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'btn1Url' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'btn1Style' => array(
+				'type' => 'string',
+				'default' => 'yellow'
+			),
+			'btn2Text' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'btn2Url' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'hasSteps' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'step1Text' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'step2Text' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'step3Text' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'hasCard' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'cardTitle' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'cardDescription' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'cardBtnText' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'cardBtnUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'hasStats' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'stat1Number' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'stat1Label' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'stat2Number' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'stat2Label' => array(
+				'type' => 'string',
+				'default' => ''
+			)
+		),
+		'icon' => 'megaphone',
+		'description' => 'Flexible Call-To-Action section supporting standard centered, step-based, and card layout styles.',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'textdomain' => 'page-cta-section',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php'
 	),
 	'page-hero-section' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
@@ -588,5 +753,59 @@ return array(
 		'style' => 'file:./style-index.css',
 		'render' => 'file:./render.php',
 		'viewScript' => 'file:./view.js'
+	),
+	'video-placeholder' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/video-placeholder',
+		'version' => '0.1.0',
+		'title' => 'Video Section Anchor',
+		'category' => 'widgets',
+		'icon' => 'format-video',
+		'description' => 'Places the GraphQL dynamic video section between blocks on the frontend.',
+		'attributes' => array(
+			'layoutType' => array(
+				'type' => 'string',
+				'default' => 'grid'
+			),
+			'showFilterBar' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'itemsPerPage' => array(
+				'type' => 'string',
+				'default' => '12'
+			),
+			'videoTitle' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'videoDescription' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'categorySlug' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'tagFilter' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'maxItems' => array(
+				'type' => 'string',
+				'default' => '24'
+			),
+			'footerNotice' => array(
+				'type' => 'string',
+				'default' => ''
+			)
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'textdomain' => 'video-placeholder',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./editor.scss'
 	)
 );

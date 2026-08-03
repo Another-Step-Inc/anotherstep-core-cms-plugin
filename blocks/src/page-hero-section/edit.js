@@ -60,6 +60,7 @@ export default function Edit( props ) {
                         label={__( 'Structural Mode', 'page-hero-section' )}
                         value={layoutType}
                         options={[
+                            { label: 'Single Column (Text Above Text and No Image)', value: 'stacked' },
                             { label: 'Split Layout (Text Left / Image Right)', value: 'split' },
                             { label: 'Background Image Layout', value: 'background' },
                         ]}
