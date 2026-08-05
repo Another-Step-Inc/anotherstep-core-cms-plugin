@@ -260,6 +260,16 @@ function as_register_blocks() {
 }
 add_action('init', 'as_register_blocks');
 
+function as_enqueue_block_styles() {
+    wp_enqueue_script(
+        'anotherstep-block-styles',
+        get_template_directory_uri() . '/build/block-styles.js',
+        array( 'wp-blocks', 'wp-dom-ready' ),
+        filemtime( get_template_directory() . '/build/block-styles.js' )
+    );
+}
+add_action( 'enqueue_block_editor_assets', 'as_enqueue_block_styles' );
+
 // 9. Feature: Store roles for shop managers and order processing
 function as_restrict_woocommerce_menus() {
     // Check if the current user has specific roles

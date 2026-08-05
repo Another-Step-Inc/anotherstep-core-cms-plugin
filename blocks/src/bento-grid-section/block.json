@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "anotherstep/bento-grid-section",
+	"version": "0.1.0",
+	"title": "Bento Grid Section",
+	"category": "design",
+	"icon": "grid-view",
+	"description": "Asymmetric Bento-style feature grid layout.",
+	"attributes": {
+		"title": { "type": "string", "default": "Who We Support" },
+		"subtitle": { "type": "string", "default": "" },
+		"hasUnderline": { "type": "boolean", "default": false },
+		"underlineColor": { "type": "string", "default": "bg-brand-dark-red" },
+		"backgroundColor": { "type": "string", "default": "bg-transparent" },
+		"columns": { "type": "number", "default": 6 }
+	},
+	"supports": { "html": false },
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

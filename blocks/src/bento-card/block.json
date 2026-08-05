@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "anotherstep/bento-card",
+	"version": "0.1.0",
+	"title": "Bento Grid Card",
+	"category": "design",
+	"icon": "layout",
+	"parent": ["anotherstep/bento-grid-section"],
+	"attributes": {
+		"colSpan": { "type": "string", "default": "md:col-span-1" },
+		"cardBgStyle": { "type": "string", "default": "bg-surface-container-lowest" },
+		"textColor": { "type": "string", "default": "text-on-surface" },
+		"icon": { "type": "string", "default": "star" },
+		"iconColor": { "type": "string", "default": "text-brand-blue" },
+		"title": { "type": "string", "default": "" },
+		"description": { "type": "string", "default": "" }
+	},
+	"supports": { "html": false },
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

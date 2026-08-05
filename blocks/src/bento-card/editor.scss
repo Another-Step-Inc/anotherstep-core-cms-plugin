@@ -1,0 +1,57 @@
+.as-bento-card-editor {
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 16px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 250px; // Ensure cards have a default height
+
+    &.bg-transparent {
+        background: transparent;
+    }
+
+    .as-card-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+
+        .as-badge {
+            font-size: 10px;
+            font-weight: 700;
+            background: #002f6c;
+            color: #ffffff;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .components-base-control__field {
+            margin-bottom: 0;
+            flex-grow: 1;
+        }
+    }
+
+    .as-card-inner-slot {
+        border: 1px dashed #94a3b8;
+        border-radius: 8px;
+        padding: 12px;
+        background: rgba(241, 245, 249, 0.5);
+        flex-grow: 1; // Pushes the slot to fill remaining card space
+        display: flex;
+        flex-direction: column;
+
+        .as-slot-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .block-editor-inner-blocks {
+            flex-grow: 1;
+        }
+    }
+}

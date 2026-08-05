@@ -1,6 +1,98 @@
 <?php
 // This file is generated. Do not modify it manually.
 return array(
+	'bento-card' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/bento-card',
+		'version' => '0.1.0',
+		'title' => 'Bento Grid Card',
+		'category' => 'design',
+		'icon' => 'layout',
+		'parent' => array(
+			'anotherstep/bento-grid-section'
+		),
+		'attributes' => array(
+			'colSpan' => array(
+				'type' => 'string',
+				'default' => 'md:col-span-1'
+			),
+			'cardBgStyle' => array(
+				'type' => 'string',
+				'default' => 'bg-surface-container-lowest'
+			),
+			'textColor' => array(
+				'type' => 'string',
+				'default' => 'text-on-surface'
+			),
+			'icon' => array(
+				'type' => 'string',
+				'default' => 'star'
+			),
+			'iconColor' => array(
+				'type' => 'string',
+				'default' => 'text-brand-blue'
+			),
+			'title' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'description' => array(
+				'type' => 'string',
+				'default' => ''
+			)
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php'
+	),
+	'bento-grid-section' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/bento-grid-section',
+		'version' => '0.1.0',
+		'title' => 'Bento Grid Section',
+		'category' => 'design',
+		'icon' => 'grid-view',
+		'description' => 'Asymmetric Bento-style feature grid layout.',
+		'attributes' => array(
+			'title' => array(
+				'type' => 'string',
+				'default' => 'Who We Support'
+			),
+			'subtitle' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'hasUnderline' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'underlineColor' => array(
+				'type' => 'string',
+				'default' => 'bg-brand-dark-red'
+			),
+			'backgroundColor' => array(
+				'type' => 'string',
+				'default' => 'bg-transparent'
+			),
+			'columns' => array(
+				'type' => 'number',
+				'default' => 6
+			)
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php'
+	),
 	'cta-contact-card-section' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -690,9 +782,77 @@ return array(
 		'textdomain' => 'split-feature-section',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
-		'style' => 'file:./style.css',
+		'style' => 'file:./style-index.css',
 		'render' => 'file:./render.php',
 		'viewScript' => 'file:./view.js'
+	),
+	'split-narrative-section' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/split-narrative-section',
+		'version' => '0.1.0',
+		'title' => 'Split Narrative Section',
+		'category' => 'design',
+		'attributes' => array(
+			'title' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'hasUnderline' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'backgroundColor' => array(
+				'type' => 'string',
+				'default' => 'bg-brand-bg'
+			),
+			'headline' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'card1Icon' => array(
+				'type' => 'string',
+				'default' => 'auto_awesome'
+			),
+			'card1IconColor' => array(
+				'type' => 'string',
+				'default' => 'text-brand-blue'
+			),
+			'card1Title' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'card1Text' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'card2Icon' => array(
+				'type' => 'string',
+				'default' => 'favorite'
+			),
+			'card2IconColor' => array(
+				'type' => 'string',
+				'default' => 'text-brand-red'
+			),
+			'card2Title' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'card2Text' => array(
+				'type' => 'string',
+				'default' => ''
+			)
+		),
+		'icon' => 'layout',
+		'description' => 'Two-column layout featuring rich content and dynamic cards with text.',
+		'supports' => array(
+			'html' => false
+		),
+		'textdomain' => 'split-narrative-section',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php'
 	),
 	'two-column-card-section' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',

@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "anotherstep/split-narrative-section",
+	"version": "0.1.0",
+	"title": "Split Narrative Section",
+	"category": "design",
+	"attributes": {
+		"title": { "type": "string", "default": "" },
+        "hasUnderline": { "type": "boolean", "default": true },
+		"backgroundColor": { "type": "string", "default": "bg-brand-bg" },
+        "headline": { "type": "string", "default": "" },
+		"card1Icon": { "type": "string", "default": "auto_awesome" },
+		"card1IconColor": { "type": "string", "default": "text-brand-blue" },
+		"card1Title": { "type": "string", "default": "" },
+		"card1Text": { "type": "string", "default": "" },
+		"card2Icon": { "type": "string", "default": "favorite" },
+		"card2IconColor": { "type": "string", "default": "text-brand-red" },
+		"card2Title": { "type": "string", "default": "" },
+		"card2Text": { "type": "string", "default": "" }
+	},
+	"icon": "layout",
+	"description": "Two-column layout featuring rich content and dynamic cards with text.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "split-narrative-section",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

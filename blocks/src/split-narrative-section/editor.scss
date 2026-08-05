@@ -1,0 +1,72 @@
+.as-split-content-editor {
+    border: 1px solid #dcdcdc;
+    border-radius: 16px;
+    padding: 32px;
+    margin: 24px 0;
+    transition: background-color 0.2s ease;
+
+    &.bg-brand-bg {
+        background-color: #f8f9fa; // Mimics light brand background
+    }
+
+    &.bg-surface-container-low {
+        background-color: #f1f3f5; // Mimics grey container background
+    }
+
+    .as-editor-header {
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 2px solid #002f6c; // Brand blue accent line
+
+        .components-base-control__field {
+            margin-bottom: 0;
+        }
+
+        input[type="text"] {
+            font-size: 24px !important;
+            font-weight: 900 !important;
+            color: #002f6c !important;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px dashed rgba(0, 47, 108, 0.3) !important;
+            background: #ffffff !important;
+            padding: 8px 12px !important;
+            border-radius: 8px;
+            width: 100%;
+
+            &:focus {
+                border-color: #002f6c !important;
+                box-shadow: 0 0 0 1px #002f6c !important;
+            }
+        }
+    }
+
+    .as-editor-body {
+        background: #ffffff;
+        border: 1px dashed #cccccc;
+        border-radius: 12px;
+        padding: 24px;
+
+        .as-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #6c757d;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        // InnerBlocks Canvas Styling
+        .block-editor-inner-blocks {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 16px;
+            background-color: #fafafa;
+
+            .block-editor-block-list__layout {
+                min-height: 80px;
+            }
+        }
+    }
+}
