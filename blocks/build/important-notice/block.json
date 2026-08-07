@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "anotherstep/important-notice",
+  "version": "1.0.0",
+  "title": "Important Notice",
+  "category": "layout",
+  "description": "Displays an important service note with an icon and highlighted text.",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.scss",
+  "style": "file:./style.scss",
+  "render": "file:./render.php",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": ""
+    },
+    "noticeText": {
+      "type": "string",
+      "default": ""
+    }
+  }
+}

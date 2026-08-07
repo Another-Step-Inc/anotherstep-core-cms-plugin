@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "anotherstep/inclusion-and-support",
+  "version": "1.0.0",
+  "title": "Inclusion Statement & Resources",
+  "category": "layout",
+  "description": "Displays the Diversity & Inclusion Statement alongside Support Resources and Helpline details.",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.scss",
+  "style": "file:./style.scss",
+  "render": "file:./render.php",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Diversity & Inclusion Statement"
+    },
+    "resourceTitle": {
+      "type": "string",
+      "default": "Support Resources"
+    },
+    "resourceDescription": {
+      "type": "string",
+      "default": "Another Step, Inc. cares about the needs of our staff and families. If you are feeling overwhelmed, please reach out to the resources available. You do not need to go through this alone."
+    },
+    "helplineTitle": {
+      "type": "string",
+      "default": "Mental Health Helpline"
+    },
+    "helplineNumber": {
+      "type": "string",
+      "default": "1-844-863-9314"
+    },
+    "helplineDescription": {
+      "type": "string",
+      "default": "The New York State Mental Health Helpline is staffed by trained volunteers who are there to listen and provide support when you need it most."
+    }
+  }
+}

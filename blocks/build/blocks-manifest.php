@@ -467,6 +467,120 @@ return array(
 		'render' => 'file:./render.php',
 		'viewScript' => 'file:./view.js'
 	),
+	'important-notice' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/important-notice',
+		'version' => '1.0.0',
+		'title' => 'Important Notice',
+		'category' => 'layout',
+		'description' => 'Displays an important service note with an icon and highlighted text.',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./editor.scss',
+		'style' => 'file:./style.scss',
+		'render' => 'file:./render.php',
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'heading' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'noticeText' => array(
+				'type' => 'string',
+				'default' => ''
+			)
+		)
+	),
+	'inclusion-and-support-section' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/inclusion-and-support',
+		'version' => '1.0.0',
+		'title' => 'Inclusion Statement & Resources',
+		'category' => 'layout',
+		'description' => 'Displays the Diversity & Inclusion Statement alongside Support Resources and Helpline details.',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./editor.scss',
+		'style' => 'file:./style.scss',
+		'render' => 'file:./render.php',
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'title' => array(
+				'type' => 'string',
+				'default' => 'Diversity & Inclusion Statement'
+			),
+			'resourceTitle' => array(
+				'type' => 'string',
+				'default' => 'Support Resources'
+			),
+			'resourceDescription' => array(
+				'type' => 'string',
+				'default' => 'Another Step, Inc. cares about the needs of our staff and families. If you are feeling overwhelmed, please reach out to the resources available. You do not need to go through this alone.'
+			),
+			'helplineTitle' => array(
+				'type' => 'string',
+				'default' => 'Mental Health Helpline'
+			),
+			'helplineNumber' => array(
+				'type' => 'string',
+				'default' => '1-844-863-9314'
+			),
+			'helplineDescription' => array(
+				'type' => 'string',
+				'default' => 'The New York State Mental Health Helpline is staffed by trained volunteers who are there to listen and provide support when you need it most.'
+			)
+		)
+	),
+	'journey-forward-section' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/journey-forward-section',
+		'version' => '1.0.0',
+		'title' => 'Journey Forward Section',
+		'category' => 'layout',
+		'description' => 'Displays the three-step Journey Forward process cards.',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./editor.scss',
+		'style' => 'file:./style.scss',
+		'render' => 'file:./render.php',
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'sectionTitle' => array(
+				'type' => 'string',
+				'default' => 'The Journey Forward'
+			),
+			'step1Number' => array(
+				'type' => 'string',
+				'default' => '01'
+			),
+			'step1Label' => array(
+				'type' => 'string',
+				'default' => 'Identify'
+			),
+			'step2Number' => array(
+				'type' => 'string',
+				'default' => '02'
+			),
+			'step2Label' => array(
+				'type' => 'string',
+				'default' => 'Strategize'
+			),
+			'step3Number' => array(
+				'type' => 'string',
+				'default' => '03'
+			),
+			'step3Label' => array(
+				'type' => 'string',
+				'default' => 'Succeed'
+			)
+		)
+	),
 	'page-cta-section' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -913,6 +1027,80 @@ return array(
 		'style' => 'file:./style-index.css',
 		'render' => 'file:./render.php',
 		'viewScript' => 'file:./view.js'
+	),
+	'upcoming-events-section' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/upcoming-events',
+		'version' => '1.0.0',
+		'title' => 'Upcoming Events',
+		'category' => 'layout',
+		'description' => 'Displays the regional news, save the date alert, monthly meetings info, and Zoom joining instructions.',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./editor.scss',
+		'style' => 'file:./style.scss',
+		'render' => 'file:./render.php',
+		'supports' => array(
+			'html' => false
+		),
+		'attributes' => array(
+			'sectionTitle' => array(
+				'type' => 'string',
+				'default' => 'Upcoming Events'
+			),
+			'sideTitle' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'sideDescription' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'saveTheDateText' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'meetingTitle' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'meetingDescription' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'inPersonTitle' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'inPersonDetails' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'digitalTitle' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'zoomUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'zoomButtonText' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'phoneText' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'phoneDetails' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'meetingId' => array(
+				'type' => 'string',
+				'default' => ''
+			)
+		)
 	),
 	'video-placeholder' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',

@@ -1,0 +1,74 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "anotherstep/upcoming-events",
+	"version": "1.0.0",
+	"title": "Upcoming Events",
+	"category": "layout",
+	"description": "Displays the regional news, save the date alert, monthly meetings info, and Zoom joining instructions.",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.scss",
+	"style": "file:./style.scss",
+	"render": "file:./render.php",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"sectionTitle": {
+			"type": "string",
+			"default": "Upcoming Events"
+		},
+		"sideTitle": {
+			"type": "string",
+			"default": ""
+		},
+		"sideDescription": {
+			"type": "string",
+			"default": ""
+		},
+		"saveTheDateText": {
+			"type": "string",
+			"default": ""
+		},
+		"meetingTitle": {
+			"type": "string",
+			"default": ""
+		},
+		"meetingDescription": {
+			"type": "string",
+			"default": ""
+		},
+		"inPersonTitle": {
+			"type": "string",
+			"default": ""
+		},
+		"inPersonDetails": {
+			"type": "string",
+			"default": ""
+		},
+		"digitalTitle": {
+			"type": "string",
+			"default": ""
+		},
+		"zoomUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"zoomButtonText": {
+			"type": "string",
+			"default": ""
+		},
+		"phoneText": {
+			"type": "string",
+			"default": ""
+		},
+		"phoneDetails": {
+			"type": "string",
+			"default": ""
+		},
+		"meetingId": {
+			"type": "string",
+			"default": ""
+		}
+	}
+}

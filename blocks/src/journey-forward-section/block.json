@@ -1,0 +1,46 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "anotherstep/journey-forward-section",
+	"version": "1.0.0",
+	"title": "Journey Forward Section",
+	"category": "layout",
+	"description": "Displays the three-step Journey Forward process cards.",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.scss",
+	"style": "file:./style.scss",
+	"render": "file:./render.php",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"sectionTitle": {
+			"type": "string",
+			"default": "The Journey Forward"
+		},
+		"step1Number": {
+			"type": "string",
+			"default": "01"
+		},
+		"step1Label": {
+			"type": "string",
+			"default": "Identify"
+		},
+		"step2Number": {
+			"type": "string",
+			"default": "02"
+		},
+		"step2Label": {
+			"type": "string",
+			"default": "Strategize"
+		},
+		"step3Number": {
+			"type": "string",
+			"default": "03"
+		},
+		"step3Label": {
+			"type": "string",
+			"default": "Succeed"
+		}
+	}
+}

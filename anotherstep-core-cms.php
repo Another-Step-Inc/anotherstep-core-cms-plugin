@@ -261,12 +261,18 @@ function as_register_blocks() {
 add_action('init', 'as_register_blocks');
 
 function as_enqueue_block_styles() {
-    wp_enqueue_script(
-        'anotherstep-block-styles',
-        get_template_directory_uri() . '/build/block-styles.js',
-        array( 'wp-blocks', 'wp-dom-ready' ),
-        filemtime( get_template_directory() . '/build/block-styles.js' )
-    );
+    $script_path = plugin_dir_path( __FILE__ ) . 'assets/js/block-styles.js';
+    $script_url  = plugin_dir_url( __FILE__ ) . 'assets/js/block-styles.js';
+
+    if ( file_exists( $script_path ) ) {
+        wp_enqueue_script(
+            'anotherstep-block-styles',
+            $script_url,
+            array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post', 'wp-element' ),
+            filemtime( $script_path ),
+            true
+        );
+    }
 }
 add_action( 'enqueue_block_editor_assets', 'as_enqueue_block_styles' );
 
