@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "anotherstep/contact-hours-card",
+  "version": "1.0.0",
+  "title": "Operating Hours Card",
+  "category": "layout",
+  "parent": [
+    "anotherstep/contact-grid"
+  ],
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Operating Hours"
+    },
+    "weekdayHours": {
+      "type": "string",
+      "default": "9:00 - 17:00"
+    },
+    "saturdayHours": {
+      "type": "string",
+      "default": "10:00 - 14:00"
+    },
+    "sundayHours": {
+      "type": "string",
+      "default": "Closed"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

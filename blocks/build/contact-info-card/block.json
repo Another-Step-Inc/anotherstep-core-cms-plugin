@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "anotherstep/contact-info-card",
+  "version": "1.0.0",
+  "title": "Contact Info Card",
+  "category": "layout",
+  "parent": [
+    "anotherstep/contact-grid"
+  ],
+  "attributes": {
+    "cardType": {
+      "type": "string",
+      "default": "phone"
+    },
+    "title": {
+      "type": "string",
+      "default": "Call Us"
+    },
+    "subtitle": {
+      "type": "string",
+      "default": "Available Mon-Fri, 9am - 5pm"
+    },
+    "value": {
+      "type": "string",
+      "default": "1-800-555-0123"
+    },
+    "href": {
+      "type": "string",
+      "default": "tel:18005550123"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

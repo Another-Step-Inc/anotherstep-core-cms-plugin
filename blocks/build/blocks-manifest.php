@@ -93,6 +93,122 @@ return array(
 		'style' => 'file:./style-index.css',
 		'render' => 'file:./render.php'
 	),
+	'contact-form' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/contact-form',
+		'version' => '1.0.0',
+		'title' => 'Contact Form Block',
+		'category' => 'layout',
+		'parent' => array(
+			'anotherstep/contact-grid'
+		),
+		'attributes' => array(
+			'title' => array(
+				'type' => 'string',
+				'default' => 'Send a Message'
+			),
+			'subtitle' => array(
+				'type' => 'string',
+				'default' => 'Tell us how we can best support you today.'
+			)
+		),
+		'editorScript' => 'file:./index.js',
+		'render' => 'file:./render.php'
+	),
+	'contact-grid' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/contact-grid',
+		'version' => '0.1.0',
+		'title' => 'Contact Grid Container',
+		'category' => 'anotherstep-blocks',
+		'icon' => 'grid-view',
+		'description' => 'Container grid holding contact info cards, operating hours, and the main contact form.',
+		'supports' => array(
+			'html' => false,
+			'align' => array(
+				'wide',
+				'full'
+			)
+		),
+		'attributes' => array(
+			'layout' => array(
+				'type' => 'string',
+				'default' => '1-2-col'
+			)
+		),
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php'
+	),
+	'contact-hours-card' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/contact-hours-card',
+		'version' => '1.0.0',
+		'title' => 'Operating Hours Card',
+		'category' => 'layout',
+		'parent' => array(
+			'anotherstep/contact-grid'
+		),
+		'attributes' => array(
+			'title' => array(
+				'type' => 'string',
+				'default' => 'Operating Hours'
+			),
+			'weekdayHours' => array(
+				'type' => 'string',
+				'default' => '9:00 - 17:00'
+			),
+			'saturdayHours' => array(
+				'type' => 'string',
+				'default' => '10:00 - 14:00'
+			),
+			'sundayHours' => array(
+				'type' => 'string',
+				'default' => 'Closed'
+			)
+		),
+		'editorScript' => 'file:./index.js',
+		'render' => 'file:./render.php'
+	),
+	'contact-info-card' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/contact-info-card',
+		'version' => '1.0.0',
+		'title' => 'Contact Info Card',
+		'category' => 'layout',
+		'parent' => array(
+			'anotherstep/contact-grid'
+		),
+		'attributes' => array(
+			'cardType' => array(
+				'type' => 'string',
+				'default' => 'phone'
+			),
+			'title' => array(
+				'type' => 'string',
+				'default' => 'Call Us'
+			),
+			'subtitle' => array(
+				'type' => 'string',
+				'default' => 'Available Mon-Fri, 9am - 5pm'
+			),
+			'value' => array(
+				'type' => 'string',
+				'default' => '1-800-555-0123'
+			),
+			'href' => array(
+				'type' => 'string',
+				'default' => 'tel:18005550123'
+			)
+		),
+		'editorScript' => 'file:./index.js',
+		'render' => 'file:./render.php'
+	),
 	'cta-contact-card-section' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
