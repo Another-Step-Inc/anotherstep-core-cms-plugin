@@ -8,7 +8,9 @@
 	"parent": [ "anotherstep/contact-grid" ],
 	"attributes": {
 		"title": { "type": "string", "default": "Send a Message" },
-		"subtitle": { "type": "string", "default": "Tell us how we can best support you today." }
+		"subtitle": { "type": "string", "default": "Tell us how we can best support you today." },
+		"buttonText": { "type": "string", "default": "Send Message" },
+    	"endpointUrl": { "type": "string", "default": "" }
 	},
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php"

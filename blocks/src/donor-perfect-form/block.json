@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "anotherstep/donor-perfect-form",
+	"version": "0.1.0",
+	"title": "DonorPerfect Form Block",
+	"category": "design",
+	"parent": [ "anotherstep/donation-grid-section" ],
+	"attributes": {
+		"title": { "type": "string", "default": "Secure Donation Form" },
+		"description": { "type": "string", "default": "Your contribution directly supports independence and community growth." },
+		"showModeToggle": { "type": "boolean", "default": true },
+		"generalFormUrl": { "type": "string", "default": "" },
+		"tributeFormUrl": { "type": "string", "default": "" },
+		"taxDisclosure": { "type": "string", "default": "Federal tax law requires us to inform you that no goods or services were provided to you in return for your gift..." },
+		"showSecurityBadge": { "type": "boolean", "default": true }
+	},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "donor-perfect-form",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.scss",
+	"style": "file:./style.scss",
+	"render": "file:./render.php",
+	"viewScript": "file:./view.js"
+}

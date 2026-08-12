@@ -1,0 +1,23 @@
+// Sidebar Trust Card Block Styles
+.wp-block-anotherstep-sidebar-trust-card {
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+
+    // Background variant helpers
+    &.bg-brand-blue-container {
+        background-color: #0f172a; // Fallback if Tailwind is not present
+        color: #ffffff;
+    }
+
+    &.bg-surface-container-low {
+        background-color: #f1f5f9;
+        color: #0f172a;
+    }
+
+    // Background watermark icon positioning
+    .material-symbols-outlined {
+        pointer-events: none;
+        user-select: none;
+    }
+}

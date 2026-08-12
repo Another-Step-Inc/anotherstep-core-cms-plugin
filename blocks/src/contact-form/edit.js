@@ -15,6 +15,12 @@ export default function Edit({ attributes, setAttributes }) {
             <InspectorControls>
                 <PanelBody title={__('Form Settings', 'anotherstep')} initialOpen={true}>
                     <TextControl
+                        label={__('Submit Button Text', 'anotherstep')}
+                        value={buttonText || ''}
+                        onChange={(val) => setAttributes({ buttonText: val })}
+                        help={__('Text displayed on the form submission button.', 'anotherstep')}
+                    />
+                    <TextControl
                         label={__('API / Action Endpoint URL', 'anotherstep')}
                         value={endpointUrl || ''}
                         onChange={(val) => setAttributes({ endpointUrl: val })}

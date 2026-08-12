@@ -1,0 +1,23 @@
+// DonorPerfect Form Block Styles
+.wp-block-anotherstep-donor-perfect-form {
+    box-sizing: border-box;
+
+    // Ensure iframe takes full container dimensions cleanly
+    iframe#donorperfect-iframe {
+        width: 100%;
+        min-height: 600px;
+        border: none;
+        display: block;
+    }
+
+    // Toggle button transition resets
+    button {
+        cursor: pointer;
+        outline: none;
+        
+        &:focus-visible {
+            ring: 2px;
+            ring-color: #0284c7;
+        }
+    }
+}

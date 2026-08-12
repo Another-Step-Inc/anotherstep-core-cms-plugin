@@ -16,6 +16,14 @@
     "subtitle": {
       "type": "string",
       "default": "Tell us how we can best support you today."
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Send Message"
+    },
+    "endpointUrl": {
+      "type": "string",
+      "default": ""
     }
   },
   "editorScript": "file:./index.js",

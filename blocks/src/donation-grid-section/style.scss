@@ -1,0 +1,9 @@
+// Donation Grid Section Container Styles
+.wp-block-anotherstep-donation-grid-section {
+    box-sizing: border-box;
+
+    // Grid layout resets
+    &.grid {
+        display: grid;
+    }
+}

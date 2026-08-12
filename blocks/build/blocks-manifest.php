@@ -111,6 +111,14 @@ return array(
 			'subtitle' => array(
 				'type' => 'string',
 				'default' => 'Tell us how we can best support you today.'
+			),
+			'buttonText' => array(
+				'type' => 'string',
+				'default' => 'Send Message'
+			),
+			'endpointUrl' => array(
+				'type' => 'string',
+				'default' => ''
 			)
 		),
 		'editorScript' => 'file:./index.js',
@@ -376,6 +384,82 @@ return array(
 		'editorStyle' => 'file:./editor.scss',
 		'style' => 'file:./style.scss',
 		'render' => 'file:./render.php'
+	),
+	'donation-grid-section' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/donation-grid-section',
+		'version' => '0.1.0',
+		'title' => 'Donation Grid Section',
+		'category' => 'design',
+		'attributes' => array(
+			'formColumnSpan' => array(
+				'type' => 'number',
+				'default' => 8
+			),
+			'sidebarColumnSpan' => array(
+				'type' => 'number',
+				'default' => 4
+			)
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'textdomain' => 'donation-grid-section',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./editor.scss',
+		'style' => 'file:./style.scss',
+		'render' => 'file:./render.php'
+	),
+	'donor-perfect-form' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/donor-perfect-form',
+		'version' => '0.1.0',
+		'title' => 'DonorPerfect Form Block',
+		'category' => 'design',
+		'parent' => array(
+			'anotherstep/donation-grid-section'
+		),
+		'attributes' => array(
+			'title' => array(
+				'type' => 'string',
+				'default' => 'Secure Donation Form'
+			),
+			'description' => array(
+				'type' => 'string',
+				'default' => 'Your contribution directly supports independence and community growth.'
+			),
+			'showModeToggle' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'generalFormUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'tributeFormUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'taxDisclosure' => array(
+				'type' => 'string',
+				'default' => 'Federal tax law requires us to inform you that no goods or services were provided to you in return for your gift...'
+			),
+			'showSecurityBadge' => array(
+				'type' => 'boolean',
+				'default' => true
+			)
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'textdomain' => 'donor-perfect-form',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./editor.scss',
+		'style' => 'file:./style.scss',
+		'render' => 'file:./render.php',
+		'viewScript' => 'file:./view.js'
 	),
 	'dynamic-info-section' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
@@ -934,6 +1018,43 @@ return array(
 		'style' => 'file:./style-index.css',
 		'render' => 'file:./render.php',
 		'viewScript' => 'file:./view.js'
+	),
+	'sidebar-trust-card' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'anotherstep/sidebar-trust-card',
+		'version' => '0.1.0',
+		'title' => 'Sidebar Trust Card Block',
+		'category' => 'design',
+		'parent' => array(
+			'anotherstep/donation-grid-section'
+		),
+		'attributes' => array(
+			'title' => array(
+				'type' => 'string',
+				'default' => 'Terms & Conditions'
+			),
+			'body' => array(
+				'type' => 'string',
+				'default' => 'By submitting your payment, you authorize us to charge...'
+			),
+			'iconName' => array(
+				'type' => 'string',
+				'default' => 'gavel'
+			),
+			'cardStyle' => array(
+				'type' => 'string',
+				'default' => 'primary-blue'
+			)
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'textdomain' => 'sidebar-trust-card',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./editor.scss',
+		'style' => 'file:./style.scss',
+		'render' => 'file:./render.php'
 	),
 	'split-feature-section' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',

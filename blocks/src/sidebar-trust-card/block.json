@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "anotherstep/sidebar-trust-card",
+	"version": "0.1.0",
+	"title": "Sidebar Trust Card Block",
+	"category": "design",
+	"parent": [ "anotherstep/donation-grid-section" ],
+	"attributes": {
+		"title": { "type": "string", "default": "Terms & Conditions" },
+		"body": { "type": "string", "default": "By submitting your payment, you authorize us to charge..." },
+		"iconName": { "type": "string", "default": "gavel" },
+		"cardStyle": { "type": "string", "default": "primary-blue" }
+	},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "sidebar-trust-card",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.scss",
+	"style": "file:./style.scss",
+	"render": "file:./render.php"
+}
