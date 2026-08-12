@@ -6,7 +6,20 @@
  * Author: IT Department
  */
 
-if ( ! defined('ABSPATH') ) wxit;
+if ( ! defined('ABSPATH') ) exit;
+
+// Automatically grant capability to target roles on plugin activation
+function as_add_approval_capabilities() {
+    $roles = ['operations_manager', 'administration_management', 'executive_director'];
+
+    foreach ($roles as $role_name) {
+        $role = get_role($role_name);
+        if ($role && !$role->has_cap('approve_content_merge')) {
+            $role->add_cap('approve_content_merge');
+        }
+    }
+}
+register_activation_hook(__FILE__, 'as_add_approval_capabilities');
 
 // 1. Feature: Register Custom Post Type - Services
 function as_register_services_cpt() {
@@ -192,58 +205,198 @@ function as_admin_menu() {
         remove_menu_page('options-general.php');
         remove_menu_page('tools.php');
         remove_menu_page('edit.php?post_type=acf-field-group');
-    }    
+    }   
 }
 add_action('admin_menu', 'as_admin_menu', 999);
 
-// 6. Feature: Website content approvals system; add meta boxes to posts, services, and promos
+// 6. Feature: Staging System for Headless Astro Frontend
+
+/**
+ * Intercept REST API updates (Gutenberg) before post status changes.
+ * Handles both published posts AND brand new draft/pending submissions.
+ */
+function as_intercept_gutenberg_staged_edits($prepared_post, $request) {
+    if (empty($prepared_post->ID)) return $prepared_post;
+
+    $post_id    = $prepared_post->ID;
+    $old_status = get_post_status($post_id);
+
+    // Run staging for ANY post update made by non-approvers
+    if (!current_user_can('approve_content_merge')) {
+        
+        $staged_data = [
+            'post_title'   => !empty($prepared_post->post_title) ? $prepared_post->post_title : get_the_title($post_id),
+            'post_content' => !empty($prepared_post->post_content) ? $prepared_post->post_content : get_post_field('post_content', $post_id),
+            'submitted_by' => get_current_user_id(),
+            'submitted_at' => current_time('mysql'),
+        ];
+
+        // Store staged data in post meta so it shows on the Dashboard Widget
+        update_post_meta($post_id, '_as_pending_approval_data', $staged_data);
+
+        // If it was ALREADY published, keep it published live for Astro
+        if ($old_status === 'publish') {
+            $prepared_post->post_status = 'publish';
+
+            // Revert live title/content so unapproved edits don't bleed onto the site
+            $live_post = get_post($post_id);
+            $prepared_post->post_title   = $live_post->post_title;
+            $prepared_post->post_content = $live_post->post_content;
+        }
+    }
+
+    return $prepared_post;
+}
+// Hook across ALL post types you use
+add_filter('rest_pre_insert_post', 'as_intercept_gutenberg_staged_edits', 10, 2);
+add_filter('rest_pre_insert_page', 'as_intercept_gutenberg_staged_edits', 10, 2);
+add_filter('rest_pre_insert_services', 'as_intercept_gutenberg_staged_edits', 10, 2);
+add_filter('rest_pre_insert_values', 'as_intercept_gutenberg_staged_edits', 10, 2);
+add_filter('rest_pre_insert_promos', 'as_intercept_gutenberg_staged_edits', 10, 2);
+
+
+/**
+ * Render Meta Box with Staging Info for Approvers
+ */
 function as_render_merge_box($post) {
-    if ($post->post_status === 'publish') {
-        echo '<p style="color: green; font-weight: bold;">✅ This content is Live (Merged).</p>';
+    $staged_data = get_post_meta($post->ID, '_as_pending_approval_data', true);
+
+    if ($staged_data) {
+        $user_info   = get_userdata($staged_data['submitted_by']);
+        $author_name = $user_info ? $user_info->display_name : 'An editor';
+        
+        // Build a secure direct action URL
+        $approve_url = wp_nonce_url(
+            admin_url('admin-post.php?action=as_approve_content_merge&post_id=' . $post->ID),
+            'as_approve_action_' . $post->ID
+        );
+
+        echo '<div style="background: #fff8e5; border-left: 4px solid #dba617; padding: 10px; margin-bottom: 12px;">';
+        echo '  <strong style="color: #b26200;">⚠️ Staged Edits Waiting</strong>';
+        echo '  <p style="font-size: 12px; color: #50575e; margin: 4px 0 0 0;">Submitted by ' . esc_html($author_name) . '<br>on ' . esc_html($staged_data['submitted_at']) . '</p>';
+        echo '</div>';
+        echo '<a href="' . esc_url($approve_url) . '" class="button button-primary button-large" style="width:100%; text-align:center; display:block;">Approve & Merge to Live</a>';
     } else {
-        echo '<p>Review the content and waiver status below.</p>';
-        echo '<input type="submit" name="as_approve_merge" class="button button-primary button-large" value="Approve & Merge to Live" style="width:100%;">';
+        echo '<p style="color: #46b450; font-weight: bold; margin: 0;">✅ Live content matches current revision.</p>';
     }
 }
-function as_add_meta_boxes() {
-    $authorized_roles = ['operations_manager', 'administration_management', 'executive_director'];
-    $current_user = wp_get_current_user();
 
-    // Only show this box if the user has one of the authorized roles
-    if (array_intersect($authorized_roles, $current_user->roles)) {
+function as_add_meta_boxes() {
+    if (current_user_can('approve_content_merge')) {
         add_meta_box(
             'as_merge_request', 
             'Content Approval (Merge)', 
             'as_render_merge_box', 
-            ['post', 'services', 'promos'], 
+            ['post', 'page', 'services', 'values', 'promos'], 
             'side', 
             'high'
         );
-    }    
+    }   
 }
 add_action('add_meta_boxes', 'as_add_meta_boxes');
 
-// 7. Feature: Saving a post with approvals from one of three roles
-function as_save_post($post_id) {
-    // Basic security checks
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-    if (!isset($_POST['as_approve_merge'])) return;
 
-    // Capability Check: Ensure only leadership can "Merge"
-    $authorized_roles = ['operations_manager', 'administration_management', 'executive_director'];
-    $current_user = wp_get_current_user();
+/**
+ * Render Dashboard Widget Content for Staged Edits
+ */
+function as_render_pending_approvals_widget() {
+    $query = new WP_Query([
+        'post_type'      => ['post', 'page', 'services', 'values', 'promos'],
+        'post_status'    => ['publish', 'draft', 'pending'],
+        'meta_key'       => '_as_pending_approval_data',
+        'posts_per_page' => 10,
+    ]);
 
-    if (array_intersect($authorized_roles, $current_user->roles)) {
-        // Unhook to prevent infinite loop
-        remove_action('save_post', 'as_save_approval_data'); 
-        
-        wp_update_post([
-            'ID'          => $post_id,
-            'post_status' => 'publish'
-        ]);
+    if (!$query->have_posts()) {
+        echo '<p style="color: #46b450; font-weight: bold; margin: 0;">✅ All clear! No pending edits awaiting review.</p>';
+        return;
+    }
+
+    echo '<p style="margin-top:0; color: #50575e;">The following posts have staged edits waiting for merge:</p>';
+    echo '<ul style="margin: 0; padding-left: 0; list-style: none;">';
+
+    while ($query->have_posts()) {
+        $query->the_post();
+        $post_id    = get_the_ID();
+        $title      = get_the_title() ?: '(Untitled)';
+        $post_type_obj = get_post_type_object(get_post_type());
+        $post_type  = $post_type_obj ? $post_type_obj->labels->singular_name : 'Post';
+        $edit_link  = get_edit_post_link($post_id);
+        $staged     = get_post_meta($post_id, '_as_pending_approval_data', true);
+        $author     = !empty($staged['submitted_by']) ? get_userdata($staged['submitted_by'])->display_name : 'Editor';
+
+        echo '<li style="padding: 10px 0; border-bottom: 1px solid #f0f0f1; display: flex; align-items: center; justify-content: space-between;">';
+        echo '  <div style="max-width: 70%;">';
+        echo '      <strong style="display: block; font-size: 14px;"><a href="' . esc_url($edit_link) . '">' . esc_html($title) . '</a></strong>';
+        echo '      <span style="font-size: 12px; color: #646970;">' . esc_html($post_type) . ' • Staged by ' . esc_html($author) . '</span>';
+        echo '  </div>';
+        echo '  <div style="text-align: right;">';
+        echo '      <a href="' . esc_url($edit_link) . '" class="button button-small button-primary">Review Edits</a>';
+        echo '  </div>';
+        echo '</li>';
+    }
+
+    echo '</ul>';
+    wp_reset_postdata();
+}
+
+function as_add_pending_approvals_dashboard_widget() {
+    if (current_user_can('approve_content_merge')) {
+        wp_add_dashboard_widget(
+            'as_pending_approvals_widget',
+            '📋 Content Pending Approval',
+            'as_render_pending_approvals_widget'
+        );
     }
 }
-add_action('save_post', 'as_save_post', 20);
+add_action('wp_dashboard_setup', 'as_add_pending_approvals_dashboard_widget');
+
+// 7. Feature: Merge Staged Changes into Live Post
+function as_handle_merge_approval_action() {
+    $post_id = isset($_GET['post_id']) ? intval($_GET['post_id']) : 0;
+
+    if (!$post_id) {
+        wp_die('Invalid post ID.');
+    }
+
+    // Verify Nonce & Permissions
+    check_admin_referer('as_approve_action_' . $post_id);
+
+    if (!current_user_can('approve_content_merge')) {
+        wp_die('You do not have permission to approve content merges.');
+    }
+
+    $staged_data = get_post_meta($post_id, '_as_pending_approval_data', true);
+
+    if ($staged_data) {
+        // Temporarily unhook the REST staging filter so wp_update_post writes directly
+        remove_filter('rest_pre_insert_post', 'as_intercept_gutenberg_staged_edits', 10);
+        remove_filter('rest_pre_insert_page', 'as_intercept_gutenberg_staged_edits', 10);
+        remove_filter('rest_pre_insert_services', 'as_intercept_gutenberg_staged_edits', 10);
+        remove_filter('rest_pre_insert_values', 'as_intercept_gutenberg_staged_edits', 10);
+        remove_filter('rest_pre_insert_promos', 'as_intercept_gutenberg_staged_edits', 10);
+
+        // Apply staged edits to live post
+        wp_update_post([
+            'ID'           => $post_id,
+            'post_title'   => $staged_data['post_title'],
+            'post_content' => $staged_data['post_content'],
+            'post_status'  => 'publish'
+        ]);
+
+        // Delete staged meta
+        delete_post_meta($post_id, '_as_pending_approval_data');
+        
+        // Log approval metadata
+        update_post_meta($post_id, '_as_last_approved_by', get_current_user_id());
+        update_post_meta($post_id, '_as_last_approved_at', current_time('mysql'));
+    }
+
+    // Redirect back to edit screen with success notice
+    wp_redirect(get_edit_post_link($post_id, 'url'));
+    exit;
+}
+add_action('admin_post_as_approve_content_merge', 'as_handle_merge_approval_action');
 
 // 8. Feature: Registering all blocks to be used in posts and pages.
 function as_register_blocks() {
@@ -291,3 +444,136 @@ function as_restrict_woocommerce_menus() {
 }
 
 add_action('admin_init', 'as_restrict_woocommerce_menus');
+
+// 10. Feature: Register Footer Settings and Nav Menus
+/**
+ * 1. Register Navigation Menus
+ */
+function register_footer_menu_locations() {
+    register_nav_menus(array(
+        'quick-links' => __('Quick Links Menu', 'textdomain'),
+        'our-services' => __('Our Services Menu', 'textdomain'),
+        'legal-links' => __('Legal Links Menu', 'textdomain'),
+    ));
+}
+add_action('init', 'register_footer_menu_locations');
+
+
+/**
+ * 2. Register ACF Options Page & Fields for WPGraphQL
+ * Requires ACF Pro and WPGraphQL for ACF.
+ */
+function register_footer_acf_options() {
+    if (function_exists('acf_add_options_page')) {
+        acf_add_options_page(array(
+            'page_title'    => 'Footer Settings',
+            'menu_title'    => 'Footer Settings',
+            'menu_slug'     => 'footer-settings',
+            'capability'    => 'manage_options',
+            'show_in_graphql' => true, // Exposes the page to GraphQL
+            'graphql_field_name' => 'footerSettings',
+        ));
+    }
+}
+add_action('acf/init', 'register_footer_acf_options');
+
+function register_footer_acf_fields() {
+    if (function_exists('acf_add_local_field_group')) {
+        acf_add_local_field_group(array(
+            'key'                 => 'group_footer_settings',
+            'title'               => 'Footer Settings',
+            'show_in_graphql'     => true,
+            'graphql_field_name'  => 'officeDetails',
+            'fields' => array(
+                // Brand Information Fields
+                array(
+                    'key'                => 'field_footer_logo',
+                    'label'              => 'Footer Logo',
+                    'name'               => 'logo',
+                    'type'               => 'image',
+                    'return_format'      => 'array',
+                    'show_in_graphql'    => true,
+                    'graphql_field_name' => 'logo',
+                ),
+                array(
+                    'key'                => 'field_company_name',
+                    'label'              => 'Company Name',
+                    'name'               => 'company_name',
+                    'type'               => 'text',
+                    'default_value'      => 'Another Step',
+                    'show_in_graphql'    => true,
+                    'graphql_field_name' => 'companyName',
+                ),
+                array(
+                    'key'                => 'field_footer_description',
+                    'label'              => 'Footer Description',
+                    'name'               => 'description',
+                    'type'               => 'textarea',
+                    'default_value'      => 'Supporting independent living with clarity, care, and community for everyone.',
+                    'show_in_graphql'    => true,
+                    'graphql_field_name' => 'description',
+                ),
+                array(
+                    'key'                => 'field_copyright_text',
+                    'label'              => 'Copyright Text',
+                    'name'               => 'copyright_text',
+                    'type'               => 'text',
+                    'instructions'       => 'Use {year} as a placeholder for the current year.',
+                    'default_value'      => '© {year} Another Step. All rights reserved.',
+                    'show_in_graphql'    => true,
+                    'graphql_field_name' => 'copyrightText',
+                ),
+                // Repeater for Offices
+                array(
+                    'key'                => 'field_footer_offices',
+                    'label'              => 'Offices',
+                    'name'               => 'offices',
+                    'type'               => 'repeater',
+                    'show_in_graphql'    => true,
+                    'graphql_field_name' => 'offices',
+                    'layout'             => 'block',
+                    'sub_fields' => array(
+                        array(
+                            'key'                => 'field_office_name',
+                            'label'              => 'Office Name',
+                            'name'               => 'name',
+                            'type'               => 'text',
+                            'show_in_graphql'    => true,
+                        ),
+                        array(
+                            'key'                => 'field_office_address',
+                            'label'              => 'Address',
+                            'name'               => 'address',
+                            'type'               => 'textarea',
+                            'show_in_graphql'    => true,
+                        ),
+                        array(
+                            'key'                => 'field_office_phone',
+                            'label'              => 'Phone Number',
+                            'name'               => 'phone',
+                            'type'               => 'text',
+                            'show_in_graphql'    => true,
+                        ),
+                        array(
+                            'key'                => 'field_office_email',
+                            'label'              => 'Email Address',
+                            'name'               => 'email',
+                            'type'               => 'email',
+                            'show_in_graphql'    => true,
+                        ),
+                    ),
+                ),
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param'    => 'options_page',
+                        'operator' => '==',
+                        'value'    => 'footer-settings',
+                    ),
+                ),
+            ),
+        ));
+    }
+}
+add_action('acf/init', 'register_footer_acf_fields');
