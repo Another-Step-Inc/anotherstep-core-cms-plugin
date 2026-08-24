@@ -7,6 +7,8 @@ class MergeHandler {
     }
 
     public function handle_merge(): void {
+        global $wpdb;
+
         $post_id = isset( $_GET['post_id'] ) ? intval( $_GET['post_id'] ) : 0;
 
         if ( ! $post_id ) {
@@ -21,15 +23,23 @@ class MergeHandler {
 
         $staged_data = get_post_meta( $post_id, '_as_pending_approval_data', true );
 
-        if ( $staged_data ) {
-            // Momentarily detach filters to perform the direct merge
-            wp_update_post([
-                'ID'           => $post_id,
-                'post_title'   => $staged_data['post_title'],
-                'post_content' => $staged_data['post_content'],
-                'post_status'  => 'publish'
-            ]);
+        if ( $staged_data && is_array( $staged_data ) ) {
+            // Direct DB update for sub-second merge performance
+            $wpdb->update(
+                $wpdb->posts,
+                [
+                    'post_title'   => $staged_data['post_title'],
+                    'post_content' => $staged_data['post_content'],
+                    'post_status'  => 'publish',
+                    'post_modified'     => current_time( 'mysql' ),
+                    'post_modified_gmt' => current_time( 'mysql', 1 ),
+                ],
+                [ 'ID' => $post_id ],
+                [ '%s', '%s', '%s', '%s', '%s' ],
+                [ '%d' ]
+            );
 
+            clean_post_cache( $post_id );
             delete_post_meta( $post_id, '_as_pending_approval_data' );
             update_post_meta( $post_id, '_as_last_approved_by', get_current_user_id() );
             update_post_meta( $post_id, '_as_last_approved_at', current_time( 'mysql' ) );
