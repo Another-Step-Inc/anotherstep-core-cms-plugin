@@ -1,0 +1,33 @@
+name: Deploy Plugin
+
+on:
+  push:
+    branches: [dev, qa, staging, main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve Destination Directory
+        id: target
+        run: |
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "DIR=/home/master/applications/prod_cms/public_html/wp-content/plugins/my-plugin/" >> $GITHUB_OUTPUT
+          elif [ "${{ github.ref_name }}" = "staging" ]; then
+            echo "DIR=/home/master/applications/staging_cms/public_html/wp-content/plugins/my-plugin/" >> $GITHUB_OUTPUT
+          elif [ "${{ github.ref_name }}" = "qa" ]; then
+            echo "DIR=/home/master/applications/qa_cms/public_html/wp-content/plugins/my-plugin/" >> $GITHUB_OUTPUT
+          elif [ "${{ github.ref_name }}" = "dev" ]; then
+            echo "DIR=/home/master/applications/dev_cms/public_html/wp-content/plugins/my-plugin/" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Sync Plugin Code over SSH
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SERVER_IP }}
+          REMOTE_USER: ${{ secrets.SERVER_USER }}
+          TARGET: ${{ steps.target.outputs.DIR }}
+          EXCLUDE: "/.git/, /.github/, /node_modules/"
