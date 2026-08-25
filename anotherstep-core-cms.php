@@ -20,6 +20,10 @@ use AnotherStep\Autoloader;
 use AnotherStep\Core\Capabilities;
 use AnotherStep\Core\AdminUI;
 
+// Shop Integration Subsystem
+use AnotherStep\Shop\ShopCapabilities;
+use AnotherStep\Shop\ShopAdminUI;
+
 // PostTypes
 use AnotherStep\PostTypes\ServicePostType;
 use AnotherStep\PostTypes\ValuesPostType;
@@ -54,11 +58,16 @@ use AnotherStep\Integrations\FooterSettings;
 Autoloader::register();
 
 // Register Activation Hooks
-register_activation_hook(__FILE__, [ Capabilities::class, 'add_approval_capabilities']);
+register_activation_hook(__FILE__, function() {
+    Capabilities::add_approval_capabilities();
+    ShopCapabilities::register_shop_roles();
+});
 
 // Initialize Subsystems
 add_action( 'plugins_loaded', function() {
     Capabilities::add_approval_capabilities();
+    ShopCapabilities::register_shop_roles();
+
     // 1. Post Types & Custom Fields
     ( new ServicePostType() )->init();
     ( new ValuesPostType() )->init();
@@ -87,4 +96,7 @@ add_action( 'plugins_loaded', function() {
     ( new BlockRegistrar() )->init();
     ( new AdminUI() )->init();
     ( new FooterSettings() )->init();
+
+    // 6. Shop & E-commerce Subsystem
+    ( new ShopAdminUI() )->init();
 });

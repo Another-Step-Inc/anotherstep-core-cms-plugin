@@ -5,7 +5,6 @@ class AdminUI
 {
     public function init(): void {
         add_action( 'admin_menu', [ $this, 'simplify_dashboard_menu' ], 999 );
-        add_action( 'admin_init', [ $this, 'restrict_woocommerce_menus' ] );
     }
 
     /**
@@ -18,18 +17,6 @@ class AdminUI
             remove_menu_page( 'options-general.php' );
             remove_menu_page( 'tools.php' );
             remove_menu_page( 'edit.php?post_type=acf-field-group' );
-        }
-    }
-
-    /**
-     * Restrict WooCommerce views for fulfillment staff.
-     */
-    public function restrict_woocommerce_menus(): void {
-        if ( current_user_can( 'order_fulfillment_processor' ) ) {
-            remove_menu_page( 'woocommerce-marketing' );
-            remove_submenu_page( 'woocommerce', 'wc-admin' );
-            remove_submenu_page( 'woocommerce', 'wc-status' );
-            remove_submenu_page( 'woocommerce', 'wc-addons' );
         }
     }
 }

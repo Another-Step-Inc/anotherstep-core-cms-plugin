@@ -32,7 +32,7 @@ class Capabilities
             'dev_approver_3' => 'Dev Approver (Level 3 - Security & Compliance)',
             'dev_approver_4' => 'Dev Approver (Level 4 - Final Sign-off)',
         ];
-        $roles = [ 'cms_content_editor', 'operations_manager', 'administration_management', 'executive_director' ];
+        $roles = [ 'editor', 'supervisor', 'administration_management', 'executive_director' ];
 
         foreach ( $approvers as $role_key => $name ) {
             if ( ! get_role( $role_key ) ) {
