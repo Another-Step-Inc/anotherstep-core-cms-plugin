@@ -66,7 +66,6 @@ register_activation_hook(__FILE__, function() {
 // Initialize Subsystems
 add_action( 'plugins_loaded', function() {
     Capabilities::add_approval_capabilities();
-    ShopCapabilities::register_shop_roles();
 
     // 1. Post Types & Custom Fields
     ( new ServicePostType() )->init();

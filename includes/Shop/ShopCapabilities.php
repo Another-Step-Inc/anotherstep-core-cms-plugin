@@ -29,6 +29,9 @@ class ShopCapabilities
                 'publish_shop_orders'       => true,
                 'read_private_shop_orders'  => true,
                 'read_private_products'     => true, // View product details/stock
+                'edit_products'             => true, // Enables sidebar menu registration
+                'edit_shop_payments'        => true, // Refunds
+                'edit_others_shop_payments' => true, // Refunds
             ] );
         }
 
