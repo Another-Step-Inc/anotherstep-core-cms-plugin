@@ -35,6 +35,7 @@ use AnotherStep\MetaBoxes\ValuesMetaBox;
 // API
 use AnotherStep\Api\RestRegistrations;
 use AnotherStep\Api\GraphQLRegistrations;
+use AnotherStep\Api\ContactFormHandler;
 
 // Track 1: Content Staging Subsystem
 use AnotherStep\Staging\StagingInterceptor;
@@ -79,6 +80,7 @@ add_action( 'plugins_loaded', function() {
     // 2. API Extensions 
     ( new RestRegistrations() )->init();
     ( new GraphQLRegistrations() )->init();
+    ( new ContactFormHandler() )->init();
 
     // 3. Track 1: Content Staging Engine
     ( new StagingInterceptor() )->init();
