@@ -259,18 +259,22 @@ return array(
 			),
 			'directorName' => array(
 				'type' => 'string',
+				'source' => 'html',
 				'default' => ''
 			),
 			'directorTitle' => array(
 				'type' => 'string',
+				'source' => 'html',
 				'default' => ''
 			),
 			'directorRegions' => array(
 				'type' => 'string',
+				'source' => 'html',
 				'default' => ''
 			),
 			'directorPhone' => array(
 				'type' => 'string',
+				'source' => 'html',
 				'default' => ''
 			),
 			'directorImageUrl' => array(

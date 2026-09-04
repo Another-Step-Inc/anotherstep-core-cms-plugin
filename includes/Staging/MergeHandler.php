@@ -24,12 +24,23 @@ class MergeHandler {
         $staged_data = get_post_meta( $post_id, '_as_pending_approval_data', true );
 
         if ( $staged_data && is_array( $staged_data ) ) {
-            // Direct DB update for sub-second merge performance
+            $raw_content = $staged_data['post_content'];
+
+            $clean_content = preg_replace_callback(
+                '/\\\\u([0-9a-fA-F]{4})/',
+                function ( $match ) {
+                    return mb_convert_encoding( pack( 'H*', $match[1] ), 'UTF-8', 'UCS-2BE' );
+                },
+                $raw_content
+            );
+
+            $clean_content = wp_unslash( $clean_content );
+
             $wpdb->update(
                 $wpdb->posts,
                 [
                     'post_title'   => $staged_data['post_title'],
-                    'post_content' => $staged_data['post_content'],
+                    'post_content' => $clean_content,
                     'post_status'  => 'publish',
                     'post_modified'     => current_time( 'mysql' ),
                     'post_modified_gmt' => current_time( 'mysql', 1 ),

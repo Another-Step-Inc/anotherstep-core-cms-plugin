@@ -55,11 +55,23 @@ class StagingInterceptor
         $old_status = get_post_status( $post_id );
 
         if ( ! current_user_can( 'approve_content_merge' ) ) {
-            $existing_staged = get_post_meta( $post_id, '_as_pending_approval_data', true );
+            $raw_content = ! empty( $prepared_post->post_content ) 
+            ? $prepared_post->post_content 
+            : get_post_field( 'post_content', $post_id );
+
+            $clean_content = preg_replace_callback(
+                '/\\\\u([0-9a-fA-F]{4})/',
+                function ( $match ) {
+                    return mb_convert_encoding( pack( 'H*', $match[1] ), 'UTF-8', 'UCS-2BE' );
+                },
+                $raw_content
+            );
+
+            $clean_content = wp_unslash( $clean_content );
 
             $staged_data = [
                 'post_title'   => ! empty( $prepared_post->post_title ) ? $prepared_post->post_title : get_the_title( $post_id ),
-                'post_content' => ! empty( $prepared_post->post_content ) ? $prepared_post->post_content : get_post_field( 'post_content', $post_id ),
+                'post_content' => $clean_content,
                 'submitted_by' => get_current_user_id(),
                 'submitted_at' => current_time( 'mysql' ),
             ];

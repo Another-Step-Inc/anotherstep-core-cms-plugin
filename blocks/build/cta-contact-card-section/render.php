@@ -8,16 +8,16 @@
  */
 
 // Fallbacks for empty fields
-$headline         = ! empty( $attributes['headline'] ) ? esc_html( $attributes['headline'] ) : 'Ready to take the next step?';
-$description      = ! empty( $attributes['description'] ) ? esc_html( $attributes['description'] ) : '';
-$btn1_text        = ! empty( $attributes['btn1Text'] ) ? esc_html( $attributes['btn1Text'] ) : 'Schedule a Call';
+$headline         = ! empty( $attributes['headline'] ) ? wp_kses_post( $attributes['headline'] ) : 'Ready to take the next step?';
+$description      = ! empty( $attributes['description'] ) ? wp_kses_post( $attributes['description'] ) : '';
+$btn1_text        = ! empty( $attributes['btn1Text'] ) ? wp_kses_post( $attributes['btn1Text'] ) : 'Schedule a Call';
 $btn1_url         = ! empty( $attributes['btn1Url'] ) ? esc_url( $attributes['btn1Url'] ) : '#';
-$btn2_text        = ! empty( $attributes['btn2Text'] ) ? esc_html( $attributes['btn2Text'] ) : 'Email Us';
+$btn2_text        = ! empty( $attributes['btn2Text'] ) ? wp_kses_post( $attributes['btn2Text'] ) : 'Email Us';
 $btn2_url         = ! empty( $attributes['btn2Url'] ) ? esc_url( $attributes['btn2Url'] ) : '#';
-$director_name    = ! empty( $attributes['directorName'] ) ? esc_html( $attributes['directorName'] ) : 'Jaison Jacob';
-$director_title   = ! empty( $attributes['directorTitle'] ) ? esc_html( $attributes['directorTitle'] ) : '';
-$director_regions = ! empty( $attributes['directorRegions'] ) ? esc_html( $attributes['directorRegions'] ) : '';
-$director_phone   = ! empty( $attributes['directorPhone'] ) ? esc_html( $attributes['directorPhone'] ) : '';
+$director_name    = ! empty( $attributes['directorName'] ) ? wp_kses_post( $attributes['directorName'] ) : '';
+$director_title   = ! empty( $attributes['directorTitle'] ) ? wp_kses_post( $attributes['directorTitle'] ) : '';
+$director_regions = ! empty( $attributes['directorRegions'] ) ? wp_kses_post( $attributes['directorRegions'] ) : '';
+$director_phone   = ! empty( $attributes['directorPhone'] ) ? wp_kses_post( $attributes['directorPhone'] ) : '';
 $director_image   = ! empty( $attributes['directorImageUrl'] ) ? esc_url( $attributes['directorImageUrl'] ) : '';
 
 $wrapper_attributes = get_block_wrapper_attributes( array( 'class' => 'py-24 bg-surface' ) );
