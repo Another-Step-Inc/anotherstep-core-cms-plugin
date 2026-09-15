@@ -106,7 +106,7 @@ if ($layout_type === 'split' && $is_image_large) {
 
             <?php if ($display_title) : ?>
                 <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-                    <?php echo esc_html($display_title); ?>
+                    <?php echo wp_kses_post($display_title); ?>
                 </h1>
             <?php endif; ?>
 
@@ -157,7 +157,7 @@ if ($layout_type === 'split' && $is_image_large) {
 
             <?php if ($display_title) : ?>
                 <h1 class="text-3xl md:text-5xl font-extrabold leading-tight mb-6 text-blue-950">
-                    <?php echo esc_html($display_title); ?>
+                    <?php echo wp_kses_post($display_title); ?>
                 </h1>
             <?php endif; ?>
 
