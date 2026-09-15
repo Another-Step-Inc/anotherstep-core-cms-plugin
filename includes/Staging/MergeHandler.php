@@ -24,17 +24,7 @@ class MergeHandler {
         $staged_data = get_post_meta( $post_id, '_as_pending_approval_data', true );
 
         if ( $staged_data && is_array( $staged_data ) ) {
-            $raw_content = $staged_data['post_content'];
-
-            $clean_content = preg_replace_callback(
-                '/\\\\u([0-9a-fA-F]{4})/',
-                function ( $match ) {
-                    return mb_convert_encoding( pack( 'H*', $match[1] ), 'UTF-8', 'UCS-2BE' );
-                },
-                $raw_content
-            );
-
-            $clean_content = wp_unslash( $clean_content );
+            $clean_content = $this->decode_unicode_escapes( $staged_data['post_content'] ?? '' );
 
             $wpdb->update(
                 $wpdb->posts,
@@ -58,5 +48,22 @@ class MergeHandler {
 
         wp_redirect( get_edit_post_link( $post_id, 'url' ) );
         exit;
+    }
+
+    private function decode_unicode_escapes( string $content ): string {
+        $content = wp_unslash( $content );
+
+        $decoded = preg_replace_callback(
+            '/(?:\\u|u)([0-9a-fA-F]{4})/',
+            static function ( array $match ): string {
+                $escaped = '\\u' . $match[1];
+                $value   = json_decode( '"' . $escaped . '"' );
+
+                return $value !== null ? $value : $match[0];
+            },
+            $content
+        );
+
+        return $decoded !== null ? $decoded : $content;
     }
 }

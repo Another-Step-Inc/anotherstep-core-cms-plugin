@@ -55,19 +55,21 @@ class StagingInterceptor
         $old_status = get_post_status( $post_id );
 
         if ( ! current_user_can( 'approve_content_merge' ) ) {
-            $raw_content = ! empty( $prepared_post->post_content ) 
-            ? $prepared_post->post_content 
-            : get_post_field( 'post_content', $post_id );
+            $content_param = $request->has_param( 'content' ) ? $request->get_param( 'content' ) : null;
 
-            $clean_content = preg_replace_callback(
-                '/\\\\u([0-9a-fA-F]{4})/',
-                function ( $match ) {
-                    return mb_convert_encoding( pack( 'H*', $match[1] ), 'UTF-8', 'UCS-2BE' );
-                },
-                $raw_content
-            );
+            if ( is_string( $content_param ) ) {
+                $clean_content = $content_param;
+            } elseif ( is_array( $content_param ) ) {
+                $clean_content = $content_param['raw'] ?? $content_param['rendered'] ?? '';
+            } elseif ( ! empty( $prepared_post->post_content ) ) {
+                $clean_content = $prepared_post->post_content;
+            } else {
+                $clean_content = get_post_field( 'post_content', $post_id );
+            }
 
-            $clean_content = wp_unslash( $clean_content );
+            if ( is_string( $clean_content ) ) {
+                $clean_content = $this->decode_unicode_escapes( $clean_content );
+            }
 
             $staged_data = [
                 'post_title'   => ! empty( $prepared_post->post_title ) ? $prepared_post->post_title : get_the_title( $post_id ),
@@ -89,5 +91,22 @@ class StagingInterceptor
         }
 
         return $prepared_post;
+    }
+
+    private function decode_unicode_escapes( string $content ): string {
+        $content = wp_unslash( $content );
+
+        $decoded = preg_replace_callback(
+            '/(?:\\u|u)([0-9a-fA-F]{4})/',
+            static function ( array $match ): string {
+                $escaped = '\\u' . $match[1];
+                $value   = json_decode( '"' . $escaped . '"' );
+
+                return $value !== null ? $value : $match[0];
+            },
+            $content
+        );
+
+        return $decoded !== null ? $decoded : $content;
     }
 }
