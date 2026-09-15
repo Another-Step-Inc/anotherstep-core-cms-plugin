@@ -40,22 +40,18 @@
 		},
 		"directorName": {
 			"type": "string",
-			"source": "html",
 			"default": ""
 		},
 		"directorTitle": {
 			"type": "string",
-			"source": "html",
 			"default": ""
 		},
 		"directorRegions": {
 			"type": "string",
-			"source": "html",
 			"default": ""
 		},
 		"directorPhone": {
 			"type": "string",
-			"source": "html",
 			"default": ""
 		},
 		"directorImageUrl": {
