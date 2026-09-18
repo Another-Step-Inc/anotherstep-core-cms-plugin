@@ -1,6 +1,6 @@
 <?php
 $heading     = ! empty( $attributes['heading'] ) ? $attributes['heading'] : 'Important Service Note';
-$notice_text = ! empty( $attributes['noticeText'] ) ? $attributes['noticeText'] : 'In order to receive 24 hour respite service, the caregiver must access Site Based Respite, <span class="text-brand-red font-bold">which Another Step does not offer.</span>';
+$notice_text = ! empty( $attributes['noticeText'] ) ? html_entity_decode( $attributes['noticeText'], ENT_QUOTES | ENT_HTML5, 'UTF-8' ) : 'In order to receive 24 hour respite service, the caregiver must access Site Based Respite, <span class="text-brand-red font-bold">which Another Step does not offer.</span>';
 
 $wrapper_attributes = get_block_wrapper_attributes( array( 'class' => 'bg-surface-container-low py-24' ) );
 ?>
@@ -15,9 +15,9 @@ $wrapper_attributes = get_block_wrapper_attributes( array( 'class' => 'bg-surfac
         <h2 class="text-title-lg font-bold text-brand-red mb-4">
           <?php echo wp_kses_post( $heading ); ?>
         </h2>
-        <p class="text-2xl lg:text-3xl font-display font-medium text-on-surface leading-tight">
+        <div class="text-2xl lg:text-3xl font-display font-medium text-on-surface leading-tight">
           <?php echo wp_kses_post( $notice_text ); ?>
-        </p>
+        </div>
       </div>
       <!-- Signature Texture/Gradient -->
       <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-brand-red/10 to-transparent rounded-bl-full"></div>

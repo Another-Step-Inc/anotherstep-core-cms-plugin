@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { TextareaControl } from '@wordpress/components';
 
 export default function Edit({ attributes, setAttributes }) {
     const { heading, noticeText } = attributes;
@@ -44,13 +45,12 @@ export default function Edit({ attributes, setAttributes }) {
                             placeholder={__('Enter heading...', 'important-notice')}
                             allowedFormats={[]}
                         />
-                        <RichText
-                            tagName="p"
+                        <TextareaControl
+                            label={__('Notice HTML', 'important-notice')}
                             value={noticeText}
                             onChange={(val) => setAttributes({ noticeText: val })}
-                            style={{ fontSize: '24px', fontWeight: '500', color: '#1e1e1e', lineHeight: '1.2', margin: 0 }}
-                            placeholder={__('Enter notice text...', 'important-notice')}
-                            allowedFormats={['core/bold', 'core/italic', 'core/text-color', 'core/link', 'core/code']}
+                            placeholder={__('Enter notice text and optional HTML tags...', 'important-notice')}
+                            help={__('HTML is sanitized when displayed.', 'important-notice')}
                         />
                     </div>
                 </div>

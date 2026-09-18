@@ -33,7 +33,7 @@ export default function Edit(props) {
                             { label: 'Surface Lowest (White)', value: 'bg-surface-container-lowest' },
                             { label: 'Transparent', value: 'bg-transparent' },
                             { label: 'Surface Container High', value: 'bg-surface-container-high' },
-                            { label: 'Primary Brand Blue', value: 'bg-primary' },
+                            { label: 'Primary Brand Blue', value: 'bg-brand-blue' },
                             { label: 'Dark Yellow', value: 'bg-brand-dark-yellow' },
                             { label: 'Dark Red', value: 'bg-brand-dark-red' }
                         ]}

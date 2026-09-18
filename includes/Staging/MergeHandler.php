@@ -24,13 +24,14 @@ class MergeHandler {
         $staged_data = get_post_meta( $post_id, '_as_pending_approval_data', true );
 
         if ( $staged_data && is_array( $staged_data ) ) {
-            $clean_content = $this->decode_unicode_escapes( $staged_data['post_content'] ?? '' );
+            $post_title   = $this->restore_unicode_escapes( $staged_data['post_title'] ?? '' );
+            $post_content = $this->restore_unicode_escapes( $staged_data['post_content'] ?? '' );
 
             $wpdb->update(
                 $wpdb->posts,
                 [
-                    'post_title'   => $staged_data['post_title'],
-                    'post_content' => $clean_content,
+                    'post_title'   => $post_title,
+                    'post_content' => $post_content,
                     'post_status'  => 'publish',
                     'post_modified'     => current_time( 'mysql' ),
                     'post_modified_gmt' => current_time( 'mysql', 1 ),
@@ -50,20 +51,13 @@ class MergeHandler {
         exit;
     }
 
-    private function decode_unicode_escapes( string $content ): string {
-        $content = wp_unslash( $content );
-
-        $decoded = preg_replace_callback(
-            '/(?:\\u|u)([0-9a-fA-F]{4})/',
+    private function restore_unicode_escapes( string $content ): string {
+        return preg_replace_callback(
+            '/(?<!\\\\)u([0-9a-fA-F]{4})/',
             static function ( array $match ): string {
-                $escaped = '\\u' . $match[1];
-                $value   = json_decode( '"' . $escaped . '"' );
-
-                return $value !== null ? $value : $match[0];
+                return '\\u' . $match[1];
             },
             $content
-        );
-
-        return $decoded !== null ? $decoded : $content;
+        ) ?: $content;
     }
 }

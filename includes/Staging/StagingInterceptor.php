@@ -33,8 +33,9 @@ class StagingInterceptor
                     $response->data['title']['rendered'] = esc_html( $staged_data['post_title'] );
                 }
                 if ( isset( $staged_data['post_content'] ) ) {
-                    $response->data['content']['raw']      = $staged_data['post_content'];
-                    $response->data['content']['rendered'] = apply_filters( 'the_content', $staged_data['post_content'] );
+                    $staged_content = $this->restore_unicode_escapes( $staged_data['post_content'] );
+                    $response->data['content']['raw']      = $staged_content;
+                    $response->data['content']['rendered'] = apply_filters( 'the_content', $staged_content );
                 }
             }
         }
@@ -68,7 +69,7 @@ class StagingInterceptor
             }
 
             if ( is_string( $clean_content ) ) {
-                $clean_content = $this->decode_unicode_escapes( $clean_content );
+                $clean_content = $this->restore_unicode_escapes( $clean_content );
             }
 
             $staged_data = [
@@ -78,7 +79,7 @@ class StagingInterceptor
                 'submitted_at' => current_time( 'mysql' ),
             ];
 
-            update_post_meta( $post_id, '_as_pending_approval_data', $staged_data );
+            update_post_meta( $post_id, '_as_pending_approval_data', wp_slash( $staged_data ) );
 
             delete_post_meta( $post_id, '_edit_lock' );
 
@@ -93,20 +94,13 @@ class StagingInterceptor
         return $prepared_post;
     }
 
-    private function decode_unicode_escapes( string $content ): string {
-        $content = wp_unslash( $content );
-
-        $decoded = preg_replace_callback(
-            '/(?:\\u|u)([0-9a-fA-F]{4})/',
+    private function restore_unicode_escapes( string $content ): string {
+        return preg_replace_callback(
+            '/(?<!\\\\)u([0-9a-fA-F]{4})/',
             static function ( array $match ): string {
-                $escaped = '\\u' . $match[1];
-                $value   = json_decode( '"' . $escaped . '"' );
-
-                return $value !== null ? $value : $match[0];
+                return '\\u' . $match[1];
             },
             $content
-        );
-
-        return $decoded !== null ? $decoded : $content;
+        ) ?: $content;
     }
 }

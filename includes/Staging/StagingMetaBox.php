@@ -77,7 +77,7 @@ class StagingMetaBox {
                 'as_approve_action_' . $post->ID
             );
 
-            echo '<a href="' . esc_url( $approve_url ) . '" class="button button-primary button-large" style="width:100%; text-align:center; display:block;">Approve & Merge to Live</a>';
+            echo '<a href="' . esc_url( $approve_url ) . '" onclick="event.preventDefault(); var url=this.href; if (window.wp && wp.data) { var editor=wp.data.dispatch(\'core/editor\'); var post=wp.data.select(\'core/editor\').getCurrentPost(); if (editor.resetPost && post) { editor.resetPost(post); } } window.onbeforeunload=null; setTimeout(function(){ window.location.href=url; }, 100); return false;" class="button button-primary button-large" style="width:100%; text-align:center; display:block;">Approve & Merge to Live</a>';
         } elseif ( $can_approve && $is_self_submission ) {
             echo '<div style="background: #e5f5fa; border-left: 4px solid #00a0d2; padding: 8px; font-size: 12px; color: #0073aa;">';
             echo '  ℹ️ <strong>Checks & Balances:</strong> You staged these changes. A second reviewer must sign off to merge them to live.';
