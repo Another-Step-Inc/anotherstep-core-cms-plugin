@@ -1,6 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls, InnerBlocks } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, ToggleControl, TextControl, TextareaControl } from '@wordpress/components';
+import { BACKGROUND_COLOR_OPTIONS } from '../theme-color-options';
 
 import './editor.scss';
 
@@ -42,9 +43,10 @@ export default function Edit(props) {
                         onChange={(val) => setAttributes({ hasUnderline: val })}
                     />
                     {hasUnderline && (
-                        <TextControl
+                        <SelectControl
                             label={__('Underline Color Class', 'bento-grid-section')}
                             value={underlineColor}
+                            options={BACKGROUND_COLOR_OPTIONS}
                             onChange={(val) => setAttributes({ underlineColor: val })}
                         />
                     )}

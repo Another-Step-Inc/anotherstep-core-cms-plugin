@@ -1,6 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls, InnerBlocks } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, ToggleControl, TextControl, TextareaControl } from '@wordpress/components';
+import { TEXT_COLOR_OPTIONS } from '../theme-color-options';
 
 import './editor.scss';
 
@@ -53,9 +54,10 @@ export default function Edit(props) {
                         value={card1Icon}
                         onChange={(val) => setAttributes({ card1Icon: val })}
                     />
-                    <TextControl
+                    <SelectControl
                         label={__('Icon Color Class', 'split-narrative-section')}
                         value={card1IconColor}
+                        options={TEXT_COLOR_OPTIONS}
                         onChange={(val) => setAttributes({ card1IconColor: val })}
                     />
                     <TextControl
@@ -76,9 +78,10 @@ export default function Edit(props) {
                         value={card2Icon}
                         onChange={(val) => setAttributes({ card2Icon: val })}
                     />
-                    <TextControl
+                    <SelectControl
                         label={__('Icon Color Class', 'split-narrative-section')}
                         value={card2IconColor}
+                        options={TEXT_COLOR_OPTIONS}
                         onChange={(val) => setAttributes({ card2IconColor: val })}
                     />
                     <TextControl

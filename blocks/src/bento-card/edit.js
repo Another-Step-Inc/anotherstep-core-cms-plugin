@@ -1,6 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls, InnerBlocks } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, TextControl, TextareaControl } from '@wordpress/components';
+import { TEXT_COLOR_OPTIONS } from '../theme-color-options';
 
 import './editor.scss';
 
@@ -39,9 +40,10 @@ export default function Edit(props) {
                         ]}
                         onChange={(val) => setAttributes({ cardBgStyle: val })}
                     />
-                    <TextControl
+                    <SelectControl
                         label={__('Text Color Class', 'bento-card')}
                         value={textColor}
+                        options={TEXT_COLOR_OPTIONS}
                         onChange={(val) => setAttributes({ textColor: val })}
                     />
                 </PanelBody>
@@ -52,9 +54,10 @@ export default function Edit(props) {
                         value={icon}
                         onChange={(val) => setAttributes({ icon: val })}
                     />
-                    <TextControl
+                    <SelectControl
                         label={__('Icon Color Class', 'bento-card')}
                         value={iconColor}
+                        options={TEXT_COLOR_OPTIONS}
                         onChange={(val) => setAttributes({ iconColor: val })}
                     />
                     <TextControl

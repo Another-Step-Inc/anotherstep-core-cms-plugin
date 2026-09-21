@@ -12,6 +12,7 @@ import {
     TextControl, 
     Button 
 } from '@wordpress/components';
+import { TEXT_COLOR_OPTIONS, BACKGROUND_COLOR_OPTIONS } from '../theme-color-options';
 
 import './editor.scss';
 
@@ -126,16 +127,16 @@ export default function Edit( props ) {
                             placeholder="verified"
                             onChange={(val) => props.setAttributes({ extraDivIcon: val })}
                         />
-                        <TextControl
+                        <SelectControl
                             label={__( 'Icon Color Utility', 'page-hero-section' )}
                             value={extraDivIconColor}
-                            placeholder="text-brand-red"
+                            options={TEXT_COLOR_OPTIONS}
                             onChange={(val) => props.setAttributes({ extraDivIconColor: val })}
                         />
-                        <TextControl
+                        <SelectControl
                             label={__( 'Container Background Utility', 'page-hero-section' )}
                             value={extraDivBgColor}
-                            placeholder="bg-surface-container-low"
+                            options={BACKGROUND_COLOR_OPTIONS}
                             onChange={(val) => props.setAttributes({ extraDivBgColor: val })}
                         />
                     </PanelBody>
