@@ -36,6 +36,8 @@ use AnotherStep\MetaBoxes\ValuesMetaBox;
 use AnotherStep\Api\RestRegistrations;
 use AnotherStep\Api\GraphQLRegistrations;
 use AnotherStep\Api\ContactFormHandler;
+use AnotherStep\Api\ComplianceFormHandler;
+use AnotherStep\Api\IncidentFormHandler;
 
 // Track 1: Content Staging Subsystem
 use AnotherStep\Staging\StagingInterceptor;
@@ -57,6 +59,10 @@ use AnotherStep\Blocks\BlockRegistrar;
 use AnotherStep\Integrations\FooterSettings;
 
 Autoloader::register();
+
+require_once ABSPATH . WPINC . '/PHPMailer/PHPMailer.php';
+require_once ABSPATH . WPINC . '/PHPMailer/SMTP.php';
+require_once ABSPATH . WPINC . '/PHPMailer/Exception.php';
 
 // Register Activation Hooks
 register_activation_hook(__FILE__, function() {
@@ -81,6 +87,8 @@ add_action( 'plugins_loaded', function() {
     ( new RestRegistrations() )->init();
     ( new GraphQLRegistrations() )->init();
     ( new ContactFormHandler() )->init();
+    ( new ComplianceFormHandler() )->init();
+    ( new IncidentFormHandler() )->init();
 
     // 3. Track 1: Content Staging Engine
     ( new StagingInterceptor() )->init();
